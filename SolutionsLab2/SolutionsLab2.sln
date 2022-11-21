@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestClient", "RestClient\RestClient.csproj", "{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoapClient", "SoapClient\SoapClient.csproj", "{5D789DF9-EF2A-408C-907A-185520C99DC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D789DF9-EF2A-408C-907A-185520C99DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D789DF9-EF2A-408C-907A-185520C99DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D789DF9-EF2A-408C-907A-185520C99DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D789DF9-EF2A-408C-907A-185520C99DC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
