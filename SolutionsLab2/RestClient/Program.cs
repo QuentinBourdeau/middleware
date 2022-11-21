@@ -19,31 +19,28 @@ namespace RestClient
         static void Main(string[] args)
         {
             string query, apiKey, url, response;
-            // 0 : Ask the user for his/her API key.
-            Console.WriteLine("Please enter your JCDecaux's API Key");
-            apiKey = Console.ReadLine();
             
             // 1.1: Retrieve all contracts.
-            query = "apiKey="+apiKey ;
-            url = "https://api.jcdecaux.com/vls/v3/contracts";
-            response = JCDecauxAPICall(url, query).Result;
-            List<JCDContract> allContracts = JsonSerializer.Deserialize<List<JCDContract>>(response);
+            query = "apiKey=41a669509b4e45db31dd29c98b811fde4c7b0ae0" ;
+            /*url = "https://api.jcdecaux.com/vls/v3/contracts";
+            response = JCDecauxAPICall(url, query).Result;*/
+            //List<JCDContract> allContracts = JsonSerializer.Deserialize<List<JCDContract>>(response);
 
             // 1.2: Display all contracts.
-            Console.WriteLine("Contracts:");
+            /*Console.WriteLine("Contracts:");
             foreach (JCDContract item in allContracts)
             {
                 Console.WriteLine(item.name);
-            }
+            }*/
 
             // 1.2: Ask the user to choose one.
-            Console.WriteLine("Which contract are you interested in ?");
+            /*Console.WriteLine("Which contract are you interested in ?");
             string contract = Console.ReadLine();
-            Console.WriteLine("Chosen contract: " + contract);
+            Console.WriteLine("Chosen contract: " + contract);*/
 
             // 2.1 Retrieve all stations
             url = "https://api.jcdecaux.com/vls/v3/stations";
-            query = "contract=" + contract + "&apiKey=" + apiKey;
+            //query = "contract=" + contract + "&apiKey=" + apiKey;
             response = JCDecauxAPICall(url, query).Result;
             List<JCDStation> allStations = JsonSerializer.Deserialize<List<JCDStation>>(response);
 
@@ -51,7 +48,7 @@ namespace RestClient
             Console.WriteLine("Stations:");
             foreach (JCDStation item in allStations)
             {
-                Console.WriteLine(item.number + ": " + item.name);
+                Console.WriteLine(item.number + ": " + item.name + ", number of bikes available:" + item.mainStands.availabilities.bikes + ", number of available places : " + item.mainStands.availabilities.stands);
             }
 
             // 2.2: Ask the user to choose one.
@@ -102,20 +99,33 @@ namespace RestClient
         }
     }
 
-    public class JCDContract
+    /*public class JCDContract
     {
         public string name { get; set; }
-    }
+    }*/
 
     public class JCDStation
     {
         public int number { get; set; }
         public string name { get; set; }
         public Position position { get; set; }
+        public MainStands mainStands{ get; set; }
     }
 
     public class Position { 
         public Double latitude { get; set; }
         public Double longitude { get; set; }
+    }
+
+    public class MainStands
+    {
+        public Availabilities availabilities { get; set; }
+    }
+
+    public class Availabilities
+    {
+        public int bikes { get; set; }
+        public int stands { get; set; }
+        
     }
 }
