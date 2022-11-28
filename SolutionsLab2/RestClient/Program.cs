@@ -10,7 +10,8 @@ using System.Net.Http;
 using System.Text.Json;
 // GeoCordinates is in the System.Device.Location namespace, coming from System.Device which is an assembly reference.
 using System.Device.Location;
-
+using RestClient.Proxy;
+using System.ServiceModel;
 
 namespace RestClient
 {
@@ -19,11 +20,18 @@ namespace RestClient
         static void Main(string[] args)
         {
             string query, apiKey, url, response;
+<<<<<<< HEAD
+            Proxy.Service1Client proxy = new Proxy.Service1Client();
+            BasicHttpBinding binding = new BasicHttpBinding();
+
+            binding.MaxReceivedMessageSize = 1000000;
+=======
 
             ApiOpenRoute aor = new ApiOpenRoute();
             Task<Rootobject> iti = aor.addressesToItinerary("Eiffel tower", "Louvres", false);
             Console.WriteLine(iti.Result.features[0].properties.segments[0].steps[0].instruction);
             //Console.WriteLine(List<double>  ld : iti.Result.features[0].geometry.coordinates);
+>>>>>>> 1a5775de10fed5cb2ec8d4469953f25fdd0ca3ef
 
             // 1.1: Retrieve all contracts.
             query = "apiKey=41a669509b4e45db31dd29c98b811fde4c7b0ae0" ;
@@ -44,9 +52,10 @@ namespace RestClient
             Console.WriteLine("Chosen contract: " + contract);*/
 
             // 2.1 Retrieve all stations
-            url = "https://api.jcdecaux.com/vls/v3/stations";
+            //url = "https://api.jcdecaux.com/vls/v3/stations";
             //query = "contract=" + contract + "&apiKey=" + apiKey;
-            response = JCDecauxAPICall(url, query).Result;
+            //response = proxy.Request(url, query);
+            response = proxy.getStationsList(query);
             List<JCDStation> allStations = JsonSerializer.Deserialize<List<JCDStation>>(response);
 
             // 2.2: Display all stations.
@@ -59,7 +68,7 @@ namespace RestClient
             // 2.2: Ask the user to choose one.
             Console.WriteLine("Which station are you interested in ?");
             int stationNumber = Int32.Parse(Console.ReadLine().Split(new[] { ':' })[0]);
-
+            
             // 3.0: Retrieve the chosen station.
             JCDStation chosenStation = allStations[0];
             foreach (JCDStation item in allStations)
@@ -96,13 +105,13 @@ namespace RestClient
         }
 
         // Task is the only possible return value on an async function. If you need to specify a type, you can use the <> notation, for instance Task<string>.
-        static async Task<string> JCDecauxAPICall(string url, string query) 
+        /*static async Task<string> JCDecauxAPICall(string url, string query) 
         {
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(url + "?" + query);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
-        }
+        }*/
     }
 
     /*public class JCDContract
