@@ -21,12 +21,8 @@ namespace RestClient
             string query, apiKey, url, response;
 
             ApiOpenRoute aor = new ApiOpenRoute();
-            Task<Itinerary> iti = aor.addressesToItinerary("Eiffel tower", "Louvres", false);
-            foreach(List<double> ld in iti.Result.features[0].geometry.coordinates){
-                foreach(double d in ld){
-                    Console.WriteLine(d);
-                }
-            }
+            Task<Rootobject> iti = aor.addressesToItinerary("Eiffel tower", "Louvres", false);
+            Console.WriteLine(iti.Result.features[0].properties.segments[0].steps[0].instruction);
             //Console.WriteLine(List<double>  ld : iti.Result.features[0].geometry.coordinates);
 
             // 1.1: Retrieve all contracts.

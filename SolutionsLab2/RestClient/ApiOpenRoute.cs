@@ -44,7 +44,7 @@ namespace RestClient
             string responseData = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<Location[]>(responseData);
         }
-        public async Task<Itinerary> addressesToItinerary(string start, string end, Boolean bicycle)
+        public async Task<Rootobject> addressesToItinerary(string start, string end, Boolean bicycle)
         {
             Task<Location[]> startingPosition = addressToPoint(start);
             Task<Location[]> endPosition = addressToPoint(end);
@@ -66,7 +66,7 @@ namespace RestClient
                 using (var response = await httpClient.GetAsync(""))
                 {
                     string responseData = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Itinerary>(responseData);
+                    return JsonConvert.DeserializeObject<Rootobject>(responseData);
  
                 }
             }
