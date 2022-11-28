@@ -12,7 +12,7 @@ namespace RestClient
     {
         public Geopoints()
         {
-                
+
         }
         public Location[] loc { get; set; }
     }
@@ -44,7 +44,7 @@ namespace RestClient
     {
         public Address()
         {
-                
+
         }
         public string shop { get; set; }
         public string road { get; set; }
@@ -58,134 +58,83 @@ namespace RestClient
         public string country_code { get; set; }
     }
 
-    [Serializable]
-    public class Itinerary
+
+    public class Rootobject
     {
-        public Itinerary()
-        {
-                
-        }
-        public Geocoding geocoding { get; set; }
         public string type { get; set; }
-        public List<Feature> features { get; set; }
-        public List<double> bbox { get; set; }
+        public Feature[] features { get; set; }
+        public float[] bbox { get; set; }
+        public Metadata metadata { get; set; }
     }
 
-    [Serializable]
-    public class Geocoding
+    public class Metadata
     {
-        public Geocoding()
-        {
-                
-        }
-        public string version { get; set; }
         public string attribution { get; set; }
+        public string service { get; set; }
+        public long timestamp { get; set; }
         public Query query { get; set; }
         public Engine engine { get; set; }
-        public long timestamp { get; set; }
     }
 
-    [Serializable]
     public class Query
     {
-        public Query()
-        {
-                
-        }
-        public int size { get; set; }
-        public bool _private { get; set; }
-        public double pointlat { get; set; }
-        public double pointlon { get; set; }
-        public double boundarycirclelat { get; set; }
-        public double boundarycirclelon { get; set; }
-        public Lang lang { get; set; }
-        public int querySize { get; set; }
+        public float[][] coordinates { get; set; }
+        public string profile { get; set; }
+        public string format { get; set; }
     }
 
-    [Serializable]
-    public class Lang
-    {
-        public Lang()
-        {
-                
-        }
-        public string name { get; set; }
-        public string iso6391 { get; set; }
-        public string iso6393 { get; set; }
-        public string via { get; set; }
-        public bool defaulted { get; set; }
-    }
-
-    [Serializable]
     public class Engine
     {
-        public Engine()
-        {
-                
-        }
-        public string name { get; set; }
-        public string author { get; set; }
         public string version { get; set; }
+        public DateTime build_date { get; set; }
+        public DateTime graph_date { get; set; }
     }
-    [Serializable]
+
     public class Feature
     {
-        public Feature()
-        {
-                
-        }
+        public float[] bbox { get; set; }
         public string type { get; set; }
-        public Geometry geometry { get; set; }
         public Properties properties { get; set; }
-        public List<double> bbox { get; set; }
+        public Geometry geometry { get; set; }
     }
-    [Serializable]
-    public class Geometry
-    {
-        public Geometry()
-        {
-                
-        }
-        public string type { get; set; }
-        public List<List<double>> coordinates { get; set; }
-    }
-    [Serializable]
+
     public class Properties
     {
-        public Properties()
-        {
-                
-        }
-        public string id { get; set; }
-        public string gid { get; set; }
-        public string layer { get; set; }
-        public string source { get; set; }
-        public string source_id { get; set; }
-        public string name { get; set; }
-        public double confidence { get; set; }
-        public double distance { get; set; }
-        public string accuracy { get; set; }
-        public string country { get; set; }
-        public string country_gid { get; set; }
-        public string country_a { get; set; }
-        public string macroregion { get; set; }
-        public string macroregion_gid { get; set; }
-        public string macroregion_a { get; set; }
-        public string region { get; set; }
-        public string region_gid { get; set; }
-        public string region_a { get; set; }
-        public string localadmin { get; set; }
-        public string localadmin_gid { get; set; }
-        public string locality { get; set; }
-        public string locality_gid { get; set; }
-        public string borough { get; set; }
-        public string borough_gid { get; set; }
-        public string neighbourhood { get; set; }
-        public string neighbourhood_gid { get; set; }
-        public string continent { get; set; }
-        public string continent_gid { get; set; }
-        public string label { get; set; }
+        public Segment[] segments { get; set; }
+        public Summary summary { get; set; }
+        public int[] way_points { get; set; }
     }
+
+    public class Summary
+    {
+        public float distance { get; set; }
+        public float duration { get; set; }
+    }
+
+    public class Segment
+    {
+        public float distance { get; set; }
+        public float duration { get; set; }
+        public Step[] steps { get; set; }
+    }
+
+    public class Step
+    {
+        public float distance { get; set; }
+        public float duration { get; set; }
+        public int type { get; set; }
+        public string instruction { get; set; }
+        public string name { get; set; }
+        public int[] way_points { get; set; }
+        public int exit_number { get; set; }
+    }
+
+    public class Geometry
+    {
+        public float[][] coordinates { get; set; }
+        public string type { get; set; }
+    }
+
 
 
 }
