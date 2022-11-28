@@ -20,10 +20,22 @@ namespace RestClient
         static void Main(string[] args)
         {
             string query, apiKey, url, response;
+<<<<<<< HEAD
             Proxy.Service1Client proxy = new Proxy.Service1Client();
             BasicHttpBinding binding = new BasicHttpBinding();
 
             binding.MaxReceivedMessageSize = 1000000;
+=======
+
+            ApiOpenRoute aor = new ApiOpenRoute();
+            Task<Itinerary> iti = aor.addressesToItinerary("Eiffel tower", "Louvres", false);
+            foreach(List<double> ld in iti.Result.features[0].geometry.coordinates){
+                foreach(double d in ld){
+                    Console.WriteLine(d);
+                }
+            }
+            //Console.WriteLine(List<double>  ld : iti.Result.features[0].geometry.coordinates);
+>>>>>>> 1a5775de10fed5cb2ec8d4469953f25fdd0ca3ef
 
             // 1.1: Retrieve all contracts.
             query = "apiKey=41a669509b4e45db31dd29c98b811fde4c7b0ae0" ;
@@ -52,10 +64,10 @@ namespace RestClient
 
             // 2.2: Display all stations.
             Console.WriteLine("Stations:");
-            foreach (JCDStation item in allStations)
+            /*foreach (JCDStation item in allStations)
             {
                 Console.WriteLine(item.number + ": " + item.name + ", number of bikes available:" + item.mainStands.availabilities.bikes + ", number of available places : " + item.mainStands.availabilities.stands);
-            }
+            }*/
 
             // 2.2: Ask the user to choose one.
             Console.WriteLine("Which station are you interested in ?");
@@ -93,6 +105,7 @@ namespace RestClient
 
             Console.WriteLine("Closest station: " + closestStation.name);
             Console.ReadLine();
+
         }
 
         // Task is the only possible return value on an async function. If you need to specify a type, you can use the <> notation, for instance Task<string>.
