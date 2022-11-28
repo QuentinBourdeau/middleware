@@ -20,12 +20,6 @@ namespace RestClient
         static void Main(string[] args)
         {
             string query, apiKey, url, response;
-<<<<<<< HEAD
-            Proxy.Service1Client proxy = new Proxy.Service1Client();
-            BasicHttpBinding binding = new BasicHttpBinding();
-
-            binding.MaxReceivedMessageSize = 1000000;
-=======
 
             ApiOpenRoute aor = new ApiOpenRoute();
             Task<Itinerary> iti = aor.addressesToItinerary("Eiffel tower", "Louvres", false);
@@ -35,7 +29,11 @@ namespace RestClient
                 }
             }
             //Console.WriteLine(List<double>  ld : iti.Result.features[0].geometry.coordinates);
->>>>>>> 1a5775de10fed5cb2ec8d4469953f25fdd0ca3ef
+
+            Proxy.Service1Client proxy = new Proxy.Service1Client();
+            BasicHttpBinding binding = new BasicHttpBinding();
+
+            binding.MaxReceivedMessageSize = 1000000;
 
             // 1.1: Retrieve all contracts.
             query = "apiKey=41a669509b4e45db31dd29c98b811fde4c7b0ae0" ;
