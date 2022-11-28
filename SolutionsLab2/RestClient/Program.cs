@@ -19,41 +19,18 @@ namespace RestClient
     {
         static void Main(string[] args)
         {
-            string query, apiKey, url, response;
+            string query, url, response;
 
             ApiOpenRoute aor = new ApiOpenRoute();
             Task<Rootobject> iti = aor.addressesToItinerary("Eiffel tower", "Louvres", false);
             Console.WriteLine(iti.Result.features[0].properties.segments[0].steps[0].instruction);
             //Console.WriteLine(List<double>  ld : iti.Result.features[0].geometry.coordinates);
 
-            Proxy.Service1Client proxy = new Proxy.Service1Client();
+            Proxy.ProxyClient proxy = new Proxy.ProxyClient();
             BasicHttpBinding binding = new BasicHttpBinding();
 
-            binding.MaxReceivedMessageSize = 1000000;
 
-            // 1.1: Retrieve all contracts.
-            query = "apiKey=41a669509b4e45db31dd29c98b811fde4c7b0ae0" ;
-            /*url = "https://api.jcdecaux.com/vls/v3/contracts";
-            response = JCDecauxAPICall(url, query).Result;*/
-            //List<JCDContract> allContracts = JsonSerializer.Deserialize<List<JCDContract>>(response);
-
-            // 1.2: Display all contracts.
-            /*Console.WriteLine("Contracts:");
-            foreach (JCDContract item in allContracts)
-            {
-                Console.WriteLine(item.name);
-            }*/
-
-            // 1.2: Ask the user to choose one.
-            /*Console.WriteLine("Which contract are you interested in ?");
-            string contract = Console.ReadLine();
-            Console.WriteLine("Chosen contract: " + contract);*/
-
-            // 2.1 Retrieve all stations
-            //url = "https://api.jcdecaux.com/vls/v3/stations";
-            //query = "contract=" + contract + "&apiKey=" + apiKey;
-            //response = proxy.Request(url, query);
-            response = proxy.getStationsList(query);
+            response = proxy.getStationsList();
             List<JCDStation> allStations = JsonSerializer.Deserialize<List<JCDStation>>(response);
 
             // 2.2: Display all stations.

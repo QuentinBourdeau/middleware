@@ -13,16 +13,16 @@ namespace ProxyCache
     public interface IProxy
     {
         [OperationContract]
-        string Request(string url, string query);
+        string Request(string url);
 
         [OperationContract]
-        string getContractsList(string queryTemp);
+        string getContractsList();
 
         [OperationContract]
-        string getStationsList(string queryTemp);
+        string getStationsList();
 
         [OperationContract]
-        string getStationsListWithContractName(string contractName, string queryTemp);
+        string getStationsListWithContractName(string contractName);
 
     }
     }
