@@ -12,49 +12,91 @@ namespace RestClient.Proxy {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IService1")]
-    public interface IService1 {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IProxy")]
+    public interface IProxy {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Request", ReplyAction="http://tempuri.org/IService1/RequestResponse")]
-        string Request(string url, string query);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/Request", ReplyAction="http://tempuri.org/IProxy/RequestResponse")]
+        string Request(string url);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Request", ReplyAction="http://tempuri.org/IService1/RequestResponse")]
-        System.Threading.Tasks.Task<string> RequestAsync(string url, string query);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/Request", ReplyAction="http://tempuri.org/IProxy/RequestResponse")]
+        System.Threading.Tasks.Task<string> RequestAsync(string url);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getContractsList", ReplyAction="http://tempuri.org/IProxy/getContractsListResponse")]
+        string getContractsList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getContractsList", ReplyAction="http://tempuri.org/IProxy/getContractsListResponse")]
+        System.Threading.Tasks.Task<string> getContractsListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getStationsList", ReplyAction="http://tempuri.org/IProxy/getStationsListResponse")]
+        string getStationsList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getStationsList", ReplyAction="http://tempuri.org/IProxy/getStationsListResponse")]
+        System.Threading.Tasks.Task<string> getStationsListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxy/getStationsListWithContractNameResponse")]
+        string getStationsListWithContractName(string contractName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxy/getStationsListWithContractNameResponse")]
+        System.Threading.Tasks.Task<string> getStationsListWithContractNameAsync(string contractName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IService1Channel : RestClient.Proxy.IService1, System.ServiceModel.IClientChannel {
+    public interface IProxyChannel : RestClient.Proxy.IProxy, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Service1Client : System.ServiceModel.ClientBase<RestClient.Proxy.IService1>, RestClient.Proxy.IService1 {
+    public partial class ProxyClient : System.ServiceModel.ClientBase<RestClient.Proxy.IProxy>, RestClient.Proxy.IProxy {
         
-        public Service1Client() {
+        public ProxyClient() {
         }
         
-        public Service1Client(string endpointConfigurationName) : 
+        public ProxyClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public Service1Client(string endpointConfigurationName, string remoteAddress) : 
+        public ProxyClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public Service1Client(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ProxyClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public Service1Client(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ProxyClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public string Request(string url, string query) {
-            return base.Channel.Request(url, query);
+        public string Request(string url) {
+            return base.Channel.Request(url);
         }
         
-        public System.Threading.Tasks.Task<string> RequestAsync(string url, string query) {
-            return base.Channel.RequestAsync(url, query);
+        public System.Threading.Tasks.Task<string> RequestAsync(string url) {
+            return base.Channel.RequestAsync(url);
+        }
+        
+        public string getContractsList() {
+            return base.Channel.getContractsList();
+        }
+        
+        public System.Threading.Tasks.Task<string> getContractsListAsync() {
+            return base.Channel.getContractsListAsync();
+        }
+        
+        public string getStationsList() {
+            return base.Channel.getStationsList();
+        }
+        
+        public System.Threading.Tasks.Task<string> getStationsListAsync() {
+            return base.Channel.getStationsListAsync();
+        }
+        
+        public string getStationsListWithContractName(string contractName) {
+            return base.Channel.getStationsListWithContractName(contractName);
+        }
+        
+        public System.Threading.Tasks.Task<string> getStationsListWithContractNameAsync(string contractName) {
+            return base.Channel.getStationsListWithContractNameAsync(contractName);
         }
     }
 }

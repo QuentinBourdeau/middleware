@@ -10,15 +10,16 @@ using System.Threading.Tasks;
 
 namespace ProxyCache
 {
-    // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
     class Proxy : IProxy
     {
+        string apiKey= "apiKey=41a669509b4e45db31dd29c98b811fde4c7b0ae0" ;
+
         private static HttpClient client = new HttpClient();
-        public string Request(string url, string query)
+        public string Request(string url)
         {
             // 1. Check if the response is in the cache.
             ObjectCache cache = MemoryCache.Default;
-            string response = cache[url + "?" + query] as string;
+            string response = cache[url + "?" + apiKey] as string;
 
             // 2. If not, call the routing server.
             if (response == null)
@@ -26,35 +27,32 @@ namespace ProxyCache
                 BasicHttpBinding binding = new BasicHttpBinding();
 
                 binding.MaxReceivedMessageSize = 1000000;
-                response = JCDecauxAPICall(url, query).Result;
+                response = JCDecauxAPICall(url, apiKey).Result;
                 // 3. Add the response to the cache.
-                cache.Add(url + "?" + query, response, DateTimeOffset.Now.AddSeconds(10));
+                cache.Add(url + "?" + apiKey, response, DateTimeOffset.Now.AddSeconds(10));
             }
             // 4. Display the response.
             return(response);
         }
 
-        public string getContractsList(string queryTemp)
+        public string getContractsList()
         {
             string url = "https://api.jcdecaux.com/vls/v3/contracts";
-            string query = queryTemp;
-            return JCDecauxAPICall(url, query).Result;
+            return JCDecauxAPICall(url, apiKey).Result;
         }
 
-        public string getStationsList(string queryTemp)
+        public string getStationsList()
         {
             BasicHttpBinding binding = new BasicHttpBinding();
 
-            binding.MaxReceivedMessageSize = 1000000;
             string url = "https://api.jcdecaux.com/vls/v3/stations";
-            string query = queryTemp;
-            return JCDecauxAPICall(url, query).Result;
+            return JCDecauxAPICall(url, apiKey).Result;
         }
 
-        public string getStationsListWithContractName(string contractName, string queryTemp)
+        public string getStationsListWithContractName(string contractName)
         {
             string url = "https://api.jcdecaux.com/vls/v3/stations";
-            string query = "contract=" + contractName + "&" + queryTemp;
+            string query = "contract=" + contractName + "&" + apiKey;
             return JCDecauxAPICall(url, query).Result;
         }
 
