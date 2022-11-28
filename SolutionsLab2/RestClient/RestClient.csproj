@@ -82,16 +82,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Connected Services\Proxy\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-=======
     <Compile Include="ApiOpenRoute.cs" />
     <Compile Include="OpenStreetMapObject.cs" />
->>>>>>> 1a5775de10fed5cb2ec8d4469953f25fdd0ca3ef
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
