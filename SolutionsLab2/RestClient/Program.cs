@@ -26,12 +26,12 @@ namespace RestClient
             Console.WriteLine(iti.Result.features[0].properties.segments[0].steps[0].instruction);
             //Console.WriteLine(List<double>  ld : iti.Result.features[0].geometry.coordinates);
 
-            Proxy.ProxyClient proxy = new Proxy.ProxyClient();
+            Proxy.ProxyCacheClient proxy = new Proxy.ProxyCacheClient();
             BasicHttpBinding binding = new BasicHttpBinding();
 
 
             response = proxy.getStationsList();
-            List<JCDStation> allStations = JsonSerializer.Deserialize<List<JCDStation>>(response);
+            //List<JCDStation> allStations = JsonSerializer.Deserialize<List<JCDStation>>(response);
 
             // 2.2: Display all stations.
             Console.WriteLine("Stations:");
@@ -43,9 +43,9 @@ namespace RestClient
             // 2.2: Ask the user to choose one.
             Console.WriteLine("Which station are you interested in ?");
             int stationNumber = Int32.Parse(Console.ReadLine().Split(new[] { ':' })[0]);
-            
+
             // 3.0: Retrieve the chosen station.
-            JCDStation chosenStation = allStations[0];
+            /*JCDStation chosenStation = allStations[0];
             foreach (JCDStation item in allStations)
             {
                 if (item.number == stationNumber) {
@@ -54,9 +54,9 @@ namespace RestClient
                 }
             }
             Console.WriteLine("Chosen station: " + chosenStation.name);
-
+            */
             //3.1 : Compute the closest station.
-            GeoCoordinate stationCoordinates = new GeoCoordinate(chosenStation.position.latitude, chosenStation.position.longitude);
+            /*GeoCoordinate stationCoordinates = new GeoCoordinate(chosenStation.position.latitude, chosenStation.position.longitude);
 
             Double minDistance = -1;
             JCDStation closestStation = chosenStation;
@@ -77,45 +77,17 @@ namespace RestClient
             Console.WriteLine("Closest station: " + closestStation.name);
             Console.ReadLine();
 
+        }*/
+
+            // Task is the only possible return value on an async function. If you need to specify a type, you can use the <> notation, for instance Task<string>.
+            /*static async Task<string> JCDecauxAPICall(string url, string query) 
+            {
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(url + "?" + query);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }*/
         }
 
-        // Task is the only possible return value on an async function. If you need to specify a type, you can use the <> notation, for instance Task<string>.
-        /*static async Task<string> JCDecauxAPICall(string url, string query) 
-        {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(url + "?" + query);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsStringAsync();
-        }*/
-    }
-
-    /*public class JCDContract
-    {
-        public string name { get; set; }
-    }*/
-
-    public class JCDStation
-    {
-        public int number { get; set; }
-        public string name { get; set; }
-        public Position position { get; set; }
-        public MainStands mainStands{ get; set; }
-    }
-
-    public class Position { 
-        public Double latitude { get; set; }
-        public Double longitude { get; set; }
-    }
-
-    public class MainStands
-    {
-        public Availabilities availabilities { get; set; }
-    }
-
-    public class Availabilities
-    {
-        public int bikes { get; set; }
-        public int stands { get; set; }
-        
     }
 }
