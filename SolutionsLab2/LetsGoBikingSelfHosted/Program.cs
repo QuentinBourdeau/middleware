@@ -17,7 +17,7 @@ namespace LetsGoBikingSelfHosted
         static void Main(string[] args)
         {
             BasicHttpBinding binding = new BasicHttpBinding();
-            Uri baseAddress = new Uri("http://localhost:8733/ProxyCache");
+            Uri baseAddress = new Uri("http://localhost:8800/ProxyCache");
             ServiceHost serviceHost = new ServiceHost(typeof(Biking), baseAddress);
             binding.MaxReceivedMessageSize = 1000000;
             serviceHost.AddServiceEndpoint(typeof(IBiking), binding, "");
