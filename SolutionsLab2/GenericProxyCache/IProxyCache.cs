@@ -11,16 +11,13 @@ namespace GenericProxyCache
     public interface IProxyCache
     {
         [OperationContract]
-        string Request(string url);
+        JCDecauxItem getContractsList();
 
         [OperationContract]
-        string getContractsList();
+        JCDecauxItem getStationsList();
 
         [OperationContract]
-        string getStationsList();
-
-        [OperationContract]
-        string getStationsListWithContractName(string contractName);
+        JCDecauxItem getStationsListWithContractName(string contractName);
 
     }
     }
