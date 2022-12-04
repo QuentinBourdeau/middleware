@@ -12,58 +12,58 @@ namespace RestClient.Proxy {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IProxy")]
-    public interface IProxy {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IProxyCache")]
+    public interface IProxyCache {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/Request", ReplyAction="http://tempuri.org/IProxy/RequestResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/Request", ReplyAction="http://tempuri.org/IProxyCache/RequestResponse")]
         string Request(string url);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/Request", ReplyAction="http://tempuri.org/IProxy/RequestResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/Request", ReplyAction="http://tempuri.org/IProxyCache/RequestResponse")]
         System.Threading.Tasks.Task<string> RequestAsync(string url);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getContractsList", ReplyAction="http://tempuri.org/IProxy/getContractsListResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getContractsList", ReplyAction="http://tempuri.org/IProxyCache/getContractsListResponse")]
         string getContractsList();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getContractsList", ReplyAction="http://tempuri.org/IProxy/getContractsListResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getContractsList", ReplyAction="http://tempuri.org/IProxyCache/getContractsListResponse")]
         System.Threading.Tasks.Task<string> getContractsListAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getStationsList", ReplyAction="http://tempuri.org/IProxy/getStationsListResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsList", ReplyAction="http://tempuri.org/IProxyCache/getStationsListResponse")]
         string getStationsList();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getStationsList", ReplyAction="http://tempuri.org/IProxy/getStationsListResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsList", ReplyAction="http://tempuri.org/IProxyCache/getStationsListResponse")]
         System.Threading.Tasks.Task<string> getStationsListAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxy/getStationsListWithContractNameResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxyCache/getStationsListWithContractNameResponse")]
         string getStationsListWithContractName(string contractName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxy/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxy/getStationsListWithContractNameResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxyCache/getStationsListWithContractNameResponse")]
         System.Threading.Tasks.Task<string> getStationsListWithContractNameAsync(string contractName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProxyChannel : RestClient.Proxy.IProxy, System.ServiceModel.IClientChannel {
+    public interface IProxyCacheChannel : RestClient.Proxy.IProxyCache, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProxyClient : System.ServiceModel.ClientBase<RestClient.Proxy.IProxy>, RestClient.Proxy.IProxy {
+    public partial class ProxyCacheClient : System.ServiceModel.ClientBase<RestClient.Proxy.IProxyCache>, RestClient.Proxy.IProxyCache {
         
-        public ProxyClient() {
+        public ProxyCacheClient() {
         }
         
-        public ProxyClient(string endpointConfigurationName) : 
+        public ProxyCacheClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public ProxyClient(string endpointConfigurationName, string remoteAddress) : 
+        public ProxyCacheClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProxyClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ProxyCacheClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProxyClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ProxyCacheClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
