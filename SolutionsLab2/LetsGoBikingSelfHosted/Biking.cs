@@ -5,37 +5,37 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using LetsGoBikingSelfHosted.GenericProxyCache;
-//hahahah
+
 namespace LetsGoBikingSelfHosted
 {
     internal class Biking : IBiking
     {
         public Biking()
         {
-            string query, url, response;
+            //string query, url, response;
 
-            ApiOpenRoute aor = new ApiOpenRoute();
-            Task<Rootobject> iti = aor.addressesToItinerary("Eiffel tower", "Louvres", false);
-            Console.WriteLine(iti.Result.features[0].properties.segments[0].steps[0].instruction);
+            //ApiOpenRoute aor = new ApiOpenRoute();
+            //Task<Rootobject> iti = aor.addressesToItinerary("Eiffel tower", "Louvres", false);
+            //Console.WriteLine(iti.Result.features[0].properties.segments[0].steps[0].instruction);
             //Console.WriteLine(List<double>  ld : iti.Result.features[0].geometry.coordinates);
 
-            ProxyCacheClient proxy = new ProxyCacheClient();
+            //ProxyCacheClient proxy = new ProxyCacheClient();
             //BasicHttpBinding binding = new BasicHttpBinding();
 
 
-            response = proxy.getStationsList();
+            //response = proxy.getStationsList();
             //List<JCDStation> allStations = JsonSerializer.Deserialize<List<JCDStation>>(response);
 
             // 2.2: Display all stations.
-            Console.WriteLine("Stations:");
+            //Console.WriteLine("Stations:");
             /*foreach (JCDStation item in allStations)
             {
                 Console.WriteLine(item.number + ": " + item.name + ", number of bikes available:" + item.mainStands.availabilities.bikes + ", number of available places : " + item.mainStands.availabilities.stands);
             }*/
 
             // 2.2: Ask the user to choose one.
-            Console.WriteLine("Which station are you interested in ?");
-            int stationNumber = Int32.Parse(Console.ReadLine().Split(new[] { ':' })[0]);
+            //Console.WriteLine("Which station are you interested in ?");
+            //int stationNumber = Int32.Parse(Console.ReadLine().Split(new[] { ':' })[0]);
 
             // 3.0: Retrieve the chosen station.
             /*JCDStation chosenStation = allStations[0];
@@ -80,6 +80,18 @@ namespace LetsGoBikingSelfHosted
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsStringAsync();
             }*/
+        }
+
+        public Itinerary GetItinerary(string origin, string destination)
+        {
+            return null;
+            //TODO 
+            // get starting point and ending point using nominatim
+            // get closest station using JCDECAUX
+            // get both station point using nominatim
+            // get all three itinerary
+            // concatenate them
+            // return the final object
         }
     }
     
