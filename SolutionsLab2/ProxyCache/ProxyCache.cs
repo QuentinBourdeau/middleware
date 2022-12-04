@@ -7,6 +7,9 @@ using System.Text;
 using System.Runtime.Caching;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Net;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace ProxyCache
 {
@@ -19,6 +22,124 @@ namespace ProxyCache
         public DateTimeOffset dt_default = ObjectCache.InfiniteAbsoluteExpiration;
         
         string apiKey= "apiKey=41a669509b4e45db31dd29c98b811fde4c7b0ae0" ;
+        
+        private T Get<T>(string CacheItemName)
+        {
+            /*where CacheItemName is the key of the entry in the cache. I
+             * If CacheItemName doesn't exist or has a null content then create a new T
+             * object and put it in the cache with CacheItemName as the corresponding key.
+             * In this case, the Expiration Time is "dt_default" 
+             * ( public DateTimeOffset dt_default in ProxyCache class).
+             * At the instanciation of a ProxyCache object,
+             * dt_default = ObjectCache.InfiniteAbsoluteExpiration (no expiration time),
+             * but dt_default can be changed. */
+            return Get<T>(CacheItemName, dt_default);
+        }
+
+        private T Get<T>(string CacheItemName, double dt_seconds)
+        {
+
+            /*where CacheItemName is the key of the entry in the cache. I
+             * If CacheItemName doesn't exist or has a null content then create a new T
+             * object and put it in the cache with CacheItemName as the corresponding key.
+             * In this case, the Expiration Time is now + dt_seconds seconds. */
+            return Get<T>(CacheItemName, DateTimeOffset.Now.AddSeconds(dt_seconds));
+
+
+            
+        }
+
+        private T Get<T>(string CacheItemName, DateTimeOffset dt)
+        {
+
+            /*where CacheItemName is the key of the entry in the cache. I
+             * If CacheItemName doesn't exist or has a null content then create a new T
+             * object and put it in the cache with CacheItemName as the corresponding key.
+             * In this case, the Expiration Time is dt(DateTimeOffset class). */
+            T t = (T)cache[CacheItemName];
+            if (!(cache.Contains(CacheItemName)) || cache[CacheItemName] == null)
+            {
+                cache.Set(CacheItemName, t, dt);
+            }
+            return t;
+
+            /* Version Dubois
+            T response = (T) cache[cacheItemName];
+            if (response == null)
+            {
+                CacheItemPolicy policy = new CacheItemPolicy();
+                policy.AbsoluteExpiration = dt;
+                response = JsonSerializer.Deserialize<T>(JCDecauxAPIGetCall(cacheItemName).Result);
+                cache.Set(cacheItemName, response, policy);
+            }
+            return response;*/
+        }
+
+
+        /*Design a JCDecauxItem class with a constructor which makes a request to the
+         * JCDecaux API to create a JCDecauxItem object. The structure of this class 
+         * depends on the targetted API's endpoint (and so on the retrieved data).)*/
+
+        /* Généré par copilot
+         * public JCDecauxItem(string contractName, string stationNumber)
+        {
+            {
+                string url = "https://api.jcdecaux.com/vls/v3/stations/" + stationNumber;
+                string query = "contract=" + contractName + "&" + apiKey;
+                string response = JCDecauxAPICall(url, query).Result;
+                JObject jObject = JObject.Parse(response);
+                name = (string)jObject["name"];
+                address = (string)jObject["address"];
+                position = (string)jObject["position"];
+                banking = (string)jObject["banking"];
+                bonus = (string)jObject["bonus"];
+                status = (string)jObject["status"];
+                contract_name = (string)jObject["contract_name"];
+                bike_stands = (string)jObject["bike_stands"];
+                available_bike_stands = (string)jObject["available_bike_stands"];
+                available_bikes = (string)jObject["available_bikes"];
+                last_update = (string)jObject["last_update"];
+            }*/
+
+        private class JCDecauxItem
+        {
+            public string Name { get; set; }
+            public int Number { get; set; }
+            public string Address { get; set; }
+            public double Latitude { get; set; }
+            public double Longitude { get; set; }
+            public int BikeStands { get; set; }
+            public int AvailableBikes { get; set; }
+
+            public JCDecauxItem(int itemNumber)
+            {
+                
+                var url = $"https://api.jcdecaux.com/vls/v3/stations/{itemNumber}";
+
+                using (var httpClient = new HttpClient())
+                {
+                    // Make a GET request to the API endpoint.
+                    var response = httpClient.GetAsync(url).Result;
+
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        // If the request is successful, parse the
+                        // response JSON data and populate the
+                        // object properties with the retrieved values.
+                        var jsonData = response.Content.ReadAsStringAsync().Result;
+                        dynamic parsedData = JsonSerializer.Deserialize<Task>(jsonData);
+                        Name = parsedData.name;
+                        Number = parsedData.number;
+                        Address = parsedData.address;
+                        Latitude = parsedData.position.lat;
+                        Longitude = parsedData.position.lng;
+                        BikeStands = parsedData.bike_stands;
+                        AvailableBikes = parsedData.available_bikes;
+                    }
+                }
+            }
+        }
+
 
         public string Request(string url)
         {
@@ -36,7 +157,7 @@ namespace ProxyCache
                 cache.Add(url + "?" + apiKey, response, DateTimeOffset.Now.AddSeconds(10));
             }
             // 4. Display the response.
-            return(response);
+            return (response);
         }
 
         public string getContractsList()
@@ -68,178 +189,8 @@ namespace ProxyCache
             return await response.Content.ReadAsStringAsync();
         }
 
+        /*Use this JCDecauxItem class in the GenericProxyCache you created to manage requests to JCDecaux on the fly.
+                */
 
-        public T Get<T>(string CacheItemName)
-        {
-            /*where CacheItemName is the key of the entry in the cache. I
-             * If CacheItemName doesn't exist or has a null content then create a new T
-             * object and put it in the cache with CacheItemName as the corresponding key.
-             * In this case, the Expiration Time is "dt_default" 
-             * ( public DateTimeOffset dt_default in ProxyCache class).
-             * At the instanciation of a ProxyCache object,
-             * dt_default = ObjectCache.InfiniteAbsoluteExpiration (no expiration time),
-             * but dt_default can be changed. */
-            /*if (!(cache.Contains(CacheItemName)) || cache[CacheItemName] == null)
-            {
-                T t = new T();
-                cache.Add(CacheItemName, t, dt_default);
-                return t;
-            }
-            else
-            {
-                T t = (T)cache[CacheItemName];
-                if (t == null)
-                {
-                    t = new T();
-                    cache.Add(CacheItemName, t, dt_default);
-                }
-                return t;
-            }*/
-            return Get<T>(CacheItemName, dt_default);
-        }
-
-        public T Get<T>(string CacheItemName, double dt_seconds)
-        {
-
-            /*where CacheItemName is the key of the entry in the cache. I
-             * If CacheItemName doesn't exist or has a null content then create a new T
-             * object and put it in the cache with CacheItemName as the corresponding key.
-             * In this case, the Expiration Time is now + dt_seconds seconds. */
-            /*if (CacheItemName == null)
-            {
-                T t = new T();
-                cache.Add(CacheItemName, t, DateTimeOffset.Now.AddSeconds(dt_seconds));
-                return t;
-            }
-            else
-            {
-                T t = (T)cache[CacheItemName];
-                if (t == null)
-                {
-                    t = new T();
-                    cache.Add(CacheItemName, t, DateTimeOffset.Now.AddSeconds(dt_seconds));
-                }
-                return t;
-            }*/
-
-            return Get<T>(CacheItemName, DateTimeOffset.Now.AddSeconds(dt_seconds));
-
-
-
-        }
-
-        public T Get<T>(string CacheItemName, DateTimeOffset dt)
-        {
-
-            /*where CacheItemName is the key of the entry in the cache. I
-             * If CacheItemName doesn't exist or has a null content then create a new T
-             * object and put it in the cache with CacheItemName as the corresponding key.
-             * In this case, the Expiration Time is dt(DateTimeOffset class). */
-            T t = (T)cache[CacheItemName];
-            if (!(cache.Contains(CacheItemName)) || cache[CacheItemName] == null)
-            {
-                //T t = new T();
-                cache.Add(CacheItemName, t, dt);
-                return t;
-            }
-            else
-            {
-                cache.Set(CacheItemName, t, dt);
-                /*T t = (T)cache[CacheItemName];
-                if (t == null)
-                {
-                    t = new T();
-                    cache.Add(CacheItemName, t, dt);
-                }
-                return t;*/
-            }
-            return t;
-
-            /* Version Dubois
-            T response = (T) cache[cacheItemName];
-            if (response == null)
-            {
-                CacheItemPolicy policy = new CacheItemPolicy();
-                policy.AbsoluteExpiration = dt;
-                response = JsonSerializer.Deserialize<T>(JCDecauxAPIGetCall(cacheItemName).Result);
-                cache.Set(cacheItemName, response, policy);
-            }
-            return response;*/
-        }
-
-        class JCDecauxItem
-        {
-            public string name { get; set; }
-            public string address { get; set; }
-            public string position { get; set; }
-            public string banking { get; set; }
-            public string bonus { get; set; }
-            public string status { get; set; }
-            public string contract_name { get; set; }
-            public string bike_stands { get; set; }
-            public string available_bike_stands { get; set; }
-            public string available_bikes { get; set; }
-            public string last_update { get; set; }
-        }
-
-        /*Design a JCDecauxItem class with a constructor which makes a request to the
-         * JCDecaux API to create a JCDecauxItem object. The structure of this class 
-         * depends on the targetted API's endpoint (and so on the retrieved data).)*/
-
-            /* Généré par copilot
-             * public JCDecauxItem(string contractName, string stationNumber)
-            {
-                {
-                    string url = "https://api.jcdecaux.com/vls/v3/stations/" + stationNumber;
-                    string query = "contract=" + contractName + "&" + apiKey;
-                    string response = JCDecauxAPICall(url, query).Result;
-                    JObject jObject = JObject.Parse(response);
-                    name = (string)jObject["name"];
-                    address = (string)jObject["address"];
-                    position = (string)jObject["position"];
-                    banking = (string)jObject["banking"];
-                    bonus = (string)jObject["bonus"];
-                    status = (string)jObject["status"];
-                    contract_name = (string)jObject["contract_name"];
-                    bike_stands = (string)jObject["bike_stands"];
-                    available_bike_stands = (string)jObject["available_bike_stands"];
-                    available_bikes = (string)jObject["available_bikes"];
-                    last_update = (string)jObject["last_update"];
-                }*/
-
-
-            /*Use this JCDecauxItem class in the GenericProxyCache you created to manage requests to JCDecaux on the fly.
-                    */
-
-            /*public class JCDStation
-            {
-                public int number { get; set; }
-                public string name { get; set; }
-                public Position position { get; set; }
-                public MainStands mainStands { get; set; }
-            }
-
-            public class Position
-            {
-                public Double latitude { get; set; }
-                public Double longitude { get; set; }
-            }
-
-            public class MainStands
-            {
-                public Availabilities availabilities { get; set; }
-            }
-
-            public class Availabilities
-            {
-                public int bikes { get; set; }
-                public int stands { get; set; }
-
-            }*/
-
-            /*public class JCDContract
-    {
-        public string name { get; set; }
-    }*/
-        }
     }
+}
