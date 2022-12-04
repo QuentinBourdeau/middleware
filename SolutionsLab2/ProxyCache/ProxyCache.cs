@@ -109,6 +109,7 @@ namespace ProxyCache
             public double Latitude { get; set; }
             public double Longitude { get; set; }
             public int BikeStands { get; set; }
+            public int AvailableBikeStands { get; set; }
             public int AvailableBikes { get; set; }
 
             public JCDecauxItem(int itemNumber)
@@ -134,6 +135,7 @@ namespace ProxyCache
                         Latitude = parsedData.position.lat;
                         Longitude = parsedData.position.lng;
                         BikeStands = parsedData.bike_stands;
+                        AvailableBikeStands = parsedData.available_bike_stands;
                         AvailableBikes = parsedData.available_bikes;
                     }
                 }
