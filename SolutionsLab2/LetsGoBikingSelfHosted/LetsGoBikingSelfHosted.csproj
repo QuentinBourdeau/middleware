@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Device" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
@@ -51,6 +52,11 @@
   <ItemGroup>
     <Compile Include="ApiOpenRoute.cs" />
     <Compile Include="Biking.cs" />
+    <Compile Include="Connected Services\GenericProxyCache\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="IBiking.cs" />
     <Compile Include="OpenStreetMapObject.cs" />
     <Compile Include="Program.cs" />
@@ -58,7 +64,32 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Connected Services\GenericProxyCache\ProxyCache.wsdl" />
+    <None Include="Connected Services\GenericProxyCache\ProxyCache.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GenericProxyCache\ProxyCache1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\GenericProxyCache\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GenericProxyCache\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GenericProxyCache\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GenericProxyCache\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
