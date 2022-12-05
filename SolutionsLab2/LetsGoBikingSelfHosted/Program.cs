@@ -30,6 +30,8 @@ namespace LetsGoBikingSelfHosted
             Console.WriteLine(bike.GetItinerary("tour eiffel", "Louvre"));
 
             Console.WriteLine("Lancement de Let's Go Biking");
+            Biking bike = new Biking();
+            Itinerary itinerary = bike.GetItinerary("Tour Eiffel", "Louvre");
             Console.ReadLine();
 
         }

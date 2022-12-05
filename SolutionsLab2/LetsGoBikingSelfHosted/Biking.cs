@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using LetsGoBikingSelfHosted.GenericProxyCache;
 
@@ -10,6 +11,10 @@ namespace LetsGoBikingSelfHosted
 {
     internal class Biking : IBiking
     {
+        Utils utils = new Utils();
+        ApiOpenRoute openStreet = new ApiOpenRoute();
+        IProxyCache genericProxyCache = new GenericProxyCache.ProxyCacheClient();
+        bool hasJCDContract = false;
         public Biking()
         {
             //string query, url, response;
@@ -84,10 +89,40 @@ namespace LetsGoBikingSelfHosted
 
         public Itinerary GetItinerary(string origin, string destination)
         {
-            ApiOpenRoute openstreet = new ApiOpenRoute();
-            Location startingCity = openstreet.addressToPoint(origin).Result[0];
-            IProxyCache a = new GenericProxyCache.ProxyCacheClient();
+            Location startingCity = openStreet.addressToPoint(origin).Result[0];
+            Location endingCity = openStreet.addressToPoint(destination).Result[0];
+            if (!utils.SameCity(startingCity, endingCity))
+            {
+                return null;
+                //Si les 2 adresses ne sont pas dans la même ville, le programme s'arrête.
+            }
+            string city = startingCity.address.city;
+            JCDecauxItem JCDecauxItems = genericProxyCache.getContractsList();
+            List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(JCDecauxItems.response);
+            
+            //List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(genericProxyCache.getContractsList());
+            //Console.WriteLine(JCDContracts[0]);
+            foreach (JCDContract contract in JCDContracts)
+            {
+                Console.WriteLine(contract.name);
+                if (contract.name == city)
+                {
+                    hasJCDContract = true;
+                    break;
+                }
+            }
+            //JCDecauxItem JCDecauxItems = proxy.getStationsList();
+            //List<JCDStation> JCDStations = JsonSerializer.Deserialize<List<JCDStation>>(JCDecauxItems.response);
+
             return null;
+            
+            //TODO 
+            // get starting point and ending point using nominatim
+            // get closest station using JCDECAUX
+            // get both station point using nominatim
+            // get all three itinerary
+            // concatenate them
+            // return the final object
         }
     }
     
