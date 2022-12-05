@@ -38,34 +38,6 @@ namespace GenericProxyCache
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
-        /*public JCDecauxItem(int itemNumber)
-        {
-
-            var url = $"https://api.jcdecaux.com/vls/v3/stations/{itemNumber}";
-
-            using (var httpClient = new HttpClient())
-            {
-                // Make a GET request to the API endpoint.
-                var response = httpClient.GetAsync(url).Result;
-
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    // If the request is successful, parse the
-                    // response JSON data and populate the
-                    // object properties with the retrieved values.
-                    var jsonData = response.Content.ReadAsStringAsync().Result;
-                    dynamic parsedData = JsonSerializer.Deserialize<Task>(jsonData);
-                    Name = parsedData.name;
-                    Number = parsedData.number;
-                    Address = parsedData.address;
-                    Latitude = parsedData.position.lat;
-                    Longitude = parsedData.position.lng;
-                    BikeStands = parsedData.bike_stands;
-                    AvailableBikeStands = parsedData.available_bike_stands;
-                    AvailableBikes = parsedData.available_bikes;
-                }
-            }
-        }*/
     }
     [DataContract]
     public class JCDContract
