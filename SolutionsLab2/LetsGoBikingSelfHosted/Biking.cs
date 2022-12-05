@@ -84,14 +84,10 @@ namespace LetsGoBikingSelfHosted
 
         public Itinerary GetItinerary(string origin, string destination)
         {
+            ApiOpenRoute openstreet = new ApiOpenRoute();
+            Location startingCity = openstreet.addressToPoint(origin).Result[0];
+            IProxyCache a = new GenericProxyCache.ProxyCacheClient();
             return null;
-            //TODO 
-            // get starting point and ending point using nominatim
-            // get closest station using JCDECAUX
-            // get both station point using nominatim
-            // get all three itinerary
-            // concatenate them
-            // return the final object
         }
     }
     

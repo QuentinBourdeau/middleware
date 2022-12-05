@@ -10,6 +10,7 @@ namespace GenericProxyCache
     [ServiceContract]
     public interface IProxyCache
     {
+
         [OperationContract]
         JCDecauxItem getContractsList();
 

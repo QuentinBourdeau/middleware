@@ -29,8 +29,6 @@ namespace GenericProxyCache
             response = JCDecauxAPICall(query).Result;
 
         }
-
-        [OperationContract]
         static async Task<string> JCDecauxAPICall(string query)
         {
             HttpClient client = new HttpClient();

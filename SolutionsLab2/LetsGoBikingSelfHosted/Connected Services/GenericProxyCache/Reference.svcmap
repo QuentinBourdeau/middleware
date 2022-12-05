@@ -7,14 +7,29 @@
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
     <GenerateInternalTypes>false</GenerateInternalTypes>
-    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <GenerateMessageContracts>true</GenerateMessageContracts>
     <NamespaceMappings />
     <CollectionMappings />
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <UseSerializerForFaults>true</UseSerializerForFaults>
-    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
-    <ReferencedAssemblies />
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Microsoft.CSharp" />
+      <ReferencedAssembly AssemblyName="mscorlib" />
+      <ReferencedAssembly AssemblyName="Newtonsoft.Json" />
+      <ReferencedAssembly AssemblyName="System" />
+      <ReferencedAssembly AssemblyName="System.Core" />
+      <ReferencedAssembly AssemblyName="System.Data" />
+      <ReferencedAssembly AssemblyName="System.Data.DataSetExtensions" />
+      <ReferencedAssembly AssemblyName="System.Device" />
+      <ReferencedAssembly AssemblyName="System.Net.Http" />
+      <ReferencedAssembly AssemblyName="System.Runtime.Serialization" />
+      <ReferencedAssembly AssemblyName="System.ServiceModel" />
+      <ReferencedAssembly AssemblyName="System.Text.Json" />
+      <ReferencedAssembly AssemblyName="System.Xml" />
+      <ReferencedAssembly AssemblyName="System.Xml.Linq" />
+    </ReferencedAssemblies>
     <ReferencedDataContractTypes />
     <ServiceContractMappings />
   </ClientOptions>
@@ -22,6 +37,7 @@
     <MetadataSource Address="http://localhost:8733/ProxyCache?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="ProxyCache2.xsd" MetadataType="Schema" ID="c5bdafd4-626b-413f-8f8f-02c8de1a9fa7" SourceId="1" SourceUrl="http://localhost:8733/ProxyCache?xsd=xsd2" />
     <MetadataFile FileName="ProxyCache.xsd" MetadataType="Schema" ID="1dd7bf69-0582-4098-9cfe-551a6800d203" SourceId="1" SourceUrl="http://localhost:8733/ProxyCache?xsd=xsd1" />
     <MetadataFile FileName="ProxyCache.wsdl" MetadataType="Wsdl" ID="68338a6d-0f55-41c6-8cc6-78ab723d3379" SourceId="1" SourceUrl="http://localhost:8733/ProxyCache?wsdl" />
     <MetadataFile FileName="ProxyCache1.xsd" MetadataType="Schema" ID="0a5eb9e0-8676-400b-9cca-83e76733b05d" SourceId="1" SourceUrl="http://localhost:8733/ProxyCache?xsd=xsd0" />

@@ -26,6 +26,9 @@ namespace LetsGoBikingSelfHosted
             serviceMetadataBehavior.HttpsGetEnabled = true;
             serviceHost.Description.Behaviors.Add(serviceMetadataBehavior);
             serviceHost.Open();
+            IBiking bike = new Biking();
+            Console.WriteLine(bike.GetItinerary("tour eiffel", "Louvre"));
+
             Console.WriteLine("Lancement de Let's Go Biking");
             Console.ReadLine();
 
