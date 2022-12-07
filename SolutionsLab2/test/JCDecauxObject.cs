@@ -10,6 +10,7 @@ namespace test
     {
 
         public string name { get; set; }
+        public List<string> cities { get; set; }
     }
 
     public class JCDStation

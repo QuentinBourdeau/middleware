@@ -25,7 +25,8 @@ namespace test
             Segment segment = new Segment();
             foreach (Rootobject obj in route)
             {
-                foreach (Single[] coor in obj.features.First().geometry.coordinates) {
+                foreach (Single[] coor in obj.features.First().geometry.coordinates)
+                {
                     itinerary.coordinates.Add(new List<float>() { (float)coor[0], (float)coor[1] });
                     Console.WriteLine(itinerary.coordinates);
                 }
@@ -39,6 +40,12 @@ namespace test
             }
 
             return itinerary;
+        }
+
+        public void cleanContractsList(List<JCDContract> contracts)
+        {
+            contracts.RemoveAll(contract => contract.cities == null);
+
         }
     }
 }
