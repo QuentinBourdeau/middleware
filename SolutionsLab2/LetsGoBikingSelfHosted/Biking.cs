@@ -84,7 +84,17 @@ namespace LetsGoBikingSelfHosted
 
         public Itinerary GetItinerary(string origin, string destination)
         {
-            return null;
+            Itinerary retVal = new Itinerary();
+            Segment seg1 = new Segment();
+            Segment seg2 = new Segment();
+            Segment seg3 = new Segment();
+            Direction dir1 = new Direction(seg1, "foot");
+            Direction dir2 = new Direction(seg2, "bike");
+            Direction dir3 = new Direction(seg3, "foot");
+            retVal.directions = new List<Direction>(); 
+            retVal.duration = 0;
+            retVal.distance = 0;
+            return retVal;
             //TODO 
             // get starting point and ending point using nominatim
             // get closest station using JCDECAUX

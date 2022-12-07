@@ -1,7 +1,7 @@
 package fr.unice.polytech.BikeProject;
 
-import com.sun.xml.ws.fault.ServerSOAPFaultException;
 import generated.*;
+import com.sun.xml.ws.fault.ServerSOAPFaultException;
 
 import java.util.Scanner;
 
@@ -25,11 +25,22 @@ public class Main {
         try{
             Itinerary itinerary = service.getItinerary(start, end);
             for (Direction d : itinerary.getDirections().getValue().getDirection()) {
-                System.out.println(d.getProfile().getValue());
+                if(d.getProfile().getValue().contains("cycling")){
+                    System.out.println("Grab a bike !");
+                }
+                if(d.getProfile().getValue().contains("foot")){
+                    System.out.println("On foot !");
+                }
                 for (Step s : d.getSegment().getValue().getSteps().getValue().getStep()){
+                    if(s.getDistance().intValue() == 0){
+                        continue;
+                    }
                     System.out.println("In " + s.getDistance().intValue() + " meters " + s.getInstruction().getValue());
                 }
             }
+            Map m = new Map();
+            m.setGeoPosition(itinerary);
+            m.draw();
             System.out.println("You have arrived at your destination!");}
         catch (ServerSOAPFaultException exception) {System.out.println(exception.getMessage());}
     }
