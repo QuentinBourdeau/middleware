@@ -54,6 +54,7 @@ namespace GenericProxyCache
              * If CacheItemName doesn't exist or has a null content then create a new T
              * object and put it in the cache with CacheItemName as the corresponding key.
              * In this case, the Expiration Time is dt(DateTimeOffset class). */
+            updateCache();
             T t = (T)cache[CacheItemName];
             if (!(cache.Contains(CacheItemName)) || t == null)
             {
@@ -63,12 +64,17 @@ namespace GenericProxyCache
             return t;
         }
 
+        private void updateCache()
+        {
+            cache.Remove(null); //Enlève tous les objets expirés du cache
+        }
+
        
         public JCDecauxItem getContractsList()
         {
             BasicHttpBinding binding = new BasicHttpBinding();
             string url = "https://api.jcdecaux.com/vls/v3/contracts?"+apiKey;
-            return Get<JCDecauxItem>(url);
+            return Get<JCDecauxItem>(url, 3600);
             //return JCDecauxAPICall(url, apiKey).Result;
         }
 
@@ -77,7 +83,7 @@ namespace GenericProxyCache
             BasicHttpBinding binding = new BasicHttpBinding();
 
             string url = "https://api.jcdecaux.com/vls/v3/stations?"+apiKey;
-            return Get<JCDecauxItem>(url);
+            return Get<JCDecauxItem>(url, 3600);
             //return JCDecauxAPICall(url, apiKey).Result;
         }
 
@@ -85,7 +91,7 @@ namespace GenericProxyCache
         {
             string url = "https://api.jcdecaux.com/vls/v3/stations";
             string query = "contract=" + contractName + "&" + apiKey;
-            return Get<JCDecauxItem>(url+ query);
+            return Get<JCDecauxItem>(url+ query, 3600);
             //return JCDecauxAPICall(url, query).Result;
         }
 
