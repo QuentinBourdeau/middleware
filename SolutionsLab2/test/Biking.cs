@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Text.Json;
 using test.ProxyCacheRef;
 
@@ -67,6 +68,38 @@ namespace test
                     minDistance = distanceToCandidate;
                 }
             }
+                        // get closest station using JCDECAUX
+            ClientJCDecauxAPI.retrieveClosestStationDeparture(startingPoint);
+
+            List<JCDStation> allstations = JsonSerializer.Deserialize<List<JCDStation>>(JCDecauxItems.response);
+            // get both closest station point using nominatim
+
+            //3.1 : Compute the closest station.
+            Position stationCoordinates = new Position(chosenStation.position.latitude, chosenStation.position.longitude);
+
+            Double minDistance = -1;
+            JCDStation closestStation = chosenStation;
+            foreach (JCDStation item in allStations)
+            {
+                //Find the current station's position.
+                Position candidatePos = new Position(item.position.latitude, item.position.longitude);
+                // And compare its distance to the chosen one to see if it is closer than the current closest.
+                Double distanceToCandidate = stationCoordinates.GetDistanceTo(candidatePos);
+
+                if (distanceToCandidate != 0 && (minDistance == -1 || distanceToCandidate < minDistance))
+                {
+                    closestStation = item;
+                    minDistance = distanceToCandidate;
+                }
+            }
+
+            Console.WriteLine("Closest station: " + closestStation.name);
+            Console.ReadLine();
+            return null;
+        }
+            // get all three itinerary
+            // concatenate them
+            // return the final object
 
             Console.WriteLine("Closest station: " + closestStation.name);
             Console.ReadLine();
@@ -85,52 +118,26 @@ namespace test
 
         public Itinerary GetItinerary(string origin, string destination)
         {
-            Location startingCity = openStreet.addressToPoint(origin).Result[0];
-            Location endingCity = openStreet.addressToPoint(destination).Result[0];
-            if (!utils.SameCity(startingCity, endingCity))
-            {
-                return null;
-                //Si les 2 adresses ne sont pas dans la même ville, le programme s'arrête.
-            }
-            string city = startingCity.address.city;
-            genericProxyCache.getStationsList();
-            JCDecauxItem JCDecauxItems = genericProxyCache.getContractsList();
-            List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(JCDecauxItems.response);
-            
-            //List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(genericProxyCache.getContractsList());
-            //Console.WriteLine(JCDContracts[0]);
-            foreach (JCDContract contract in JCDContracts)
-            {
-                Console.WriteLine(contract.name);
-                if (contract.name == city)
-                {
-                    hasJCDContract = true;
-                    break;
-                }
-            }
-            //JCDecauxItem JCDecauxItems = proxy.getStationsList();
-            //List<JCDStation> JCDStations = JsonSerializer.Deserialize<List<JCDStation>>(JCDecauxItems.response);
 
             //TODO 
 
             // get starting point and ending point using nominatim
-            Location startingPoint = openStreet.addressToPoint(origin).Result[0];
-            Location endingPoint = openStreet.addressToPoint(destination).Result[0];
-            // check if both point have the same city / contract
-            if (!utils.SameCity(startingCity, endingCity))
-            {
-                return null;
-            }
-            string city = startingPoint.address.city;
-            // get closest station using JCDECAUX
-            JCDecauxItem JCDecauxItems = genericProxyCache.getContractsList();
-            List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(JCDecauxItems.response);
-            // get both station point using nominatim
-            // get all three itinerary
-            // concatenate them
-            // return the final object
+            GeoCoordinate startingPoint = openStreet.addressToPoint(origin).Result;
+            GeoCoordinate endingPoint = openStreet.addressToPoint(destination).Result;
 
-            return null;
+            JCDStation startStation = ClientJCDecauxAPI.retrieveClosestStationDeparture(startingPoint);
+            JCDStation endingStation = ClientJCDecauxAPI.retrieveClosestStationArrival(startingPoint);
+
+            GeoCoordinate startStationLocation = utils.posToCoor(startStation.position);
+            GeoCoordinate endingStationLocation = utils.posToCoor(endingStation.position);
+
+            List<Rootobject> iti = new List<Rootobject>();
+            iti.Add(openStreet.geoToItinerary(startingPoint,startStationLocation,false).Result);
+            iti.Add(openStreet.geoToItinerary(startStationLocation, endingStationLocation, true).Result);
+            iti.Add(openStreet.geoToItinerary(endingStationLocation, endingPoint, false).Result);
+
+            return utils.calculateItinenary(iti);
+
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -37,7 +38,12 @@ namespace test
         public float importance { get; set; }
         public string icon { get; set; }
         public Address address { get; set; }
+        public GeoCoordinate GetGeoCoordinate()
+        {
+            return new GeoCoordinate(Double.Parse(lat, System.Globalization.CultureInfo.InvariantCulture), Double.Parse(lon, System.Globalization.CultureInfo.InvariantCulture));
+        }
     }
+
 
     [Serializable]
     public class Address

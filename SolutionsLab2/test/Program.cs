@@ -15,7 +15,7 @@ namespace test
             BasicHttpBinding binding = new BasicHttpBinding();
             Uri baseAddress = new Uri("http://localhost:8800/ProxyCache");
             ServiceHost serviceHost = new ServiceHost(typeof(Biking), baseAddress);
-            binding.MaxReceivedMessageSize = 1000000;
+            binding.MaxReceivedMessageSize = 1000000000;
             serviceHost.AddServiceEndpoint(typeof(IBiking), binding, "");
             ServiceMetadataBehavior serviceMetadataBehavior = new ServiceMetadataBehavior();
             serviceMetadataBehavior.HttpGetEnabled = true;

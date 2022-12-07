@@ -42,6 +42,11 @@ namespace test
 
     public class Position
     {
+        public Position(double latitude, double longitude)
+        {
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
 
         public double latitude { get; set; }
 
