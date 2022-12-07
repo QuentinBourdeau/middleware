@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using test.ProxyCacheRef;
 
 namespace test
