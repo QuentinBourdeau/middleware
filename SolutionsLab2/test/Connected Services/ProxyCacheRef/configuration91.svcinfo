@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="IU1TQBop50VgcOvzzKAIMvk008W51MWG9cdvruhKH6s=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="xe89kuAqeVsNz5DI6/8Bt1c8BhctEnManphhFb7qpXs=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IProxyCache">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IProxyCache" contract="Proxy.IProxyCache" bindingType="basicHttpBinding" address="http://localhost:8733/Design_Time_Addresses/ProxyCache/Service1/" bindingConfiguration="BasicHttpBinding_IProxyCache">
+    <endpoint name="BasicHttpBinding_IProxyCache" contract="ProxyCacheRef.IProxyCache" bindingType="basicHttpBinding" address="http://localhost:8733/ProxyCache" bindingConfiguration="BasicHttpBinding_IProxyCache">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8733/Design_Time_Addresses/ProxyCache/Service1/</serializedValue>
+          <serializedValue>http://localhost:8733/ProxyCache</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -127,7 +127,7 @@
           <serializedValue>BasicHttpBinding_IProxyCache</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>Proxy.IProxyCache</serializedValue>
+          <serializedValue>ProxyCacheRef.IProxyCache</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>

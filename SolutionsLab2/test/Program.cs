@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Http;
-using System.Text.Json;
-using System.Device.Location;
-//using RestClient.Proxy;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 
-namespace LetsGoBikingSelfHosted
+namespace test
 {
     class Program
     {
@@ -34,6 +30,6 @@ namespace LetsGoBikingSelfHosted
             Console.ReadLine();
 
         }
-    
+
     }
 }

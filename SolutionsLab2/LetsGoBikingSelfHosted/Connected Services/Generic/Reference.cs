@@ -8,45 +8,39 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RestClient.Proxy {
+namespace LetsGoBikingSelfHosted.Generic {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IProxyCache")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Generic.IProxyCache")]
     public interface IProxyCache {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/Request", ReplyAction="http://tempuri.org/IProxyCache/RequestResponse")]
-        string Request(string url);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/Request", ReplyAction="http://tempuri.org/IProxyCache/RequestResponse")]
-        System.Threading.Tasks.Task<string> RequestAsync(string url);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getContractsList", ReplyAction="http://tempuri.org/IProxyCache/getContractsListResponse")]
+        GenericProxyCache.JCDecauxItem getContractsList();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getContractsList", ReplyAction="http://tempuri.org/IProxyCache/getContractsListResponse")]
-        string getContractsList();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getContractsList", ReplyAction="http://tempuri.org/IProxyCache/getContractsListResponse")]
-        System.Threading.Tasks.Task<string> getContractsListAsync();
+        System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getContractsListAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsList", ReplyAction="http://tempuri.org/IProxyCache/getStationsListResponse")]
-        string getStationsList();
+        GenericProxyCache.JCDecauxItem getStationsList();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsList", ReplyAction="http://tempuri.org/IProxyCache/getStationsListResponse")]
-        System.Threading.Tasks.Task<string> getStationsListAsync();
+        System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getStationsListAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxyCache/getStationsListWithContractNameResponse")]
-        string getStationsListWithContractName(string contractName);
+        GenericProxyCache.JCDecauxItem getStationsListWithContractName(string contractName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxyCache/getStationsListWithContractNameResponse")]
-        System.Threading.Tasks.Task<string> getStationsListWithContractNameAsync(string contractName);
+        System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getStationsListWithContractNameAsync(string contractName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProxyCacheChannel : RestClient.Proxy.IProxyCache, System.ServiceModel.IClientChannel {
+    public interface IProxyCacheChannel : LetsGoBikingSelfHosted.Generic.IProxyCache, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProxyCacheClient : System.ServiceModel.ClientBase<RestClient.Proxy.IProxyCache>, RestClient.Proxy.IProxyCache {
+    public partial class ProxyCacheClient : System.ServiceModel.ClientBase<LetsGoBikingSelfHosted.Generic.IProxyCache>, LetsGoBikingSelfHosted.Generic.IProxyCache {
         
         public ProxyCacheClient() {
         }
@@ -67,35 +61,27 @@ namespace RestClient.Proxy {
                 base(binding, remoteAddress) {
         }
         
-        public string Request(string url) {
-            return base.Channel.Request(url);
-        }
-        
-        public System.Threading.Tasks.Task<string> RequestAsync(string url) {
-            return base.Channel.RequestAsync(url);
-        }
-        
-        public string getContractsList() {
+        public GenericProxyCache.JCDecauxItem getContractsList() {
             return base.Channel.getContractsList();
         }
         
-        public System.Threading.Tasks.Task<string> getContractsListAsync() {
+        public System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getContractsListAsync() {
             return base.Channel.getContractsListAsync();
         }
         
-        public string getStationsList() {
+        public GenericProxyCache.JCDecauxItem getStationsList() {
             return base.Channel.getStationsList();
         }
         
-        public System.Threading.Tasks.Task<string> getStationsListAsync() {
+        public System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getStationsListAsync() {
             return base.Channel.getStationsListAsync();
         }
         
-        public string getStationsListWithContractName(string contractName) {
+        public GenericProxyCache.JCDecauxItem getStationsListWithContractName(string contractName) {
             return base.Channel.getStationsListWithContractName(contractName);
         }
         
-        public System.Threading.Tasks.Task<string> getStationsListWithContractNameAsync(string contractName) {
+        public System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getStationsListWithContractNameAsync(string contractName) {
             return base.Channel.getStationsListWithContractNameAsync(contractName);
         }
     }

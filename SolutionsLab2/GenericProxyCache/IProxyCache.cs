@@ -21,4 +21,4 @@ namespace GenericProxyCache
         JCDecauxItem getStationsListWithContractName(string contractName);
 
     }
-    }
+}

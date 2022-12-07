@@ -1,19 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="Request">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="url" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RequestResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="RequestResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+  <xs:import schemaLocation="http://localhost:8733/ProxyCache?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/GenericProxyCache" />
   <xs:element name="getContractsList">
     <xs:complexType>
       <xs:sequence />
@@ -22,7 +9,7 @@
   <xs:element name="getContractsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="getContractsListResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GenericProxyCache" minOccurs="0" name="getContractsListResult" nillable="true" type="q1:JCDecauxItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -34,7 +21,7 @@
   <xs:element name="getStationsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="getStationsListResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/GenericProxyCache" minOccurs="0" name="getStationsListResult" nillable="true" type="q2:JCDecauxItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -48,7 +35,7 @@
   <xs:element name="getStationsListWithContractNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="getStationsListWithContractNameResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/GenericProxyCache" minOccurs="0" name="getStationsListWithContractNameResult" nillable="true" type="q3:JCDecauxItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

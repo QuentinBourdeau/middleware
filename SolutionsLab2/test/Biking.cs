@@ -5,15 +5,15 @@ using System.ServiceModel;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using LetsGoBikingSelfHosted.GenericProxyCache;
+using test.ProxyCacheRef;
 
-namespace LetsGoBikingSelfHosted
+namespace test
 {
     internal class Biking : IBiking
     {
         Utils utils = new Utils();
         ApiOpenRoute openStreet = new ApiOpenRoute();
-        IProxyCache genericProxyCache = new GenericProxyCache.ProxyCacheClient();
+        ProxyCacheClient genericProxyCache = new ProxyCacheClient();
         bool hasJCDContract = false;
         public Biking()
         {
@@ -99,11 +99,11 @@ namespace LetsGoBikingSelfHosted
             string city = startingCity.address.city;
             genericProxyCache.getStationsList();
             JCDecauxItem JCDecauxItems = genericProxyCache.getContractsList();
-            //List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(JCDecauxItems.response);
+            List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(JCDecauxItems.response);
             
             //List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(genericProxyCache.getContractsList());
             //Console.WriteLine(JCDContracts[0]);
-            /*foreach (JCDContract contract in JCDContracts)
+            foreach (JCDContract contract in JCDContracts)
             {
                 Console.WriteLine(contract.name);
                 if (contract.name == city)
@@ -111,7 +111,7 @@ namespace LetsGoBikingSelfHosted
                     hasJCDContract = true;
                     break;
                 }
-            }*/
+            }
             //JCDecauxItem JCDecauxItems = proxy.getStationsList();
             //List<JCDStation> JCDStations = JsonSerializer.Deserialize<List<JCDStation>>(JCDecauxItems.response);
 
@@ -126,5 +126,47 @@ namespace LetsGoBikingSelfHosted
             // return the final object
         }
     }
-    
+
+    public class JCDContract
+    {
+
+        public string name { get; set; }
+    }
+
+    public class JCDStation
+    {
+
+        public int number { get; set; }
+
+        public string name { get; set; }
+
+        public string contractName { get; set; }
+
+        public Position position { get; set; }
+
+        public Totalstands totalStands { get; set; }
+    }
+
+    public class Totalstands
+    {
+
+        public Availabilities availabilities { get; set; }
+    }
+
+    public class Availabilities
+    {
+
+        public int bikes { get; set; }
+
+        public int stands { get; set; }
+    }
+
+    public class Position
+    {
+
+        public double latitude { get; set; }
+
+        public double longitude { get; set; }
+    }
+
 }
