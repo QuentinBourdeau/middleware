@@ -25,6 +25,12 @@ namespace test
             Segment segment = new Segment();
             foreach (Rootobject obj in route)
             {
+                foreach (Single[] coor in obj.features.First().geometry.coordinates) {
+                    itinerary.coordinates.Add(new List<float>() { (float)coor[0], (float)coor[1] });
+                    Console.WriteLine(itinerary.coordinates);
+                }
+
+
                 Segment seg = obj.features.First().properties.segments.First();
                 string profile = obj.metadata.query.profile;
                 itinerary.directions.Add(new Direction(seg, profile));

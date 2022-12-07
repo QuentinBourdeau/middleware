@@ -16,10 +16,6 @@ namespace test
 
         static ClientJCDecauxAPI()
         {
-            //BasicHttpBinding basicHttpBinding = new BasicHttpBinding();
-            //basicHttpBinding.MaxReceivedMessageSize = 10000000;
-
-            //EndpointAddress jCDProxyEndpoint = new EndpointAddress("http://localhost:8800/ProxyCache");
             proxy = new ProxyCacheClient();
         }
 

@@ -13,6 +13,7 @@ namespace test
         public Itinerary()
         {
             directions = new List<Direction>();
+            coordinates = new List<List<float>>();
         }
 
         [DataMember]
@@ -23,6 +24,9 @@ namespace test
 
         [DataMember]
         public double duration { get; set; }
+
+        [DataMember]
+        public List<List<float>> coordinates { get; set; }
 
     }
 
