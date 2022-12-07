@@ -18,7 +18,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="directions" type="{http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted}ArrayOfDirection" minOccurs="0"/&gt;
+ *         &lt;element name="coordinates" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfArrayOffloat" minOccurs="0"/&gt;
+ *         &lt;element name="directions" type="{http://schemas.datacontract.org/2004/07/test}ArrayOfDirection" minOccurs="0"/&gt;
  *         &lt;element name="distance" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
  *         &lt;element name="duration" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
@@ -31,16 +32,43 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Itinerary", propOrder = {
+    "coordinates",
     "directions",
     "distance",
     "duration"
 })
 public class Itinerary {
 
-    @XmlElementRef(name = "directions", namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "coordinates", namespace = "http://schemas.datacontract.org/2004/07/test", type = JAXBElement.class, required = false)
+    protected JAXBElement<ArrayOfArrayOffloat> coordinates;
+    @XmlElementRef(name = "directions", namespace = "http://schemas.datacontract.org/2004/07/test", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfDirection> directions;
     protected Double distance;
     protected Double duration;
+
+    /**
+     * Obtient la valeur de la propriété coordinates.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link ArrayOfArrayOffloat }{@code >}
+     *     
+     */
+    public JAXBElement<ArrayOfArrayOffloat> getCoordinates() {
+        return coordinates;
+    }
+
+    /**
+     * Définit la valeur de la propriété coordinates.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link ArrayOfArrayOffloat }{@code >}
+     *     
+     */
+    public void setCoordinates(JAXBElement<ArrayOfArrayOffloat> value) {
+        this.coordinates = value;
+    }
 
     /**
      * Obtient la valeur de la propriété directions.

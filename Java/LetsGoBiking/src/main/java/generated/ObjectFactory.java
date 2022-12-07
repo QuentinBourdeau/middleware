@@ -28,12 +28,14 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Itinerary_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "Itinerary");
-    private final static QName _ArrayOfDirection_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "ArrayOfDirection");
-    private final static QName _Direction_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "Direction");
-    private final static QName _Segment_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "Segment");
-    private final static QName _ArrayOfStep_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "ArrayOfStep");
-    private final static QName _Step_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "Step");
+    private final static QName _Itinerary_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "Itinerary");
+    private final static QName _ArrayOfDirection_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "ArrayOfDirection");
+    private final static QName _Direction_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "Direction");
+    private final static QName _Segment_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "Segment");
+    private final static QName _ArrayOfStep_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "ArrayOfStep");
+    private final static QName _Step_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "Step");
+    private final static QName _ArrayOfArrayOffloat_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfArrayOffloat");
+    private final static QName _ArrayOffloat_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOffloat");
     private final static QName _ArrayOfint_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfint");
     private final static QName _AnyType_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "anyType");
     private final static QName _AnyURI_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "anyURI");
@@ -59,13 +61,14 @@ public class ObjectFactory {
     private final static QName _GetItineraryOrigin_QNAME = new QName("http://tempuri.org/", "origin");
     private final static QName _GetItineraryDestination_QNAME = new QName("http://tempuri.org/", "destination");
     private final static QName _GetItineraryResponseGetItineraryResult_QNAME = new QName("http://tempuri.org/", "GetItineraryResult");
-    private final static QName _StepInstruction_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "instruction");
-    private final static QName _StepName_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "name");
-    private final static QName _StepWayPoints_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "way_points");
-    private final static QName _SegmentSteps_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "steps");
-    private final static QName _DirectionProfile_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "profile");
-    private final static QName _DirectionSegment_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "segment");
-    private final static QName _ItineraryDirections_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", "directions");
+    private final static QName _StepInstruction_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "instruction");
+    private final static QName _StepName_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "name");
+    private final static QName _StepWayPoints_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "way_points");
+    private final static QName _SegmentSteps_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "steps");
+    private final static QName _DirectionProfile_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "profile");
+    private final static QName _DirectionSegment_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "segment");
+    private final static QName _ItineraryCoordinates_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "coordinates");
+    private final static QName _ItineraryDirections_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "directions");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated
@@ -139,6 +142,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ArrayOfArrayOffloat }
+     * 
+     */
+    public ArrayOfArrayOffloat createArrayOfArrayOffloat() {
+        return new ArrayOfArrayOffloat();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOffloat }
+     * 
+     */
+    public ArrayOffloat createArrayOffloat() {
+        return new ArrayOffloat();
+    }
+
+    /**
      * Create an instance of {@link ArrayOfint }
      * 
      */
@@ -154,7 +173,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link Itinerary }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "Itinerary")
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "Itinerary")
     public JAXBElement<Itinerary> createItinerary(Itinerary value) {
         return new JAXBElement<Itinerary>(_Itinerary_QNAME, Itinerary.class, null, value);
     }
@@ -167,7 +186,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfDirection }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "ArrayOfDirection")
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "ArrayOfDirection")
     public JAXBElement<ArrayOfDirection> createArrayOfDirection(ArrayOfDirection value) {
         return new JAXBElement<ArrayOfDirection>(_ArrayOfDirection_QNAME, ArrayOfDirection.class, null, value);
     }
@@ -180,7 +199,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link Direction }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "Direction")
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "Direction")
     public JAXBElement<Direction> createDirection(Direction value) {
         return new JAXBElement<Direction>(_Direction_QNAME, Direction.class, null, value);
     }
@@ -193,7 +212,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link Segment }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "Segment")
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "Segment")
     public JAXBElement<Segment> createSegment(Segment value) {
         return new JAXBElement<Segment>(_Segment_QNAME, Segment.class, null, value);
     }
@@ -206,7 +225,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfStep }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "ArrayOfStep")
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "ArrayOfStep")
     public JAXBElement<ArrayOfStep> createArrayOfStep(ArrayOfStep value) {
         return new JAXBElement<ArrayOfStep>(_ArrayOfStep_QNAME, ArrayOfStep.class, null, value);
     }
@@ -219,9 +238,35 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link Step }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "Step")
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "Step")
     public JAXBElement<Step> createStep(Step value) {
         return new JAXBElement<Step>(_Step_QNAME, Step.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfArrayOffloat }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfArrayOffloat }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays", name = "ArrayOfArrayOffloat")
+    public JAXBElement<ArrayOfArrayOffloat> createArrayOfArrayOffloat(ArrayOfArrayOffloat value) {
+        return new JAXBElement<ArrayOfArrayOffloat>(_ArrayOfArrayOffloat_QNAME, ArrayOfArrayOffloat.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOffloat }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOffloat }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays", name = "ArrayOffloat")
+    public JAXBElement<ArrayOffloat> createArrayOffloat(ArrayOffloat value) {
+        return new JAXBElement<ArrayOffloat>(_ArrayOffloat_QNAME, ArrayOffloat.class, null, value);
     }
 
     /**
@@ -557,7 +602,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "instruction", scope = Step.class)
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "instruction", scope = Step.class)
     public JAXBElement<String> createStepInstruction(String value) {
         return new JAXBElement<String>(_StepInstruction_QNAME, String.class, Step.class, value);
     }
@@ -570,7 +615,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "name", scope = Step.class)
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "name", scope = Step.class)
     public JAXBElement<String> createStepName(String value) {
         return new JAXBElement<String>(_StepName_QNAME, String.class, Step.class, value);
     }
@@ -583,7 +628,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "way_points", scope = Step.class)
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "way_points", scope = Step.class)
     public JAXBElement<ArrayOfint> createStepWayPoints(ArrayOfint value) {
         return new JAXBElement<ArrayOfint>(_StepWayPoints_QNAME, ArrayOfint.class, Step.class, value);
     }
@@ -596,7 +641,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfStep }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "steps", scope = Segment.class)
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "steps", scope = Segment.class)
     public JAXBElement<ArrayOfStep> createSegmentSteps(ArrayOfStep value) {
         return new JAXBElement<ArrayOfStep>(_SegmentSteps_QNAME, ArrayOfStep.class, Segment.class, value);
     }
@@ -609,7 +654,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "profile", scope = Direction.class)
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "profile", scope = Direction.class)
     public JAXBElement<String> createDirectionProfile(String value) {
         return new JAXBElement<String>(_DirectionProfile_QNAME, String.class, Direction.class, value);
     }
@@ -622,9 +667,22 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link Segment }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "segment", scope = Direction.class)
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "segment", scope = Direction.class)
     public JAXBElement<Segment> createDirectionSegment(Segment value) {
         return new JAXBElement<Segment>(_DirectionSegment_QNAME, Segment.class, Direction.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfArrayOffloat }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfArrayOffloat }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "coordinates", scope = Itinerary.class)
+    public JAXBElement<ArrayOfArrayOffloat> createItineraryCoordinates(ArrayOfArrayOffloat value) {
+        return new JAXBElement<ArrayOfArrayOffloat>(_ItineraryCoordinates_QNAME, ArrayOfArrayOffloat.class, Itinerary.class, value);
     }
 
     /**
@@ -635,7 +693,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfDirection }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", name = "directions", scope = Itinerary.class)
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "directions", scope = Itinerary.class)
     public JAXBElement<ArrayOfDirection> createItineraryDirections(ArrayOfDirection value) {
         return new JAXBElement<ArrayOfDirection>(_ItineraryDirections_QNAME, ArrayOfDirection.class, Itinerary.class, value);
     }

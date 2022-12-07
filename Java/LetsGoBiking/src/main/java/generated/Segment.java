@@ -20,7 +20,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element name="distance" type="{http://www.w3.org/2001/XMLSchema}float" minOccurs="0"/&gt;
  *         &lt;element name="duration" type="{http://www.w3.org/2001/XMLSchema}float" minOccurs="0"/&gt;
- *         &lt;element name="steps" type="{http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted}ArrayOfStep" minOccurs="0"/&gt;
+ *         &lt;element name="steps" type="{http://schemas.datacontract.org/2004/07/test}ArrayOfStep" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -39,7 +39,7 @@ public class Segment {
 
     protected Float distance;
     protected Float duration;
-    @XmlElementRef(name = "steps", namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "steps", namespace = "http://schemas.datacontract.org/2004/07/test", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfStep> steps;
 
     /**

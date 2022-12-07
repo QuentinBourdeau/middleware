@@ -50,12 +50,12 @@ public class Step {
     protected Float duration;
     @XmlElement(name = "exit_number")
     protected Integer exitNumber;
-    @XmlElementRef(name = "instruction", namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "instruction", namespace = "http://schemas.datacontract.org/2004/07/test", type = JAXBElement.class, required = false)
     protected JAXBElement<String> instruction;
-    @XmlElementRef(name = "name", namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "name", namespace = "http://schemas.datacontract.org/2004/07/test", type = JAXBElement.class, required = false)
     protected JAXBElement<String> name;
     protected Integer type;
-    @XmlElementRef(name = "way_points", namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "way_points", namespace = "http://schemas.datacontract.org/2004/07/test", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfint> wayPoints;
 
     /**

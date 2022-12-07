@@ -19,7 +19,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="Direction" type="{http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted}Direction" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="Direction" type="{http://schemas.datacontract.org/2004/07/test}Direction" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;

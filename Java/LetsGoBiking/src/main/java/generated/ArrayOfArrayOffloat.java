@@ -10,16 +10,16 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java pour ArrayOfStep complex type.
+ * <p>Classe Java pour ArrayOfArrayOffloat complex type.
  * 
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="ArrayOfStep"&gt;
+ * &lt;complexType name="ArrayOfArrayOffloat"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="Step" type="{http://schemas.datacontract.org/2004/07/test}Step" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="ArrayOffloat" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOffloat" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -29,41 +29,41 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ArrayOfStep", propOrder = {
-    "step"
+@XmlType(name = "ArrayOfArrayOffloat", namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays", propOrder = {
+    "arrayOffloat"
 })
-public class ArrayOfStep {
+public class ArrayOfArrayOffloat {
 
-    @XmlElement(name = "Step", nillable = true)
-    protected List<Step> step;
+    @XmlElement(name = "ArrayOffloat", nillable = true)
+    protected List<ArrayOffloat> arrayOffloat;
 
     /**
-     * Gets the value of the step property.
+     * Gets the value of the arrayOffloat property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a <CODE>set</CODE> method for the step property.
+     * This is why there is not a <CODE>set</CODE> method for the arrayOffloat property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getStep().add(newItem);
+     *    getArrayOffloat().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Step }
+     * {@link ArrayOffloat }
      * 
      * 
      */
-    public List<Step> getStep() {
-        if (step == null) {
-            step = new ArrayList<Step>();
+    public List<ArrayOffloat> getArrayOffloat() {
+        if (arrayOffloat == null) {
+            arrayOffloat = new ArrayList<ArrayOffloat>();
         }
-        return this.step;
+        return this.arrayOffloat;
     }
 
 }

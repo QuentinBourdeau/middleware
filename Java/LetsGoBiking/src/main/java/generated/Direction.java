@@ -19,7 +19,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="profile" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="segment" type="{http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted}Segment" minOccurs="0"/&gt;
+ *         &lt;element name="segment" type="{http://schemas.datacontract.org/2004/07/test}Segment" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -35,9 +35,9 @@ import jakarta.xml.bind.annotation.XmlType;
 })
 public class Direction {
 
-    @XmlElementRef(name = "profile", namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "profile", namespace = "http://schemas.datacontract.org/2004/07/test", type = JAXBElement.class, required = false)
     protected JAXBElement<String> profile;
-    @XmlElementRef(name = "segment", namespace = "http://schemas.datacontract.org/2004/07/LetsGoBikingSelfHosted", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "segment", namespace = "http://schemas.datacontract.org/2004/07/test", type = JAXBElement.class, required = false)
     protected JAXBElement<Segment> segment;
 
     /**
