@@ -111,58 +111,27 @@ namespace test
             //JCDecauxItem JCDecauxItems = proxy.getStationsList();
             //List<JCDStation> JCDStations = JsonSerializer.Deserialize<List<JCDStation>>(JCDecauxItems.response);
 
-            return null;
-            
             //TODO 
+
             // get starting point and ending point using nominatim
+            Location startingPoint = openStreet.addressToPoint(origin).Result[0];
+            Location endingPoint = openStreet.addressToPoint(destination).Result[0];
+            // check if both point have the same city / contract
+            if (!utils.SameCity(startingCity, endingCity))
+            {
+                return null;
+            }
+            string city = startingPoint.address.city;
             // get closest station using JCDECAUX
+            JCDecauxItem JCDecauxItems = genericProxyCache.getContractsList();
+            List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(JCDecauxItems.response);
             // get both station point using nominatim
             // get all three itinerary
             // concatenate them
             // return the final object
+
+            return null;
         }
-    }
-
-    public class JCDContract
-    {
-
-        public string name { get; set; }
-    }
-
-    public class JCDStation
-    {
-
-        public int number { get; set; }
-
-        public string name { get; set; }
-
-        public string contractName { get; set; }
-
-        public Position position { get; set; }
-
-        public Totalstands totalStands { get; set; }
-    }
-
-    public class Totalstands
-    {
-
-        public Availabilities availabilities { get; set; }
-    }
-
-    public class Availabilities
-    {
-
-        public int bikes { get; set; }
-
-        public int stands { get; set; }
-    }
-
-    public class Position
-    {
-
-        public double latitude { get; set; }
-
-        public double longitude { get; set; }
     }
 
 }
