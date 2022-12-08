@@ -1,0 +1,2460 @@
+Index: ../../SolutionsLab2/ProxyCache/IProxyCache.cs
+===================================================================
+diff --git a/../../SolutionsLab2/ProxyCache/IProxyCache.cs b/../../SolutionsLab2/ProxyCache/IProxyCache.cs
+deleted file mode 100644
+--- a/../../SolutionsLab2/ProxyCache/IProxyCache.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ /dev/null	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
+@@ -1,27 +0,0 @@
+-using System;
+-using System.Collections.Generic;
+-using System.Linq;
+-using System.Runtime.Serialization;
+-using System.ServiceModel;
+-using System.Text;
+-using System.Runtime.Caching;
+-
+-namespace ProxyCache
+-{
+-    [ServiceContract]
+-    public interface IProxyCache
+-    {
+-        [OperationContract]
+-        string Request(string url);
+-
+-        [OperationContract]
+-        string getContractsList();
+-
+-        [OperationContract]
+-        string getStationsList();
+-
+-        [OperationContract]
+-        string getStationsListWithContractName(string contractName);
+-
+-    }
+-    }
+Index: ../../SolutionsLab2/ProxyCache/App.config
+===================================================================
+diff --git a/../../SolutionsLab2/ProxyCache/App.config b/../../SolutionsLab2/ProxyCache/App.config
+deleted file mode 100644
+--- a/../../SolutionsLab2/ProxyCache/App.config	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ /dev/null	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
+@@ -1,58 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<configuration>
+-
+-  <appSettings>
+-    <add key="aspnet:UseTaskFriendlySynchronizationContext" value="true" />
+-  </appSettings>
+-  <system.web>
+-    <compilation debug="true" />
+-  </system.web>
+-  <!-- Lors du déploiement du projet de bibilothèque de services, le contenu du fichier de configuration doit être ajouté au fichier app.config  
+-  de l'hôte. System.Configuration ne prend pas en charge les fichiers de configuration des bibliothèques. -->
+-  <system.serviceModel>
+-    <services>
+-      <service name="ProxyCache.ProxyCache">
+-        <endpoint address="" binding="basicHttpBinding" contract="ProxyCache.IProxyCache">
+-          <identity>
+-            <dns value="localhost" />
+-          </identity>
+-        </endpoint>
+-        <endpoint address="mex" binding="mexHttpBinding" contract="IMetadataExchange" />
+-        <host>
+-          <baseAddresses>
+-            <add baseAddress="http://localhost:8733/Design_Time_Addresses/ProxyCache/Service1/" />
+-          </baseAddresses>
+-        </host>
+-      </service>
+-    </services>
+-    <behaviors>
+-      <serviceBehaviors>
+-        <behavior>
+-          <!-- Pour éviter la divulgation d'informations de métadonnées, 
+-          définissez les valeurs ci-dessous sur false avant le déploiement -->
+-          <serviceMetadata httpGetEnabled="True" httpsGetEnabled="True" />
+-          <!-- Pour recevoir les détails de l'exception dans les erreurs à des fins de débogage, 
+-          définissez la valeur ci-dessous sur true.  Pour éviter la divulgation d'informations d'exception, 
+-          définissez-la sur false avant le déploiement -->
+-          <serviceDebug includeExceptionDetailInFaults="False" />
+-        </behavior>
+-      </serviceBehaviors>
+-    </behaviors>
+-  </system.serviceModel>
+-
+-  <runtime>
+-
+-    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+-
+-      <dependentAssembly>
+-
+-        <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+-
+-        <bindingRedirect oldVersion="0.0.0.0-4.0.4.1" newVersion="4.0.4.1" />
+-
+-      </dependentAssembly>
+-
+-    </assemblyBinding>
+-
+-  </runtime>
+-</configuration>
+Index: ../../SolutionsLab2/ProxyCache/Properties/AssemblyInfo.cs
+===================================================================
+diff --git a/../../SolutionsLab2/ProxyCache/Properties/AssemblyInfo.cs b/../../SolutionsLab2/ProxyCache/Properties/AssemblyInfo.cs
+deleted file mode 100644
+--- a/../../SolutionsLab2/ProxyCache/Properties/AssemblyInfo.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ /dev/null	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
+@@ -1,36 +0,0 @@
+-using System.Reflection;
+-using System.Runtime.CompilerServices;
+-using System.Runtime.InteropServices;
+-
+-// Les informations générales relatives à un assembly dépendent de 
+-// l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
+-// associées à un assembly.
+-[assembly: AssemblyTitle("ProxyCache")]
+-[assembly: AssemblyDescription("")]
+-[assembly: AssemblyConfiguration("")]
+-[assembly: AssemblyCompany("")]
+-[assembly: AssemblyProduct("ProxyCache")]
+-[assembly: AssemblyCopyright("Copyright ©  2022")]
+-[assembly: AssemblyTrademark("")]
+-[assembly: AssemblyCulture("")]
+-
+-// L'affectation de la valeur false à ComVisible rend les types invisibles dans cet assembly 
+-// aux composants COM.  Si vous devez accéder à un type dans cet assembly à partir de 
+-// COM, affectez la valeur true à l'attribut ComVisible sur ce type.
+-[assembly: ComVisible(false)]
+-
+-// Le GUID suivant est pour l'ID de la typelib si ce projet est exposé à COM
+-[assembly: Guid("e26ecd9e-3c8b-4fe6-93d7-e80a517ccbc6")]
+-
+-// Les informations de version pour un assembly se composent des quatre valeurs suivantes :
+-//
+-//      Version principale
+-//      Version secondaire 
+-//      Numéro de build
+-//      Révision
+-//
+-// Vous pouvez spécifier toutes les valeurs ou indiquer les numéros de build et de révision par défaut 
+-// en utilisant '*', comme indiqué ci-dessous :
+-// [assembly: AssemblyVersion("1.0.*")]
+-[assembly: AssemblyVersion("1.0.0.0")]
+-[assembly: AssemblyFileVersion("1.0.0.0")]
+Index: ../../SolutionsLab2/RestClient/Program.cs
+===================================================================
+diff --git a/../../SolutionsLab2/RestClient/Program.cs b/../../SolutionsLab2/RestClient/Program.cs
+deleted file mode 100644
+--- a/../../SolutionsLab2/RestClient/Program.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ /dev/null	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
+@@ -1,93 +0,0 @@
+-using System;
+-using System.Collections.Generic;
+-using System.Linq;
+-using System.Text;
+-using System.Threading.Tasks;
+-// HttpClient is in the System.web.Http namespace.
+-using System.Net.Http;
+-// To use JsonSerializer, you need to add System.Text.Json. Depending on your project type and version, you may find it as assembly reference or Nuget package
+-// (right-click on the project --> (add --> Reference) or Manage NuGet packages).
+-using System.Text.Json;
+-// GeoCordinates is in the System.Device.Location namespace, coming from System.Device which is an assembly reference.
+-using System.Device.Location;
+-using RestClient.Proxy;
+-using System.ServiceModel;
+-
+-namespace RestClient
+-{
+-    internal class Program
+-    {
+-        static void Main(string[] args)
+-        {
+-            string query, url, response;
+-
+-            ApiOpenRoute aor = new ApiOpenRoute();
+-            Task<Rootobject> iti = aor.addressesToItinerary("Eiffel tower", "Louvres", false);
+-            Console.WriteLine(iti.Result.features[0].properties.segments[0].steps[0].instruction);
+-            //Console.WriteLine(List<double>  ld : iti.Result.features[0].geometry.coordinates);
+-
+-            Proxy.ProxyCacheClient proxy = new Proxy.ProxyCacheClient();
+-            BasicHttpBinding binding = new BasicHttpBinding();
+-
+-
+-            response = proxy.getStationsList();
+-            //List<JCDStation> allStations = JsonSerializer.Deserialize<List<JCDStation>>(response);
+-
+-            // 2.2: Display all stations.
+-            Console.WriteLine("Stations:");
+-            /*foreach (JCDStation item in allStations)
+-            {
+-                Console.WriteLine(item.number + ": " + item.name + ", number of bikes available:" + item.mainStands.availabilities.bikes + ", number of available places : " + item.mainStands.availabilities.stands);
+-            }*/
+-
+-            // 2.2: Ask the user to choose one.
+-            Console.WriteLine("Which station are you interested in ?");
+-            int stationNumber = Int32.Parse(Console.ReadLine().Split(new[] { ':' })[0]);
+-
+-            // 3.0: Retrieve the chosen station.
+-            /*JCDStation chosenStation = allStations[0];
+-            foreach (JCDStation item in allStations)
+-            {
+-                if (item.number == stationNumber) {
+-                    chosenStation = item;
+-                    break;
+-                }
+-            }
+-            Console.WriteLine("Chosen station: " + chosenStation.name);
+-            */
+-            //3.1 : Compute the closest station.
+-            /*GeoCoordinate stationCoordinates = new GeoCoordinate(chosenStation.position.latitude, chosenStation.position.longitude);
+-
+-            Double minDistance = -1;
+-            JCDStation closestStation = chosenStation;
+-            foreach (JCDStation item in allStations)
+-            {
+-                // Find the current station's position.
+-                GeoCoordinate candidatePos = new GeoCoordinate(item.position.latitude, item.position.longitude);
+-                // And compare its distance to the chosen one to see if it is closer than the current closest.
+-                Double distanceToCandidate = stationCoordinates.GetDistanceTo(candidatePos);
+-
+-                if (distanceToCandidate != 0 && (minDistance == -1 || distanceToCandidate < minDistance))
+-                {
+-                    closestStation = item;
+-                    minDistance = distanceToCandidate;
+-                }
+-            }
+-
+-            Console.WriteLine("Closest station: " + closestStation.name);
+-            Console.ReadLine();
+-
+-        }*/
+-
+-            // Task is the only possible return value on an async function. If you need to specify a type, you can use the <> notation, for instance Task<string>.
+-            /*static async Task<string> JCDecauxAPICall(string url, string query) 
+-            {
+-                HttpClient client = new HttpClient();
+-                HttpResponseMessage response = await client.GetAsync(url + "?" + query);
+-                response.EnsureSuccessStatusCode();
+-                return await response.Content.ReadAsStringAsync();
+-            }*/
+-        }
+-
+-    }
+-}
+Index: ../../SolutionsLab2/RestClient/App.config
+===================================================================
+diff --git a/../../SolutionsLab2/RestClient/App.config b/../../SolutionsLab2/RestClient/App.config
+deleted file mode 100644
+--- a/../../SolutionsLab2/RestClient/App.config	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ /dev/null	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
+@@ -1,26 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<configuration>
+-    <startup> 
+-        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+-    </startup>
+-  <runtime>
+-    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+-      <dependentAssembly>
+-        <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+-        <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0" />
+-      </dependentAssembly>
+-    </assemblyBinding>
+-  </runtime>
+-  <system.serviceModel>
+-    <bindings>
+-      <basicHttpBinding>
+-        <binding name="BasicHttpBinding_IProxyCache" />
+-      </basicHttpBinding>
+-    </bindings>
+-    <client>
+-      <endpoint address="http://localhost:8733/Design_Time_Addresses/ProxyCache/Service1/"
+-        binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IProxyCache"
+-        contract="Proxy.IProxyCache" name="BasicHttpBinding_IProxyCache" />
+-    </client>
+-  </system.serviceModel>
+-</configuration>
+\ No newline at end of file
+Index: ../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/Reference.cs
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/Reference.cs b/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/Reference.cs
+deleted file mode 100644
+--- a/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/Reference.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ /dev/null	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
+@@ -1,102 +0,0 @@
+-//------------------------------------------------------------------------------
+-// <auto-generated>
+-//     Ce code a été généré par un outil.
+-//     Version du runtime :4.0.30319.42000
+-//
+-//     Les modifications apportées à ce fichier peuvent provoquer un comportement incorrect et seront perdues si
+-//     le code est régénéré.
+-// </auto-generated>
+-//------------------------------------------------------------------------------
+-
+-namespace LetsGoBikingSelfHosted.GenericProxyCache {
+-    
+-    
+-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GenericProxyCache.IProxyCache")]
+-    public interface IProxyCache {
+-        
+-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/Request", ReplyAction="http://tempuri.org/IProxyCache/RequestResponse")]
+-        string Request(string url);
+-        
+-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/Request", ReplyAction="http://tempuri.org/IProxyCache/RequestResponse")]
+-        System.Threading.Tasks.Task<string> RequestAsync(string url);
+-        
+-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getContractsList", ReplyAction="http://tempuri.org/IProxyCache/getContractsListResponse")]
+-        string getContractsList();
+-        
+-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getContractsList", ReplyAction="http://tempuri.org/IProxyCache/getContractsListResponse")]
+-        System.Threading.Tasks.Task<string> getContractsListAsync();
+-        
+-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsList", ReplyAction="http://tempuri.org/IProxyCache/getStationsListResponse")]
+-        string getStationsList();
+-        
+-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsList", ReplyAction="http://tempuri.org/IProxyCache/getStationsListResponse")]
+-        System.Threading.Tasks.Task<string> getStationsListAsync();
+-        
+-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxyCache/getStationsListWithContractNameResponse")]
+-        string getStationsListWithContractName(string contractName);
+-        
+-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxyCache/getStationsListWithContractNameResponse")]
+-        System.Threading.Tasks.Task<string> getStationsListWithContractNameAsync(string contractName);
+-    }
+-    
+-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+-    public interface IProxyCacheChannel : LetsGoBikingSelfHosted.GenericProxyCache.IProxyCache, System.ServiceModel.IClientChannel {
+-    }
+-    
+-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+-    public partial class ProxyCacheClient : System.ServiceModel.ClientBase<LetsGoBikingSelfHosted.GenericProxyCache.IProxyCache>, LetsGoBikingSelfHosted.GenericProxyCache.IProxyCache {
+-        
+-        public ProxyCacheClient() {
+-        }
+-        
+-        public ProxyCacheClient(string endpointConfigurationName) : 
+-                base(endpointConfigurationName) {
+-        }
+-        
+-        public ProxyCacheClient(string endpointConfigurationName, string remoteAddress) : 
+-                base(endpointConfigurationName, remoteAddress) {
+-        }
+-        
+-        public ProxyCacheClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+-                base(endpointConfigurationName, remoteAddress) {
+-        }
+-        
+-        public ProxyCacheClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+-                base(binding, remoteAddress) {
+-        }
+-        
+-        public string Request(string url) {
+-            return base.Channel.Request(url);
+-        }
+-        
+-        public System.Threading.Tasks.Task<string> RequestAsync(string url) {
+-            return base.Channel.RequestAsync(url);
+-        }
+-        
+-        public string getContractsList() {
+-            return base.Channel.getContractsList();
+-        }
+-        
+-        public System.Threading.Tasks.Task<string> getContractsListAsync() {
+-            return base.Channel.getContractsListAsync();
+-        }
+-        
+-        public string getStationsList() {
+-            return base.Channel.getStationsList();
+-        }
+-        
+-        public System.Threading.Tasks.Task<string> getStationsListAsync() {
+-            return base.Channel.getStationsListAsync();
+-        }
+-        
+-        public string getStationsListWithContractName(string contractName) {
+-            return base.Channel.getStationsListWithContractName(contractName);
+-        }
+-        
+-        public System.Threading.Tasks.Task<string> getStationsListWithContractNameAsync(string contractName) {
+-            return base.Channel.getStationsListWithContractNameAsync(contractName);
+-        }
+-    }
+-}
+Index: ../../SolutionsLab2/ProxyCache/ProxyCache.cs
+===================================================================
+diff --git a/../../SolutionsLab2/ProxyCache/ProxyCache.cs b/../../SolutionsLab2/ProxyCache/ProxyCache.cs
+deleted file mode 100644
+--- a/../../SolutionsLab2/ProxyCache/ProxyCache.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ /dev/null	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
+@@ -1,198 +0,0 @@
+-using System;
+-using System.Collections.Generic;
+-using System.Linq;
+-using System.Runtime.Serialization;
+-using System.ServiceModel;
+-using System.Text;
+-using System.Runtime.Caching;
+-using System.Net.Http;
+-using System.Threading.Tasks;
+-using System.Net;
+-using System.Text.Json.Serialization;
+-using System.Text.Json;
+-
+-namespace ProxyCache
+-{
+-    class ProxyCache : IProxyCache
+-    {
+-        private static HttpClient client = new HttpClient();
+-        private static MemoryCache cache = MemoryCache.Default;
+-        //private static ObjectCache cache2 = MemoryCache.Default;
+-        //private static CacheItemPolicy policy = new CacheItemPolicy();
+-        public DateTimeOffset dt_default = ObjectCache.InfiniteAbsoluteExpiration;
+-        
+-        string apiKey= "apiKey=41a669509b4e45db31dd29c98b811fde4c7b0ae0" ;
+-        
+-        private T Get<T>(string CacheItemName)
+-        {
+-            /*where CacheItemName is the key of the entry in the cache. I
+-             * If CacheItemName doesn't exist or has a null content then create a new T
+-             * object and put it in the cache with CacheItemName as the corresponding key.
+-             * In this case, the Expiration Time is "dt_default" 
+-             * ( public DateTimeOffset dt_default in ProxyCache class).
+-             * At the instanciation of a ProxyCache object,
+-             * dt_default = ObjectCache.InfiniteAbsoluteExpiration (no expiration time),
+-             * but dt_default can be changed. */
+-            return Get<T>(CacheItemName, dt_default);
+-        }
+-
+-        private T Get<T>(string CacheItemName, double dt_seconds)
+-        {
+-
+-            /*where CacheItemName is the key of the entry in the cache. I
+-             * If CacheItemName doesn't exist or has a null content then create a new T
+-             * object and put it in the cache with CacheItemName as the corresponding key.
+-             * In this case, the Expiration Time is now + dt_seconds seconds. */
+-            return Get<T>(CacheItemName, DateTimeOffset.Now.AddSeconds(dt_seconds));
+-
+-
+-            
+-        }
+-
+-        private T Get<T>(string CacheItemName, DateTimeOffset dt)
+-        {
+-
+-            /*where CacheItemName is the key of the entry in the cache. I
+-             * If CacheItemName doesn't exist or has a null content then create a new T
+-             * object and put it in the cache with CacheItemName as the corresponding key.
+-             * In this case, the Expiration Time is dt(DateTimeOffset class). */
+-            T t = (T)cache[CacheItemName];
+-            if (!(cache.Contains(CacheItemName)) || cache[CacheItemName] == null)
+-            {
+-                cache.Set(CacheItemName, t, dt);
+-            }
+-            return t;
+-
+-            /* Version Dubois
+-            T response = (T) cache[cacheItemName];
+-            if (response == null)
+-            {
+-                CacheItemPolicy policy = new CacheItemPolicy();
+-                policy.AbsoluteExpiration = dt;
+-                response = JsonSerializer.Deserialize<T>(JCDecauxAPIGetCall(cacheItemName).Result);
+-                cache.Set(cacheItemName, response, policy);
+-            }
+-            return response;*/
+-        }
+-
+-
+-        /*Design a JCDecauxItem class with a constructor which makes a request to the
+-         * JCDecaux API to create a JCDecauxItem object. The structure of this class 
+-         * depends on the targetted API's endpoint (and so on the retrieved data).)*/
+-
+-        /* Généré par copilot
+-         * public JCDecauxItem(string contractName, string stationNumber)
+-        {
+-            {
+-                string url = "https://api.jcdecaux.com/vls/v3/stations/" + stationNumber;
+-                string query = "contract=" + contractName + "&" + apiKey;
+-                string response = JCDecauxAPICall(url, query).Result;
+-                JObject jObject = JObject.Parse(response);
+-                name = (string)jObject["name"];
+-                address = (string)jObject["address"];
+-                position = (string)jObject["position"];
+-                banking = (string)jObject["banking"];
+-                bonus = (string)jObject["bonus"];
+-                status = (string)jObject["status"];
+-                contract_name = (string)jObject["contract_name"];
+-                bike_stands = (string)jObject["bike_stands"];
+-                available_bike_stands = (string)jObject["available_bike_stands"];
+-                available_bikes = (string)jObject["available_bikes"];
+-                last_update = (string)jObject["last_update"];
+-            }*/
+-
+-        private class JCDecauxItem
+-        {
+-            public string Name { get; set; }
+-            public int Number { get; set; }
+-            public string Address { get; set; }
+-            public double Latitude { get; set; }
+-            public double Longitude { get; set; }
+-            public int BikeStands { get; set; }
+-            public int AvailableBikeStands { get; set; }
+-            public int AvailableBikes { get; set; }
+-
+-            public JCDecauxItem(int itemNumber)
+-            {
+-                
+-                var url = $"https://api.jcdecaux.com/vls/v3/stations/{itemNumber}";
+-
+-                using (var httpClient = new HttpClient())
+-                {
+-                    // Make a GET request to the API endpoint.
+-                    var response = httpClient.GetAsync(url).Result;
+-
+-                    if (response.StatusCode == HttpStatusCode.OK)
+-                    {
+-                        // If the request is successful, parse the
+-                        // response JSON data and populate the
+-                        // object properties with the retrieved values.
+-                        var jsonData = response.Content.ReadAsStringAsync().Result;
+-                        dynamic parsedData = JsonSerializer.Deserialize<Task>(jsonData);
+-                        Name = parsedData.name;
+-                        Number = parsedData.number;
+-                        Address = parsedData.address;
+-                        Latitude = parsedData.position.lat;
+-                        Longitude = parsedData.position.lng;
+-                        BikeStands = parsedData.bike_stands;
+-                        AvailableBikeStands = parsedData.available_bike_stands;
+-                        AvailableBikes = parsedData.available_bikes;
+-                    }
+-                }
+-            }
+-        }
+-
+-
+-        public string Request(string url)
+-        {
+-            // 1. Check if the response is in the cache.
+-            //ObjectCache cache = MemoryCache.Default;
+-            string response = cache[url + "?" + apiKey] as string;
+-
+-            // 2. If not, call the routing server.
+-            if (response == null)
+-            {
+-                BasicHttpBinding binding = new BasicHttpBinding();
+-
+-                response = JCDecauxAPICall(url, apiKey).Result;
+-                // 3. Add the response to the cache.
+-                cache.Add(url + "?" + apiKey, response, DateTimeOffset.Now.AddSeconds(10));
+-            }
+-            // 4. Display the response.
+-            return (response);
+-        }
+-
+-        public string getContractsList()
+-        {
+-            string url = "https://api.jcdecaux.com/vls/v3/contracts";
+-            return JCDecauxAPICall(url, apiKey).Result;
+-        }
+-
+-        public string getStationsList()
+-        {
+-            BasicHttpBinding binding = new BasicHttpBinding();
+-
+-            string url = "https://api.jcdecaux.com/vls/v3/stations";
+-            return JCDecauxAPICall(url, apiKey).Result;
+-        }
+-
+-        public string getStationsListWithContractName(string contractName)
+-        {
+-            string url = "https://api.jcdecaux.com/vls/v3/stations";
+-            string query = "contract=" + contractName + "&" + apiKey;
+-            return JCDecauxAPICall(url, query).Result;
+-        }
+-
+-        static async Task<string> JCDecauxAPICall(string url, string query)
+-        {
+-            HttpClient client = new HttpClient();
+-            HttpResponseMessage response = await client.GetAsync(url + "?" + query);
+-            response.EnsureSuccessStatusCode();
+-            return await response.Content.ReadAsStringAsync();
+-        }
+-
+-        /*Use this JCDecauxItem class in the GenericProxyCache you created to manage requests to JCDecaux on the fly.
+-                */
+-
+-    }
+-}
+Index: ../../SolutionsLab2/ProxyCache/packages.config
+===================================================================
+diff --git a/../../SolutionsLab2/ProxyCache/packages.config b/../../SolutionsLab2/ProxyCache/packages.config
+deleted file mode 100644
+--- a/../../SolutionsLab2/ProxyCache/packages.config	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ /dev/null	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
+@@ -1,7 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="System.Buffers" version="4.5.1" targetFramework="net472" />
+-  <package id="System.Memory" version="4.5.4" targetFramework="net472" />
+-  <package id="System.Numerics.Vectors" version="4.5.0" targetFramework="net472" />
+-  <package id="System.Runtime.CompilerServices.Unsafe" version="4.5.3" targetFramework="net472" />
+-</packages>
+\ No newline at end of file
+Index: ../../SolutionsLab2/LetsGoBikingSelfHosted/ApiOpenRoute.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Text;\r\nusing System.Text.Json;\r\nusing System.Text.Json.Serialization;\r\nusing System.Threading.Tasks;\r\nusing System;\r\nusing System.Net.Http;\r\nusing System.ServiceModel;\r\nusing Newtonsoft.Json;\r\n\r\nnamespace LetsGoBikingSelfHosted\r\n{\r\n    internal class ApiOpenRoute\r\n    {\r\n        private static readonly HttpClient client = new HttpClient();\r\n        private static readonly string API_KEY = \"5b3ce3597851110001cf6248533c8f297d74424baa814af18ec650eb\";\r\n\r\n        public async Task<Location[]> addressToPoint(string address)\r\n        {\r\n            string url = \"https://nominatim.openstreetmap.org/?\";\r\n            string text = \"&addressdetails=1\" + \"&q=\" + address + \"&format=json\" + \"&limit=1\";\r\n\r\n            var baseAddress = new Uri(url + text);\r\n\r\n            /*using (var httpClient = new HttpClient {})\r\n            {\r\n                httpClient.DefaultRequestHeaders.Clear();\r\n                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(\"accept\", \"application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8\");\r\n\r\n                using (var response = await httpClient.GetAsync(baseAddress))\r\n                {\r\n                    string responseData = await response.Content.ReadAsStringAsync();\r\n                    Console.WriteLine(responseData);\r\n                    return JsonSerializer.Deserialize<Geopoints>(responseData);\r\n                }\r\n            }*/\r\n            client.DefaultRequestHeaders.Clear();\r\n            client.DefaultRequestHeaders.TryAddWithoutValidation(\"accept\", \"*/*\");\r\n            client.DefaultRequestHeaders.TryAddWithoutValidation(\"accept-Encoding\", \"gzip, deflate, br\");\r\n            client.DefaultRequestHeaders.TryAddWithoutValidation(\"connection\", \"keep-alive\");\r\n            client.DefaultRequestHeaders.TryAddWithoutValidation(\"User-Agent\", \"PostmanRuntime/7.29.0\");\r\n            var response = await client.GetAsync(baseAddress);\r\n            string responseData = await response.Content.ReadAsStringAsync();\r\n            return JsonConvert.DeserializeObject<Location[]>(responseData);\r\n        }\r\n        public async Task<Rootobject> addressesToItinerary(string start, string end, Boolean bicycle)\r\n        {\r\n            Task<Location[]> startingPosition = addressToPoint(start);\r\n            Task<Location[]> endPosition = addressToPoint(end);\r\n            startingPosition.Wait();\r\n            endPosition.Wait();\r\n            // exemple https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248b3387dbe4cbc4881a29750ec80c1b64a&start=8.681495,49.41461&end=8.687872,49.420318\r\n            string url = \"https://api.openrouteservice.org/v2/directions/\" + (bicycle ? \"cycling-regular\" : \"foot-walking\") + \"?api_key=\";\r\n            string text = \"&start=\" + startingPosition.Result[0].lon + \",\" + startingPosition.Result[0].lat + \"&end=\" +\r\n                endPosition.Result[0].lon + \",\" + endPosition.Result[0].lat + \"&size=1\";\r\n\r\n\r\n            var baseAddress = new Uri(url + API_KEY + text);\r\n\r\n            using (var httpClient = new HttpClient { BaseAddress = baseAddress })\r\n            {\r\n                httpClient.DefaultRequestHeaders.Clear();\r\n                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(\"accept\", \"application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8\");\r\n\r\n                using (var response = await httpClient.GetAsync(\"\"))\r\n                {\r\n                    string responseData = await response.Content.ReadAsStringAsync();\r\n                    return JsonConvert.DeserializeObject<Rootobject>(responseData);\r\n\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/ApiOpenRoute.cs b/../../SolutionsLab2/LetsGoBikingSelfHosted/ApiOpenRoute.cs
+--- a/../../SolutionsLab2/LetsGoBikingSelfHosted/ApiOpenRoute.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/LetsGoBikingSelfHosted/ApiOpenRoute.cs	(date 1670449614132)
+@@ -68,6 +68,29 @@
+                     string responseData = await response.Content.ReadAsStringAsync();
+                     return JsonConvert.DeserializeObject<Rootobject>(responseData);
+ 
++                }
++            }
++        }
++        public async Task<Rootobject> addressesToItinerary(Location startingPosition, Location endPosition, Boolean bicycle)
++        {
++            // exemple https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248b3387dbe4cbc4881a29750ec80c1b64a&start=8.681495,49.41461&end=8.687872,49.420318
++            string url = "https://api.openrouteservice.org/v2/directions/" + (bicycle ? "cycling-regular" : "foot-walking") + "?api_key=";
++            string text = "&start=" + startingPosition.lon + "," + startingPosition.lat + "&end=" +
++                endPosition.lon + "," + endPosition.lat + "&size=1";
++
++
++            var baseAddress = new Uri(url + API_KEY + text);
++
++            using (var httpClient = new HttpClient { BaseAddress = baseAddress })
++            {
++                httpClient.DefaultRequestHeaders.Clear();
++                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("accept", "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8");
++
++                using (var response = await httpClient.GetAsync(""))
++                {
++                    string responseData = await response.Content.ReadAsStringAsync();
++                    return JsonConvert.DeserializeObject<Rootobject>(responseData);
++
+                 }
+             }
+         }
+Index: ../../SolutionsLab2/GenericProxyCache/ProxyCache.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Runtime.Serialization;\r\nusing System.ServiceModel;\r\nusing System.Text;\r\nusing System.Runtime.Caching;\r\nusing System.Net.Http;\r\nusing System.Threading.Tasks;\r\nusing System.Net;\r\nusing System.Text.Json.Serialization;\r\nusing System.Text.Json;\r\n\r\nnamespace GenericProxyCache\r\n{\r\n    class ProxyCache : IProxyCache\r\n    {\r\n        private static HttpClient client = new HttpClient();\r\n        private static MemoryCache cache = MemoryCache.Default;\r\n        public DateTimeOffset dt_default = ObjectCache.InfiniteAbsoluteExpiration;\r\n        \r\n        string apiKey= \"apiKey=41a669509b4e45db31dd29c98b811fde4c7b0ae0\" ;\r\n        \r\n        private T Get<T>(string CacheItemName)\r\n        {\r\n            /*where CacheItemName is the key of the entry in the cache. I\r\n             * If CacheItemName doesn't exist or has a null content then create a new T\r\n             * object and put it in the cache with CacheItemName as the corresponding key.\r\n             * In this case, the Expiration Time is \"dt_default\" \r\n             * ( public DateTimeOffset dt_default in ProxyCache class).\r\n             * At the instanciation of a ProxyCache object,\r\n             * dt_default = ObjectCache.InfiniteAbsoluteExpiration (no expiration time),\r\n             * but dt_default can be changed. */\r\n            return Get<T>(CacheItemName, dt_default);\r\n        }\r\n\r\n        private T Get<T>(string CacheItemName, double dt_seconds)\r\n        {\r\n\r\n            /*where CacheItemName is the key of the entry in the cache. I\r\n             * If CacheItemName doesn't exist or has a null content then create a new T\r\n             * object and put it in the cache with CacheItemName as the corresponding key.\r\n             * In this case, the Expiration Time is now + dt_seconds seconds. */\r\n            return Get<T>(CacheItemName, DateTimeOffset.Now.AddSeconds(dt_seconds));\r\n\r\n\r\n            \r\n        }\r\n\r\n        private T Get<T>(string CacheItemName, DateTimeOffset dt)\r\n        {\r\n\r\n            /*where CacheItemName is the key of the entry in the cache. I\r\n             * If CacheItemName doesn't exist or has a null content then create a new T\r\n             * object and put it in the cache with CacheItemName as the corresponding key.\r\n             * In this case, the Expiration Time is dt(DateTimeOffset class). */\r\n            T t = (T)cache[CacheItemName];\r\n            if (!(cache.Contains(CacheItemName)) || t == null)\r\n            {\r\n                t = (T)Activator.CreateInstance(typeof(T), CacheItemName);\r\n                cache.Set(CacheItemName, t, dt);\r\n            }\r\n            return t;\r\n        }\r\n\r\n       \r\n        public JCDecauxItem getContractsList()\r\n        {\r\n            string url = \"https://api.jcdecaux.com/vls/v3/contracts?\"+apiKey;\r\n            return Get<JCDecauxItem>(url);\r\n            //return JCDecauxAPICall(url, apiKey).Result;\r\n        }\r\n\r\n        public JCDecauxItem getStationsList()\r\n        {\r\n            BasicHttpBinding binding = new BasicHttpBinding();\r\n\r\n            string url = \"https://api.jcdecaux.com/vls/v3/stations?\"+apiKey;\r\n            return Get<JCDecauxItem>(url);\r\n            //return JCDecauxAPICall(url, apiKey).Result;\r\n        }\r\n\r\n        public JCDecauxItem getStationsListWithContractName(string contractName)\r\n        {\r\n            string url = \"https://api.jcdecaux.com/vls/v3/stations\";\r\n            string query = \"contract=\" + contractName + \"&\" + apiKey;\r\n            return Get<JCDecauxItem>(url+ query);\r\n            //return JCDecauxAPICall(url, query).Result;\r\n        }\r\n\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/GenericProxyCache/ProxyCache.cs b/../../SolutionsLab2/GenericProxyCache/ProxyCache.cs
+--- a/../../SolutionsLab2/GenericProxyCache/ProxyCache.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/GenericProxyCache/ProxyCache.cs	(date 1670449614131)
+@@ -66,8 +66,9 @@
+        
+         public JCDecauxItem getContractsList()
+         {
++            BasicHttpBinding binding = new BasicHttpBinding();
+             string url = "https://api.jcdecaux.com/vls/v3/contracts?"+apiKey;
+-            return Get<JCDecauxItem>(url);
++            return Get<JCDecauxItem>(url, 3600);
+             //return JCDecauxAPICall(url, apiKey).Result;
+         }
+ 
+@@ -76,15 +77,15 @@
+             BasicHttpBinding binding = new BasicHttpBinding();
+ 
+             string url = "https://api.jcdecaux.com/vls/v3/stations?"+apiKey;
+-            return Get<JCDecauxItem>(url);
++            return Get<JCDecauxItem>(url, 3600);
+             //return JCDecauxAPICall(url, apiKey).Result;
+         }
+ 
+         public JCDecauxItem getStationsListWithContractName(string contractName)
+         {
+-            string url = "https://api.jcdecaux.com/vls/v3/stations";
++            string url = "https://api.jcdecaux.com/vls/v3/stations?";
+             string query = "contract=" + contractName + "&" + apiKey;
+-            return Get<JCDecauxItem>(url+ query);
++            return Get<JCDecauxItem>(url+ query, 3600);
+             //return JCDecauxAPICall(url, query).Result;
+         }
+ 
+Index: ../../SolutionsLab2/LetsGoBikingSelfHosted/App.config
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<configuration>\r\n    <startup> \r\n        <supportedRuntime version=\"v4.0\" sku=\".NETFramework,Version=v4.7.2\" />\r\n    </startup>\r\n    <system.serviceModel>\r\n        <bindings>\r\n            <basicHttpBinding>\r\n                <binding name=\"BasicHttpBinding_IProxyCache\" maxReceivedMessageSize=\"1000000\"/>\r\n            </basicHttpBinding>\r\n        </bindings>\r\n        <client>\r\n            <endpoint address=\"http://localhost:8733/ProxyCache\" binding=\"basicHttpBinding\"\r\n                bindingConfiguration=\"BasicHttpBinding_IProxyCache\" contract=\"GenericProxyCache.IProxyCache\"\r\n                name=\"BasicHttpBinding_IProxyCache\" />\r\n        </client>\r\n    </system.serviceModel>\r\n</configuration>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/App.config b/../../SolutionsLab2/LetsGoBikingSelfHosted/App.config
+--- a/../../SolutionsLab2/LetsGoBikingSelfHosted/App.config	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/LetsGoBikingSelfHosted/App.config	(date 1670449614133)
+@@ -1,4 +1,4 @@
+-<?xml version="1.0" encoding="utf-8" ?>
++<?xml version="1.0" encoding="utf-8"?>
+ <configuration>
+     <startup> 
+         <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+@@ -6,13 +6,21 @@
+     <system.serviceModel>
+         <bindings>
+             <basicHttpBinding>
+-                <binding name="BasicHttpBinding_IProxyCache" maxReceivedMessageSize="1000000"/>
++                <binding name="BasicHttpBinding_IProxyCache" />
+             </basicHttpBinding>
+         </bindings>
+         <client>
+             <endpoint address="http://localhost:8733/ProxyCache" binding="basicHttpBinding"
+-                bindingConfiguration="BasicHttpBinding_IProxyCache" contract="GenericProxyCache.IProxyCache"
++                bindingConfiguration="BasicHttpBinding_IProxyCache" contract="Generic.IProxyCache"
+                 name="BasicHttpBinding_IProxyCache" />
+         </client>
+     </system.serviceModel>
++  <runtime>
++    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
++      <dependentAssembly>
++        <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
++        <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0" />
++      </dependentAssembly>
++    </assemblyBinding>
++  </runtime>
+ </configuration>
+\ No newline at end of file
+Index: ../../SolutionsLab2/GenericProxyCache/IProxyCache.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Runtime.Serialization;\r\nusing System.ServiceModel;\r\nusing System.Text;\r\n\r\nnamespace GenericProxyCache\r\n{\r\n    [ServiceContract]\r\n    public interface IProxyCache\r\n    {\r\n        [OperationContract]\r\n        JCDecauxItem getContractsList();\r\n\r\n        [OperationContract]\r\n        JCDecauxItem getStationsList();\r\n\r\n        [OperationContract]\r\n        JCDecauxItem getStationsListWithContractName(string contractName);\r\n\r\n    }\r\n    }\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/GenericProxyCache/IProxyCache.cs b/../../SolutionsLab2/GenericProxyCache/IProxyCache.cs
+--- a/../../SolutionsLab2/GenericProxyCache/IProxyCache.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/GenericProxyCache/IProxyCache.cs	(date 1670449614130)
+@@ -10,6 +10,7 @@
+     [ServiceContract]
+     public interface IProxyCache
+     {
++
+         [OperationContract]
+         JCDecauxItem getContractsList();
+ 
+@@ -20,4 +21,4 @@
+         JCDecauxItem getStationsListWithContractName(string contractName);
+ 
+     }
+-    }
++}
+Index: ../../SolutionsLab2/GenericProxyCache/App.config
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<configuration>\r\n    <startup> \r\n        <supportedRuntime version=\"v4.0\" sku=\".NETFramework,Version=v4.7.2\" />\r\n    </startup>\r\n  <runtime>\r\n    <assemblyBinding xmlns=\"urn:schemas-microsoft-com:asm.v1\">\r\n      <dependentAssembly>\r\n        <assemblyIdentity name=\"System.Runtime.CompilerServices.Unsafe\" publicKeyToken=\"b03f5f7f11d50a3a\" culture=\"neutral\" />\r\n        <bindingRedirect oldVersion=\"0.0.0.0-6.0.0.0\" newVersion=\"6.0.0.0\" />\r\n      </dependentAssembly>\r\n    </assemblyBinding>\r\n  </runtime>\r\n</configuration>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/GenericProxyCache/App.config b/../../SolutionsLab2/GenericProxyCache/App.config
+--- a/../../SolutionsLab2/GenericProxyCache/App.config	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/GenericProxyCache/App.config	(date 1670449614129)
+@@ -3,12 +3,4 @@
+     <startup> 
+         <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+     </startup>
+-  <runtime>
+-    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+-      <dependentAssembly>
+-        <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+-        <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0" />
+-      </dependentAssembly>
+-    </assemblyBinding>
+-  </runtime>
+ </configuration>
+\ No newline at end of file
+Index: ../../SolutionsLab2/GenericProxyCache/Program.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.ServiceModel;\r\nusing System.ServiceModel.Description;\r\nusing System.Text;\r\nusing System.Text.Json;\r\nusing System.Threading.Tasks;\r\n\r\nnamespace GenericProxyCache\r\n{\r\n    class Program\r\n    {\r\n        static void Main(string[] args)\r\n        {\r\n            BasicHttpBinding binding = new BasicHttpBinding();\r\n            Uri baseAddress = new Uri(\"http://localhost:8733/ProxyCache\");\r\n            ServiceHost serviceHost = new ServiceHost(typeof(ProxyCache),baseAddress);\r\n            binding.MaxReceivedMessageSize = 1000000;\r\n            serviceHost.AddServiceEndpoint(typeof(IProxyCache), binding, \"\");\r\n            ServiceMetadataBehavior serviceMetadataBehavior= new ServiceMetadataBehavior();\r\n            serviceMetadataBehavior.HttpGetEnabled= true;\r\n            serviceMetadataBehavior.HttpsGetEnabled= true;\r\n            serviceHost.Description.Behaviors.Add(serviceMetadataBehavior);\r\n            serviceHost.Open();\r\n            Console.WriteLine(\"Le proxy est en cours d'utilisation\");\r\n            ProxyCache proxy = new ProxyCache();\r\n            JCDecauxItem JCDecauxItems = proxy.getStationsList();\r\n            List<JCDStation> JCDStations = JsonSerializer.Deserialize<List<JCDStation>>(JCDecauxItems.response);\r\n            foreach (JCDStation station in JCDStations)\r\n            {\r\n                Console.WriteLine(station.position.latitude);\r\n            }\r\n            Console.ReadLine();\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/GenericProxyCache/Program.cs b/../../SolutionsLab2/GenericProxyCache/Program.cs
+--- a/../../SolutionsLab2/GenericProxyCache/Program.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/GenericProxyCache/Program.cs	(date 1670449614131)
+@@ -26,11 +26,11 @@
+             Console.WriteLine("Le proxy est en cours d'utilisation");
+             ProxyCache proxy = new ProxyCache();
+             JCDecauxItem JCDecauxItems = proxy.getStationsList();
+-            List<JCDStation> JCDStations = JsonSerializer.Deserialize<List<JCDStation>>(JCDecauxItems.response);
++            /*List<JCDStation> JCDStations = JsonSerializer.Deserialize<List<JCDStation>>(JCDecauxItems.response);
+             foreach (JCDStation station in JCDStations)
+             {
+                 Console.WriteLine(station.position.latitude);
+-            }
++            }*/
+             Console.ReadLine();
+         }
+     }
+Index: ../../SolutionsLab2/GenericProxyCache/JCDecauxClasses.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Net.Http;\r\nusing System.Net;\r\nusing System.Text;\r\nusing System.Text.Json;\r\nusing System.Threading.Tasks;\r\nusing System.Runtime.Serialization;\r\nusing System.ServiceModel;\r\n\r\nnamespace GenericProxyCache\r\n{\r\n    /*Design a JCDecauxItem class with a constructor which makes a request to the\r\n     * JCDecaux API to create a JCDecauxItem object. The structure of this class \r\n     * depends on the targetted API's endpoint (and so on the retrieved data).)*/\r\n    [DataContract]\r\n    public class JCDecauxItem\r\n    {\r\n        [DataMember]\r\n        string query { get; set; }\r\n        [DataMember]\r\n        public string response { get; set; }\r\n\r\n\r\n        public JCDecauxItem(string query)\r\n        {\r\n            this.query = query;\r\n            response = JCDecauxAPICall(query).Result;\r\n\r\n        }\r\n\r\n        [OperationContract]\r\n        static async Task<string> JCDecauxAPICall(string query)\r\n        {\r\n            HttpClient client = new HttpClient();\r\n            HttpResponseMessage response = await client.GetAsync(query);\r\n            response.EnsureSuccessStatusCode();\r\n            return await response.Content.ReadAsStringAsync();\r\n        }\r\n        /*public JCDecauxItem(int itemNumber)\r\n        {\r\n\r\n            var url = $\"https://api.jcdecaux.com/vls/v3/stations/{itemNumber}\";\r\n\r\n            using (var httpClient = new HttpClient())\r\n            {\r\n                // Make a GET request to the API endpoint.\r\n                var response = httpClient.GetAsync(url).Result;\r\n\r\n                if (response.StatusCode == HttpStatusCode.OK)\r\n                {\r\n                    // If the request is successful, parse the\r\n                    // response JSON data and populate the\r\n                    // object properties with the retrieved values.\r\n                    var jsonData = response.Content.ReadAsStringAsync().Result;\r\n                    dynamic parsedData = JsonSerializer.Deserialize<Task>(jsonData);\r\n                    Name = parsedData.name;\r\n                    Number = parsedData.number;\r\n                    Address = parsedData.address;\r\n                    Latitude = parsedData.position.lat;\r\n                    Longitude = parsedData.position.lng;\r\n                    BikeStands = parsedData.bike_stands;\r\n                    AvailableBikeStands = parsedData.available_bike_stands;\r\n                    AvailableBikes = parsedData.available_bikes;\r\n                }\r\n            }\r\n        }*/\r\n    }\r\n    [DataContract]\r\n    public class JCDContract\r\n    {\r\n        [DataMember]\r\n        public string name { get; set; }\r\n    }\r\n\r\n    [DataContract]\r\n    public class JCDStation\r\n    {\r\n        [DataMember]\r\n        public int number { get; set; }\r\n        [DataMember]\r\n        public string name { get; set; }\r\n        [DataMember]\r\n        public string contractName { get; set; }\r\n        [DataMember]\r\n        public Position position { get; set; }\r\n        [DataMember]\r\n        public Totalstands totalStands { get; set; }\r\n    }\r\n\r\n\r\n    [DataContract]\r\n    public class Totalstands\r\n    {\r\n        [DataMember]\r\n        public Availabilities availabilities { get; set; }\r\n    }\r\n\r\n    [DataContract]\r\n    public class Availabilities\r\n    {\r\n        [DataMember]\r\n        public int bikes { get; set; }\r\n        [DataMember]\r\n        public int stands { get; set; }\r\n    }\r\n\r\n\r\n    [DataContract]\r\n    public class Position\r\n    {\r\n        [DataMember]\r\n        public double latitude { get; set; }\r\n        [DataMember]\r\n        public double longitude { get; set; }\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/GenericProxyCache/JCDecauxClasses.cs b/../../SolutionsLab2/GenericProxyCache/JCDecauxClasses.cs
+--- a/../../SolutionsLab2/GenericProxyCache/JCDecauxClasses.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/GenericProxyCache/JCDecauxClasses.cs	(date 1670449614130)
+@@ -30,7 +30,6 @@
+ 
+         }
+ 
+-        [OperationContract]
+         static async Task<string> JCDecauxAPICall(string query)
+         {
+             HttpClient client = new HttpClient();
+@@ -38,83 +37,6 @@
+             response.EnsureSuccessStatusCode();
+             return await response.Content.ReadAsStringAsync();
+         }
+-        /*public JCDecauxItem(int itemNumber)
+-        {
+-
+-            var url = $"https://api.jcdecaux.com/vls/v3/stations/{itemNumber}";
+-
+-            using (var httpClient = new HttpClient())
+-            {
+-                // Make a GET request to the API endpoint.
+-                var response = httpClient.GetAsync(url).Result;
+-
+-                if (response.StatusCode == HttpStatusCode.OK)
+-                {
+-                    // If the request is successful, parse the
+-                    // response JSON data and populate the
+-                    // object properties with the retrieved values.
+-                    var jsonData = response.Content.ReadAsStringAsync().Result;
+-                    dynamic parsedData = JsonSerializer.Deserialize<Task>(jsonData);
+-                    Name = parsedData.name;
+-                    Number = parsedData.number;
+-                    Address = parsedData.address;
+-                    Latitude = parsedData.position.lat;
+-                    Longitude = parsedData.position.lng;
+-                    BikeStands = parsedData.bike_stands;
+-                    AvailableBikeStands = parsedData.available_bike_stands;
+-                    AvailableBikes = parsedData.available_bikes;
+-                }
+-            }
+-        }*/
+-    }
+-    [DataContract]
+-    public class JCDContract
+-    {
+-        [DataMember]
+-        public string name { get; set; }
+     }
+-
+-    [DataContract]
+-    public class JCDStation
+-    {
+-        [DataMember]
+-        public int number { get; set; }
+-        [DataMember]
+-        public string name { get; set; }
+-        [DataMember]
+-        public string contractName { get; set; }
+-        [DataMember]
+-        public Position position { get; set; }
+-        [DataMember]
+-        public Totalstands totalStands { get; set; }
+-    }
+-
+-
+-    [DataContract]
+-    public class Totalstands
+-    {
+-        [DataMember]
+-        public Availabilities availabilities { get; set; }
+-    }
+-
+-    [DataContract]
+-    public class Availabilities
+-    {
+-        [DataMember]
+-        public int bikes { get; set; }
+-        [DataMember]
+-        public int stands { get; set; }
+-    }
+-
+-
+-    [DataContract]
+-    public class Position
+-    {
+-        [DataMember]
+-        public double latitude { get; set; }
+-        [DataMember]
+-        public double longitude { get; set; }
+-    }
+-
+ 
+ }
+Index: ../../SolutionsLab2/RestClient/Connected Services/Proxy/Reference.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/RestClient/Connected Services/Proxy/Reference.cs b/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/Reference.cs
+rename from ../../SolutionsLab2/RestClient/Connected Services/Proxy/Reference.cs
+rename to ../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/Reference.cs
+--- a/../../SolutionsLab2/RestClient/Connected Services/Proxy/Reference.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/Reference.cs	(date 1670449614198)
+@@ -8,45 +8,39 @@
+ // </auto-generated>
+ //------------------------------------------------------------------------------
+ 
+-namespace RestClient.Proxy {
++namespace LetsGoBikingSelfHosted.Generic {
+     
+     
+     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IProxyCache")]
++    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Generic.IProxyCache")]
+     public interface IProxyCache {
+         
+-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/Request", ReplyAction="http://tempuri.org/IProxyCache/RequestResponse")]
+-        string Request(string url);
+-        
+-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/Request", ReplyAction="http://tempuri.org/IProxyCache/RequestResponse")]
+-        System.Threading.Tasks.Task<string> RequestAsync(string url);
+-        
+         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getContractsList", ReplyAction="http://tempuri.org/IProxyCache/getContractsListResponse")]
+-        string getContractsList();
++        GenericProxyCache.JCDecauxItem getContractsList();
+         
+         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getContractsList", ReplyAction="http://tempuri.org/IProxyCache/getContractsListResponse")]
+-        System.Threading.Tasks.Task<string> getContractsListAsync();
++        System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getContractsListAsync();
+         
+         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsList", ReplyAction="http://tempuri.org/IProxyCache/getStationsListResponse")]
+-        string getStationsList();
++        GenericProxyCache.JCDecauxItem getStationsList();
+         
+         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsList", ReplyAction="http://tempuri.org/IProxyCache/getStationsListResponse")]
+-        System.Threading.Tasks.Task<string> getStationsListAsync();
++        System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getStationsListAsync();
+         
+         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxyCache/getStationsListWithContractNameResponse")]
+-        string getStationsListWithContractName(string contractName);
++        GenericProxyCache.JCDecauxItem getStationsListWithContractName(string contractName);
+         
+         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxyCache/getStationsListWithContractNameResponse")]
+-        System.Threading.Tasks.Task<string> getStationsListWithContractNameAsync(string contractName);
++        System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getStationsListWithContractNameAsync(string contractName);
+     }
+     
+     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+-    public interface IProxyCacheChannel : RestClient.Proxy.IProxyCache, System.ServiceModel.IClientChannel {
++    public interface IProxyCacheChannel : LetsGoBikingSelfHosted.Generic.IProxyCache, System.ServiceModel.IClientChannel {
+     }
+     
+     [System.Diagnostics.DebuggerStepThroughAttribute()]
+     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+-    public partial class ProxyCacheClient : System.ServiceModel.ClientBase<RestClient.Proxy.IProxyCache>, RestClient.Proxy.IProxyCache {
++    public partial class ProxyCacheClient : System.ServiceModel.ClientBase<LetsGoBikingSelfHosted.Generic.IProxyCache>, LetsGoBikingSelfHosted.Generic.IProxyCache {
+         
+         public ProxyCacheClient() {
+         }
+@@ -67,35 +61,27 @@
+                 base(binding, remoteAddress) {
+         }
+         
+-        public string Request(string url) {
+-            return base.Channel.Request(url);
+-        }
+-        
+-        public System.Threading.Tasks.Task<string> RequestAsync(string url) {
+-            return base.Channel.RequestAsync(url);
+-        }
+-        
+-        public string getContractsList() {
++        public GenericProxyCache.JCDecauxItem getContractsList() {
+             return base.Channel.getContractsList();
+         }
+         
+-        public System.Threading.Tasks.Task<string> getContractsListAsync() {
++        public System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getContractsListAsync() {
+             return base.Channel.getContractsListAsync();
+         }
+         
+-        public string getStationsList() {
++        public GenericProxyCache.JCDecauxItem getStationsList() {
+             return base.Channel.getStationsList();
+         }
+         
+-        public System.Threading.Tasks.Task<string> getStationsListAsync() {
++        public System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getStationsListAsync() {
+             return base.Channel.getStationsListAsync();
+         }
+         
+-        public string getStationsListWithContractName(string contractName) {
++        public GenericProxyCache.JCDecauxItem getStationsListWithContractName(string contractName) {
+             return base.Channel.getStationsListWithContractName(contractName);
+         }
+         
+-        public System.Threading.Tasks.Task<string> getStationsListWithContractNameAsync(string contractName) {
++        public System.Threading.Tasks.Task<GenericProxyCache.JCDecauxItem> getStationsListWithContractNameAsync(string contractName) {
+             return base.Channel.getStationsListWithContractNameAsync(contractName);
+         }
+     }
+Index: ../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache1.xsd
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache1.xsd b/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache1.xsd
+new file mode 100644
+--- /dev/null	(date 1670449614134)
++++ b/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache1.xsd	(date 1670449614134)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="utf-8"?>
++<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GenericProxyCache" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GenericProxyCache" xmlns:xs="http://www.w3.org/2001/XMLSchema">
++  <xs:complexType name="JCDecauxItem">
++    <xs:sequence>
++      <xs:element minOccurs="0" name="query" nillable="true" type="xs:string" />
++      <xs:element minOccurs="0" name="response" nillable="true" type="xs:string" />
++    </xs:sequence>
++  </xs:complexType>
++  <xs:element name="JCDecauxItem" nillable="true" type="tns:JCDecauxItem" />
++</xs:schema>
+\ No newline at end of file
+Index: ../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/ProxyCache1.xsd
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/ProxyCache1.xsd b/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache.xsd
+rename from ../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/ProxyCache1.xsd
+rename to ../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache.xsd
+--- a/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/ProxyCache1.xsd	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache.xsd	(date 1670449614200)
+@@ -1,19 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+-  <xs:element name="Request">
+-    <xs:complexType>
+-      <xs:sequence>
+-        <xs:element minOccurs="0" name="url" nillable="true" type="xs:string" />
+-      </xs:sequence>
+-    </xs:complexType>
+-  </xs:element>
+-  <xs:element name="RequestResponse">
+-    <xs:complexType>
+-      <xs:sequence>
+-        <xs:element minOccurs="0" name="RequestResult" nillable="true" type="xs:string" />
+-      </xs:sequence>
+-    </xs:complexType>
+-  </xs:element>
++  <xs:import schemaLocation="http://localhost:8733/ProxyCache?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/GenericProxyCache" />
+   <xs:element name="getContractsList">
+     <xs:complexType>
+       <xs:sequence />
+@@ -22,7 +9,7 @@
+   <xs:element name="getContractsListResponse">
+     <xs:complexType>
+       <xs:sequence>
+-        <xs:element minOccurs="0" name="getContractsListResult" nillable="true" type="xs:string" />
++        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GenericProxyCache" minOccurs="0" name="getContractsListResult" nillable="true" type="q1:JCDecauxItem" />
+       </xs:sequence>
+     </xs:complexType>
+   </xs:element>
+@@ -34,7 +21,7 @@
+   <xs:element name="getStationsListResponse">
+     <xs:complexType>
+       <xs:sequence>
+-        <xs:element minOccurs="0" name="getStationsListResult" nillable="true" type="xs:string" />
++        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/GenericProxyCache" minOccurs="0" name="getStationsListResult" nillable="true" type="q2:JCDecauxItem" />
+       </xs:sequence>
+     </xs:complexType>
+   </xs:element>
+@@ -48,7 +35,7 @@
+   <xs:element name="getStationsListWithContractNameResponse">
+     <xs:complexType>
+       <xs:sequence>
+-        <xs:element minOccurs="0" name="getStationsListWithContractNameResult" nillable="true" type="xs:string" />
++        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/GenericProxyCache" minOccurs="0" name="getStationsListWithContractNameResult" nillable="true" type="q3:JCDecauxItem" />
+       </xs:sequence>
+     </xs:complexType>
+   </xs:element>
+Index: ../../SolutionsLab2/RestClient/Connected Services/Proxy/service.wsdl
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/RestClient/Connected Services/Proxy/service.wsdl b/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache.wsdl
+rename from ../../SolutionsLab2/RestClient/Connected Services/Proxy/service.wsdl
+rename to ../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache.wsdl
+--- a/../../SolutionsLab2/RestClient/Connected Services/Proxy/service.wsdl	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache.wsdl	(date 1670449614201)
+@@ -1,17 +1,12 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ProxyCache" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
++<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ProxyCache" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+   <wsdl:types>
+     <xsd:schema targetNamespace="http://tempuri.org/Imports">
+-      <xsd:import namespace="http://tempuri.org/" />
+-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
++      <xsd:import schemaLocation="http://localhost:8733/ProxyCache?xsd=xsd2" namespace="http://tempuri.org/" />
++      <xsd:import schemaLocation="http://localhost:8733/ProxyCache?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
++      <xsd:import schemaLocation="http://localhost:8733/ProxyCache?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/GenericProxyCache" />
+     </xsd:schema>
+   </wsdl:types>
+-  <wsdl:message name="IProxyCache_Request_InputMessage">
+-    <wsdl:part name="parameters" element="tns:Request" />
+-  </wsdl:message>
+-  <wsdl:message name="IProxyCache_Request_OutputMessage">
+-    <wsdl:part name="parameters" element="tns:RequestResponse" />
+-  </wsdl:message>
+   <wsdl:message name="IProxyCache_getContractsList_InputMessage">
+     <wsdl:part name="parameters" element="tns:getContractsList" />
+   </wsdl:message>
+@@ -31,10 +26,6 @@
+     <wsdl:part name="parameters" element="tns:getStationsListWithContractNameResponse" />
+   </wsdl:message>
+   <wsdl:portType name="IProxyCache">
+-    <wsdl:operation name="Request">
+-      <wsdl:input wsaw:Action="http://tempuri.org/IProxyCache/Request" message="tns:IProxyCache_Request_InputMessage" />
+-      <wsdl:output wsaw:Action="http://tempuri.org/IProxyCache/RequestResponse" message="tns:IProxyCache_Request_OutputMessage" />
+-    </wsdl:operation>
+     <wsdl:operation name="getContractsList">
+       <wsdl:input wsaw:Action="http://tempuri.org/IProxyCache/getContractsList" message="tns:IProxyCache_getContractsList_InputMessage" />
+       <wsdl:output wsaw:Action="http://tempuri.org/IProxyCache/getContractsListResponse" message="tns:IProxyCache_getContractsList_OutputMessage" />
+@@ -50,15 +41,6 @@
+   </wsdl:portType>
+   <wsdl:binding name="BasicHttpBinding_IProxyCache" type="tns:IProxyCache">
+     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+-    <wsdl:operation name="Request">
+-      <soap:operation soapAction="http://tempuri.org/IProxyCache/Request" style="document" />
+-      <wsdl:input>
+-        <soap:body use="literal" />
+-      </wsdl:input>
+-      <wsdl:output>
+-        <soap:body use="literal" />
+-      </wsdl:output>
+-    </wsdl:operation>
+     <wsdl:operation name="getContractsList">
+       <soap:operation soapAction="http://tempuri.org/IProxyCache/getContractsList" style="document" />
+       <wsdl:input>
+@@ -89,7 +71,7 @@
+   </wsdl:binding>
+   <wsdl:service name="ProxyCache">
+     <wsdl:port name="BasicHttpBinding_IProxyCache" binding="tns:BasicHttpBinding_IProxyCache">
+-      <soap:address location="http://localhost:8733/Design_Time_Addresses/ProxyCache/Service1/" />
++      <soap:address location="http://localhost:8733/ProxyCache" />
+     </wsdl:port>
+   </wsdl:service>
+ </wsdl:definitions>
+\ No newline at end of file
+Index: ../../SolutionsLab2/LetsGoBikingSelfHosted/LetsGoBikingSelfHosted.csproj
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Project ToolsVersion=\"15.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\r\n  <Import Project=\"$(MSBuildExtensionsPath)\\$(MSBuildToolsVersion)\\Microsoft.Common.props\" Condition=\"Exists('$(MSBuildExtensionsPath)\\$(MSBuildToolsVersion)\\Microsoft.Common.props')\" />\r\n  <PropertyGroup>\r\n    <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>\r\n    <Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>\r\n    <ProjectGuid>{F2D19C2D-C7A5-4329-B9BE-0361577FF778}</ProjectGuid>\r\n    <OutputType>Exe</OutputType>\r\n    <RootNamespace>LetsGoBikingSelfHosted</RootNamespace>\r\n    <AssemblyName>LetsGoBikingSelfHosted</AssemblyName>\r\n    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>\r\n    <FileAlignment>512</FileAlignment>\r\n    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>\r\n    <Deterministic>true</Deterministic>\r\n  </PropertyGroup>\r\n  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' \">\r\n    <PlatformTarget>AnyCPU</PlatformTarget>\r\n    <DebugSymbols>true</DebugSymbols>\r\n    <DebugType>full</DebugType>\r\n    <Optimize>false</Optimize>\r\n    <OutputPath>bin\\Debug\\</OutputPath>\r\n    <DefineConstants>DEBUG;TRACE</DefineConstants>\r\n    <ErrorReport>prompt</ErrorReport>\r\n    <WarningLevel>4</WarningLevel>\r\n  </PropertyGroup>\r\n  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \">\r\n    <PlatformTarget>AnyCPU</PlatformTarget>\r\n    <DebugType>pdbonly</DebugType>\r\n    <Optimize>true</Optimize>\r\n    <OutputPath>bin\\Release\\</OutputPath>\r\n    <DefineConstants>TRACE</DefineConstants>\r\n    <ErrorReport>prompt</ErrorReport>\r\n    <WarningLevel>4</WarningLevel>\r\n  </PropertyGroup>\r\n  <ItemGroup>\r\n    <Reference Include=\"Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL\">\r\n      <HintPath>..\\packages\\Newtonsoft.Json.13.0.1\\lib\\net45\\Newtonsoft.Json.dll</HintPath>\r\n    </Reference>\r\n    <Reference Include=\"System\" />\r\n    <Reference Include=\"System.Core\" />\r\n    <Reference Include=\"System.Device\" />\r\n    <Reference Include=\"System.Runtime.Serialization\" />\r\n    <Reference Include=\"System.ServiceModel\" />\r\n    <Reference Include=\"System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL\" />\r\n    <Reference Include=\"System.Xml.Linq\" />\r\n    <Reference Include=\"System.Data.DataSetExtensions\" />\r\n    <Reference Include=\"Microsoft.CSharp\" />\r\n    <Reference Include=\"System.Data\" />\r\n    <Reference Include=\"System.Net.Http\" />\r\n    <Reference Include=\"System.Xml\" />\r\n  </ItemGroup>\r\n  <ItemGroup>\r\n    <Compile Include=\"ApiOpenRoute.cs\" />\r\n    <Compile Include=\"Biking.cs\" />\r\n    <Compile Include=\"ServerObjects.cs\" />\r\n    <Compile Include=\"Connected Services\\GenericProxyCache\\Reference.cs\">\r\n      <AutoGen>True</AutoGen>\r\n      <DesignTime>True</DesignTime>\r\n      <DependentUpon>Reference.svcmap</DependentUpon>\r\n    </Compile>\r\n    <Compile Include=\"IBiking.cs\" />\r\n    <Compile Include=\"OpenStreetMapObject.cs\" />\r\n    <Compile Include=\"Program.cs\" />\r\n    <Compile Include=\"Properties\\AssemblyInfo.cs\" />\r\n  </ItemGroup>\r\n  <ItemGroup>\r\n    <None Include=\"App.config\" />\r\n    <None Include=\"Connected Services\\GenericProxyCache\\ProxyCache.wsdl\" />\r\n    <None Include=\"Connected Services\\GenericProxyCache\\ProxyCache.xsd\">\r\n      <SubType>Designer</SubType>\r\n    </None>\r\n    <None Include=\"Connected Services\\GenericProxyCache\\ProxyCache1.xsd\">\r\n      <SubType>Designer</SubType>\r\n    </None>\r\n    <None Include=\"packages.config\" />\r\n  </ItemGroup>\r\n  <ItemGroup>\r\n    <WCFMetadata Include=\"Connected Services\\\" />\r\n  </ItemGroup>\r\n  <ItemGroup>\r\n    <WCFMetadataStorage Include=\"Connected Services\\GenericProxyCache\\\" />\r\n  </ItemGroup>\r\n  <ItemGroup>\r\n    <None Include=\"Connected Services\\GenericProxyCache\\configuration91.svcinfo\" />\r\n  </ItemGroup>\r\n  <ItemGroup>\r\n    <None Include=\"Connected Services\\GenericProxyCache\\configuration.svcinfo\" />\r\n  </ItemGroup>\r\n  <ItemGroup>\r\n    <None Include=\"Connected Services\\GenericProxyCache\\Reference.svcmap\">\r\n      <Generator>WCF Proxy Generator</Generator>\r\n      <LastGenOutput>Reference.cs</LastGenOutput>\r\n    </None>\r\n  </ItemGroup>\r\n  <Import Project=\"$(MSBuildToolsPath)\\Microsoft.CSharp.targets\" />\r\n</Project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/LetsGoBikingSelfHosted.csproj b/../../SolutionsLab2/LetsGoBikingSelfHosted/LetsGoBikingSelfHosted.csproj
+--- a/../../SolutionsLab2/LetsGoBikingSelfHosted/LetsGoBikingSelfHosted.csproj	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/LetsGoBikingSelfHosted/LetsGoBikingSelfHosted.csproj	(date 1670449614136)
+@@ -37,8 +37,21 @@
+       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+     </Reference>
+     <Reference Include="System" />
++    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
++    </Reference>
+     <Reference Include="System.Core" />
+     <Reference Include="System.Device" />
++    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Numerics" />
++    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
++      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
++      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
++    </Reference>
+     <Reference Include="System.Runtime.Serialization" />
+     <Reference Include="System.ServiceModel" />
+     <Reference Include="System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+@@ -52,42 +65,52 @@
+   <ItemGroup>
+     <Compile Include="ApiOpenRoute.cs" />
+     <Compile Include="Biking.cs" />
+-    <Compile Include="ServerObjects.cs" />
+-    <Compile Include="Connected Services\GenericProxyCache\Reference.cs">
++    <Compile Include="Connected Services\Generic\Reference.cs">
+       <AutoGen>True</AutoGen>
+       <DesignTime>True</DesignTime>
+       <DependentUpon>Reference.svcmap</DependentUpon>
+     </Compile>
++    <Compile Include="ServerObjects.cs" />
+     <Compile Include="IBiking.cs" />
+     <Compile Include="OpenStreetMapObject.cs" />
+     <Compile Include="Program.cs" />
+     <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="Utils.cs" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="App.config" />
+-    <None Include="Connected Services\GenericProxyCache\ProxyCache.wsdl" />
+-    <None Include="Connected Services\GenericProxyCache\ProxyCache.xsd">
++    <None Include="Connected Services\Generic\ProxyCache.wsdl" />
++    <None Include="Connected Services\Generic\ProxyCache.xsd">
++      <SubType>Designer</SubType>
++    </None>
++    <None Include="Connected Services\Generic\ProxyCache1.xsd">
+       <SubType>Designer</SubType>
+     </None>
+-    <None Include="Connected Services\GenericProxyCache\ProxyCache1.xsd">
++    <None Include="Connected Services\Generic\ProxyCache2.xsd">
+       <SubType>Designer</SubType>
+     </None>
+     <None Include="packages.config" />
+   </ItemGroup>
+   <ItemGroup>
++    <ProjectReference Include="..\GenericProxyCache\GenericProxyCache.csproj">
++      <Project>{0D19DCCC-6803-4C4B-826C-AE596767FAEF}</Project>
++      <Name>GenericProxyCache</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <ItemGroup>
+     <WCFMetadata Include="Connected Services\" />
+   </ItemGroup>
+   <ItemGroup>
+-    <WCFMetadataStorage Include="Connected Services\GenericProxyCache\" />
++    <WCFMetadataStorage Include="Connected Services\Generic\" />
+   </ItemGroup>
+   <ItemGroup>
+-    <None Include="Connected Services\GenericProxyCache\configuration91.svcinfo" />
++    <None Include="Connected Services\Generic\configuration91.svcinfo" />
+   </ItemGroup>
+   <ItemGroup>
+-    <None Include="Connected Services\GenericProxyCache\configuration.svcinfo" />
++    <None Include="Connected Services\Generic\configuration.svcinfo" />
+   </ItemGroup>
+   <ItemGroup>
+-    <None Include="Connected Services\GenericProxyCache\Reference.svcmap">
++    <None Include="Connected Services\Generic\Reference.svcmap">
+       <Generator>WCF Proxy Generator</Generator>
+       <LastGenOutput>Reference.cs</LastGenOutput>
+     </None>
+Index: ../../SolutionsLab2/LetsGoBikingSelfHosted/Biking.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.ServiceModel;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing LetsGoBikingSelfHosted.GenericProxyCache;\r\n\r\nnamespace LetsGoBikingSelfHosted\r\n{\r\n    internal class Biking : IBiking\r\n    {\r\n        public Biking()\r\n        {\r\n            //string query, url, response;\r\n\r\n            //ApiOpenRoute aor = new ApiOpenRoute();\r\n            //Task<Rootobject> iti = aor.addressesToItinerary(\"Eiffel tower\", \"Louvres\", false);\r\n            //Console.WriteLine(iti.Result.features[0].properties.segments[0].steps[0].instruction);\r\n            //Console.WriteLine(List<double>  ld : iti.Result.features[0].geometry.coordinates);\r\n\r\n            //ProxyCacheClient proxy = new ProxyCacheClient();\r\n            //BasicHttpBinding binding = new BasicHttpBinding();\r\n\r\n\r\n            //response = proxy.getStationsList();\r\n            //List<JCDStation> allStations = JsonSerializer.Deserialize<List<JCDStation>>(response);\r\n\r\n            // 2.2: Display all stations.\r\n            //Console.WriteLine(\"Stations:\");\r\n            /*foreach (JCDStation item in allStations)\r\n            {\r\n                Console.WriteLine(item.number + \": \" + item.name + \", number of bikes available:\" + item.mainStands.availabilities.bikes + \", number of available places : \" + item.mainStands.availabilities.stands);\r\n            }*/\r\n\r\n            // 2.2: Ask the user to choose one.\r\n            //Console.WriteLine(\"Which station are you interested in ?\");\r\n            //int stationNumber = Int32.Parse(Console.ReadLine().Split(new[] { ':' })[0]);\r\n\r\n            // 3.0: Retrieve the chosen station.\r\n            /*JCDStation chosenStation = allStations[0];\r\n            foreach (JCDStation item in allStations)\r\n            {\r\n                if (item.number == stationNumber) {\r\n                    chosenStation = item;\r\n                    break;\r\n                }\r\n            }\r\n            Console.WriteLine(\"Chosen station: \" + chosenStation.name);\r\n            */\r\n            //3.1 : Compute the closest station.\r\n            /*GeoCoordinate stationCoordinates = new GeoCoordinate(chosenStation.position.latitude, chosenStation.position.longitude);\r\n\r\n            Double minDistance = -1;\r\n            JCDStation closestStation = chosenStation;\r\n            foreach (JCDStation item in allStations)\r\n            {\r\n                // Find the current station's position.\r\n                GeoCoordinate candidatePos = new GeoCoordinate(item.position.latitude, item.position.longitude);\r\n                // And compare its distance to the chosen one to see if it is closer than the current closest.\r\n                Double distanceToCandidate = stationCoordinates.GetDistanceTo(candidatePos);\r\n\r\n                if (distanceToCandidate != 0 && (minDistance == -1 || distanceToCandidate < minDistance))\r\n                {\r\n                    closestStation = item;\r\n                    minDistance = distanceToCandidate;\r\n                }\r\n            }\r\n\r\n            Console.WriteLine(\"Closest station: \" + closestStation.name);\r\n            Console.ReadLine();\r\n\r\n        }*/\r\n\r\n            // Task is the only possible return value on an async function. If you need to specify a type, you can use the <> notation, for instance Task<string>.\r\n            /*static async Task<string> JCDecauxAPICall(string url, string query) \r\n            {\r\n                HttpClient client = new HttpClient();\r\n                HttpResponseMessage response = await client.GetAsync(url + \"?\" + query);\r\n                response.EnsureSuccessStatusCode();\r\n                return await response.Content.ReadAsStringAsync();\r\n            }*/\r\n        }\r\n\r\n        public Itinerary GetItinerary(string origin, string destination)\r\n        {\r\n            Itinerary retVal = new Itinerary();\r\n            Segment seg1 = new Segment();\r\n            Segment seg2 = new Segment();\r\n            Segment seg3 = new Segment();\r\n            Direction dir1 = new Direction(seg1, \"foot\");\r\n            Direction dir2 = new Direction(seg2, \"bike\");\r\n            Direction dir3 = new Direction(seg3, \"foot\");\r\n            retVal.directions = new List<Direction>(); \r\n            retVal.duration = 0;\r\n            retVal.distance = 0;\r\n            return retVal;\r\n            //TODO \r\n            // get starting point and ending point using nominatim\r\n            // get closest station using JCDECAUX\r\n            // get both station point using nominatim\r\n            // get all three itinerary\r\n            // concatenate them\r\n            // return the final object\r\n        }\r\n    }\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/Biking.cs b/../../SolutionsLab2/LetsGoBikingSelfHosted/Biking.cs
+--- a/../../SolutionsLab2/LetsGoBikingSelfHosted/Biking.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/LetsGoBikingSelfHosted/Biking.cs	(date 1670449746478)
+@@ -3,6 +3,7 @@
+ using System.Linq;
+ using System.ServiceModel;
+ using System.Text;
++using System.Text.Json;
+ using System.Threading.Tasks;
+ using LetsGoBikingSelfHosted.GenericProxyCache;
+ 
+@@ -10,6 +11,10 @@
+ {
+     internal class Biking : IBiking
+     {
++        Utils utils = new Utils();
++        ApiOpenRoute openStreet = new ApiOpenRoute();
++        IProxyCache genericProxyCache = new GenericProxyCache.ProxyCacheClient();
++        bool hasJCDContract = false;
+         public Biking()
+         {
+             //string query, url, response;
+@@ -84,17 +89,34 @@
+ 
+         public Itinerary GetItinerary(string origin, string destination)
+         {
+-            Itinerary retVal = new Itinerary();
+-            Segment seg1 = new Segment();
+-            Segment seg2 = new Segment();
+-            Segment seg3 = new Segment();
+-            Direction dir1 = new Direction(seg1, "foot");
+-            Direction dir2 = new Direction(seg2, "bike");
+-            Direction dir3 = new Direction(seg3, "foot");
+-            retVal.directions = new List<Direction>(); 
+-            retVal.duration = 0;
+-            retVal.distance = 0;
+-            return retVal;
++            Location startingCity = openStreet.addressToPoint(origin).Result[0];
++            Location endingCity = openStreet.addressToPoint(destination).Result[0];
++            if (!utils.SameCity(startingCity, endingCity))
++            {
++                return null;
++                //Si les 2 adresses ne sont pas dans la même ville, le programme s'arrête.
++            }
++            string city = startingCity.address.city;
++            genericProxyCache.getStationsList();
++            JCDecauxItem JCDecauxItems = genericProxyCache.getContractsList();
++            //List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(JCDecauxItems.response);
++            
++            //List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(genericProxyCache.getContractsList());
++            //Console.WriteLine(JCDContracts[0]);
++            /*foreach (JCDContract contract in JCDContracts)
++            {
++                Console.WriteLine(contract.name);
++                if (contract.name == city)
++                {
++                    hasJCDContract = true;
++                    break;
++                }
++            }*/
++            //JCDecauxItem JCDecauxItems = proxy.getStationsList();
++            //List<JCDStation> JCDStations = JsonSerializer.Deserialize<List<JCDStation>>(JCDecauxItems.response);
++
++            return null;
++            
+             //TODO 
+             // get starting point and ending point using nominatim
+             // get closest station using JCDECAUX
+Index: ../../SolutionsLab2/LetsGoBikingSelfHosted/packages.config
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<packages>\r\n  <package id=\"Newtonsoft.Json\" version=\"13.0.1\" targetFramework=\"net472\" />\r\n</packages>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/packages.config b/../../SolutionsLab2/LetsGoBikingSelfHosted/packages.config
+--- a/../../SolutionsLab2/LetsGoBikingSelfHosted/packages.config	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/LetsGoBikingSelfHosted/packages.config	(date 1670449614138)
+@@ -1,4 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <packages>
+   <package id="Newtonsoft.Json" version="13.0.1" targetFramework="net472" />
++  <package id="System.Buffers" version="4.5.1" targetFramework="net472" />
++  <package id="System.Memory" version="4.5.4" targetFramework="net472" />
++  <package id="System.Numerics.Vectors" version="4.5.0" targetFramework="net472" />
++  <package id="System.Runtime.CompilerServices.Unsafe" version="6.0.0" targetFramework="net472" />
+ </packages>
+\ No newline at end of file
+Index: ../../SolutionsLab2/LetsGoBikingSelfHosted/Program.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing System.Net.Http;\r\nusing System.Text.Json;\r\nusing System.Device.Location;\r\n//using RestClient.Proxy;\r\nusing System.ServiceModel;\r\nusing System.ServiceModel.Description;\r\n\r\nnamespace LetsGoBikingSelfHosted\r\n{\r\n    class Program\r\n    {\r\n        static void Main(string[] args)\r\n        {\r\n            BasicHttpBinding binding = new BasicHttpBinding();\r\n            Uri baseAddress = new Uri(\"http://localhost:8800/ProxyCache\");\r\n            ServiceHost serviceHost = new ServiceHost(typeof(Biking), baseAddress);\r\n            binding.MaxReceivedMessageSize = 1000000;\r\n            serviceHost.AddServiceEndpoint(typeof(IBiking), binding, \"\");\r\n            ServiceMetadataBehavior serviceMetadataBehavior = new ServiceMetadataBehavior();\r\n            serviceMetadataBehavior.HttpGetEnabled = true;\r\n            serviceMetadataBehavior.HttpsGetEnabled = true;\r\n            serviceHost.Description.Behaviors.Add(serviceMetadataBehavior);\r\n            serviceHost.Open();\r\n            Console.WriteLine(\"Lancement de Let's Go Biking\");\r\n            Console.ReadLine();\r\n\r\n        }\r\n    \r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/Program.cs b/../../SolutionsLab2/LetsGoBikingSelfHosted/Program.cs
+--- a/../../SolutionsLab2/LetsGoBikingSelfHosted/Program.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/LetsGoBikingSelfHosted/Program.cs	(date 1670449614137)
+@@ -26,7 +26,11 @@
+             serviceMetadataBehavior.HttpsGetEnabled = true;
+             serviceHost.Description.Behaviors.Add(serviceMetadataBehavior);
+             serviceHost.Open();
++            IBiking bike = new Biking();
++            Console.WriteLine(bike.GetItinerary("tour eiffel", "Louvre"));
++
+             Console.WriteLine("Lancement de Let's Go Biking");
++            Itinerary itinerary = bike.GetItinerary("Tour Eiffel", "Louvre");
+             Console.ReadLine();
+ 
+         }
+Index: ../../SolutionsLab2/LetsGoBikingSelfHosted/Utils.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/Utils.cs b/../../SolutionsLab2/LetsGoBikingSelfHosted/Utils.cs
+new file mode 100644
+--- /dev/null	(date 1670449614137)
++++ b/../../SolutionsLab2/LetsGoBikingSelfHosted/Utils.cs	(date 1670449614137)
+@@ -0,0 +1,16 @@
++using System;
++using System.Collections.Generic;
++using System.Linq;
++using System.Text;
++using System.Threading.Tasks;
++
++namespace LetsGoBikingSelfHosted
++{
++    internal class Utils
++    {
++        public bool SameCity(Location origin, Location destination)
++        {
++            return origin.Equals(destination);
++        }
++    }
++}
+Index: ../../SolutionsLab2/test/Biking.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/test/Biking.cs b/../../SolutionsLab2/test/Biking.cs
+new file mode 100644
+--- /dev/null	(date 1670449614139)
++++ b/../../SolutionsLab2/test/Biking.cs	(date 1670449614139)
+@@ -0,0 +1,144 @@
++using System;
++using System.Collections.Generic;
++using System.Device.Location;
++using System.Text.Json;
++using test.ProxyCacheRef;
++
++namespace test
++{
++    internal class Biking : IBiking
++    {
++        Utils utils = new Utils();
++        ApiOpenRoute openStreet = new ApiOpenRoute();
++        ProxyCacheClient genericProxyCache = new ProxyCacheClient();
++        bool hasJCDContract = false;
++        public Biking()
++        {
++            //string query, url, response;
++
++            //ApiOpenRoute aor = new ApiOpenRoute();
++            //Task<Rootobject> iti = aor.addressesToItinerary("Eiffel tower", "Louvres", false);
++            //Console.WriteLine(iti.Result.features[0].properties.segments[0].steps[0].instruction);
++            //Console.WriteLine(List<double>  ld : iti.Result.features[0].geometry.coordinates);
++
++            //ProxyCacheClient proxy = new ProxyCacheClient();
++            //BasicHttpBinding binding = new BasicHttpBinding();
++
++
++            //response = proxy.getStationsList();
++            //List<JCDStation> allStations = JsonSerializer.Deserialize<List<JCDStation>>(response);
++
++            // 2.2: Display all stations.
++            //Console.WriteLine("Stations:");
++            /*foreach (JCDStation item in allStations)
++            {
++                Console.WriteLine(item.number + ": " + item.name + ", number of bikes available:" + item.mainStands.availabilities.bikes + ", number of available places : " + item.mainStands.availabilities.stands);
++            }*/
++
++            // 2.2: Ask the user to choose one.
++            //Console.WriteLine("Which station are you interested in ?");
++            //int stationNumber = Int32.Parse(Console.ReadLine().Split(new[] { ':' })[0]);
++
++            // 3.0: Retrieve the chosen station.
++            /*JCDStation chosenStation = allStations[0];
++            foreach (JCDStation item in allStations)
++            {
++                if (item.number == stationNumber) {
++                    chosenStation = item;
++                    break;
++                }
++            }
++            Console.WriteLine("Chosen station: " + chosenStation.name);
++            */
++            //3.1 : Compute the closest station.
++            /*GeoCoordinate stationCoordinates = new GeoCoordinate(chosenStation.position.latitude, chosenStation.position.longitude);
++
++            Double minDistance = -1;
++            JCDStation closestStation = chosenStation;
++            foreach (JCDStation item in allStations)
++            {
++                // Find the current station's position.
++                GeoCoordinate candidatePos = new GeoCoordinate(item.position.latitude, item.position.longitude);
++                // And compare its distance to the chosen one to see if it is closer than the current closest.
++                Double distanceToCandidate = stationCoordinates.GetDistanceTo(candidatePos);
++
++                if (distanceToCandidate != 0 && (minDistance == -1 || distanceToCandidate < minDistance))
++                {
++                    closestStation = item;
++                    minDistance = distanceToCandidate;
++                }
++            }
++                        // get closest station using JCDECAUX
++            ClientJCDecauxAPI.retrieveClosestStationDeparture(startingPoint);
++
++            List<JCDStation> allstations = JsonSerializer.Deserialize<List<JCDStation>>(JCDecauxItems.response);
++            // get both closest station point using nominatim
++
++            //3.1 : Compute the closest station.
++            Position stationCoordinates = new Position(chosenStation.position.latitude, chosenStation.position.longitude);
++
++            Double minDistance = -1;
++            JCDStation closestStation = chosenStation;
++            foreach (JCDStation item in allStations)
++            {
++                //Find the current station's position.
++                Position candidatePos = new Position(item.position.latitude, item.position.longitude);
++                // And compare its distance to the chosen one to see if it is closer than the current closest.
++                Double distanceToCandidate = stationCoordinates.GetDistanceTo(candidatePos);
++
++                if (distanceToCandidate != 0 && (minDistance == -1 || distanceToCandidate < minDistance))
++                {
++                    closestStation = item;
++                    minDistance = distanceToCandidate;
++                }
++            }
++
++            Console.WriteLine("Closest station: " + closestStation.name);
++            Console.ReadLine();
++            return null;
++        }
++            // get all three itinerary
++            // concatenate them
++            // return the final object
++
++            Console.WriteLine("Closest station: " + closestStation.name);
++            Console.ReadLine();
++
++        }*/
++
++            // Task is the only possible return value on an async function. If you need to specify a type, you can use the <> notation, for instance Task<string>.
++            /*static async Task<string> JCDecauxAPICall(string url, string query) 
++            {
++                HttpClient client = new HttpClient();
++                HttpResponseMessage response = await client.GetAsync(url + "?" + query);
++                response.EnsureSuccessStatusCode();
++                return await response.Content.ReadAsStringAsync();
++            }*/
++        }
++
++        public Itinerary GetItinerary(string origin, string destination)
++        {
++
++            //TODO 
++
++            // get starting point and ending point using nominatim
++            GeoCoordinate startingPoint = openStreet.addressToPoint(origin).Result;
++            GeoCoordinate endingPoint = openStreet.addressToPoint(destination).Result;
++
++            JCDStation startStation = ClientJCDecauxAPI.retrieveClosestStationDeparture(startingPoint);
++            JCDStation endingStation = ClientJCDecauxAPI.retrieveClosestStationArrival(startingPoint);
++
++            GeoCoordinate startStationLocation = utils.posToCoor(startStation.position);
++            GeoCoordinate endingStationLocation = utils.posToCoor(endingStation.position);
++
++            List<Rootobject> iti = new List<Rootobject>();
++            iti.Add(openStreet.geoToItinerary(startingPoint,startStationLocation,false).Result);
++            iti.Add(openStreet.geoToItinerary(startStationLocation, endingStationLocation, true).Result);
++            iti.Add(openStreet.geoToItinerary(endingStationLocation, endingPoint, false).Result);
++
++            return utils.calculateItinenary(iti);
++
++        }
++    }
++
++}
+Index: ../../SolutionsLab2/RestClient/ApiOpenRoute.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/RestClient/ApiOpenRoute.cs b/../../SolutionsLab2/test/ApiOpenRoute.cs
+rename from ../../SolutionsLab2/RestClient/ApiOpenRoute.cs
+rename to ../../SolutionsLab2/test/ApiOpenRoute.cs
+--- a/../../SolutionsLab2/RestClient/ApiOpenRoute.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/test/ApiOpenRoute.cs	(date 1670449614190)
+@@ -7,19 +7,21 @@
+ using System;
+ using System.Net.Http;
+ using System.ServiceModel;
+-using Newtonsoft.Json;
++using System.Device.Location;
++using System.Collections;
++using System.Globalization;
+ 
+-namespace RestClient
++namespace test
+ {
+     internal class ApiOpenRoute
+     {
+         private static readonly HttpClient client = new HttpClient();
+         private static readonly string API_KEY = "5b3ce3597851110001cf6248533c8f297d74424baa814af18ec650eb";
+ 
+-        public async Task<Location[]> addressToPoint(string address)
++        public async Task<GeoCoordinate> addressToPoint(string address)
+         {
+             string url = "https://nominatim.openstreetmap.org/?";
+-            string text = "&addressdetails=1" + "&q="+ address + "&format=json"+"&limit=1";
++            string text = "&addressdetails=1" + "&q=" + address + "&format=json" + "&limit=1";
+ 
+             var baseAddress = new Uri(url + text);
+ 
+@@ -36,24 +38,22 @@
+                 }
+             }*/
+             client.DefaultRequestHeaders.Clear();
+-            client.DefaultRequestHeaders.TryAddWithoutValidation("accept","*/*");
++            client.DefaultRequestHeaders.TryAddWithoutValidation("accept", "*/*");
+             client.DefaultRequestHeaders.TryAddWithoutValidation("accept-Encoding", "gzip, deflate, br");
+             client.DefaultRequestHeaders.TryAddWithoutValidation("connection", "keep-alive");
+             client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "PostmanRuntime/7.29.0");
+             var response = await client.GetAsync(baseAddress);
+             string responseData = await response.Content.ReadAsStringAsync();
+-            return JsonConvert.DeserializeObject<Location[]>(responseData);
++            Location ret = JsonSerializer.Deserialize<Location[]>(responseData).First();
++            return ret.GetGeoCoordinate();
+         }
+-        public async Task<Rootobject> addressesToItinerary(string start, string end, Boolean bicycle)
++
++        public async Task<Rootobject> geoToItinerary(GeoCoordinate startingPosition, GeoCoordinate endPosition, Boolean bicycle)
+         {
+-            Task<Location[]> startingPosition = addressToPoint(start);
+-            Task<Location[]> endPosition = addressToPoint(end);
+-            startingPosition.Wait();
+-            endPosition.Wait();
+             // exemple https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248b3387dbe4cbc4881a29750ec80c1b64a&start=8.681495,49.41461&end=8.687872,49.420318
+-            string url = "https://api.openrouteservice.org/v2/directions/"+ (bicycle ? "cycling-regular" : "foot-walking") +"?api_key=";
+-            string text = "&start=" + startingPosition.Result[0].lon + "," + startingPosition.Result[0].lat + "&end=" + 
+-                endPosition.Result[0].lon + "," + endPosition.Result[0].lat + "&size=1";
++            string url = "https://api.openrouteservice.org/v2/directions/" + (bicycle ? "cycling-regular" : "foot-walking") + "?api_key=";
++            string text = "&start=" + startingPosition.Longitude.ToString(CultureInfo.InvariantCulture) + "," + startingPosition.Latitude.ToString(CultureInfo.InvariantCulture) + "&end=" +
++                endPosition.Longitude.ToString(CultureInfo.InvariantCulture) + "," + endPosition.Latitude.ToString(CultureInfo.InvariantCulture) + "&size=1";
+ 
+ 
+             var baseAddress = new Uri(url + API_KEY + text);
+@@ -66,10 +66,10 @@
+                 using (var response = await httpClient.GetAsync(""))
+                 {
+                     string responseData = await response.Content.ReadAsStringAsync();
+-                    return JsonConvert.DeserializeObject<Rootobject>(responseData);
+- 
++                    return JsonSerializer.Deserialize<Rootobject>(responseData);
++
+                 }
+             }
+         }
+     }
+-}
+\ No newline at end of file
++}
+Index: ../../SolutionsLab2/test/App.config
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/test/App.config b/../../SolutionsLab2/test/App.config
+new file mode 100644
+--- /dev/null	(date 1670449614138)
++++ b/../../SolutionsLab2/test/App.config	(date 1670449614138)
+@@ -0,0 +1,24 @@
++<?xml version="1.0" encoding="utf-8"?>
++<configuration>
++    <startup> 
++        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
++    </startup>
++    <system.serviceModel>
++        <bindings>
++            <basicHttpBinding>
++                <binding name="BasicHttpBinding_IProxyCache"  maxBufferPoolSize="1000000000" maxReceivedMessageSize="1000000000"/>
++            </basicHttpBinding>
++        </bindings>
++        <client>
++            <endpoint address="http://localhost:8733/ProxyCache" binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IProxyCache" contract="ProxyCacheRef.IProxyCache" name="BasicHttpBinding_IProxyCache" />
++        </client>
++    </system.serviceModel>
++  <runtime>
++    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
++      <dependentAssembly>
++        <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
++        <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0" />
++      </dependentAssembly>
++    </assemblyBinding>
++  </runtime>
++</configuration>
+\ No newline at end of file
+Index: ../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache.xsd
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache.xsd b/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache.xsd
+new file mode 100644
+--- /dev/null	(date 1670449614139)
++++ b/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache.xsd	(date 1670449614139)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="utf-8"?>
++<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GenericProxyCache" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GenericProxyCache" xmlns:xs="http://www.w3.org/2001/XMLSchema">
++  <xs:complexType name="JCDecauxItem">
++    <xs:sequence>
++      <xs:element minOccurs="0" name="query" nillable="true" type="xs:string" />
++      <xs:element minOccurs="0" name="response" nillable="true" type="xs:string" />
++    </xs:sequence>
++  </xs:complexType>
++  <xs:element name="JCDecauxItem" nillable="true" type="tns:JCDecauxItem" />
++</xs:schema>
+\ No newline at end of file
+Index: ../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/ProxyCache.wsdl
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/ProxyCache.wsdl b/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache.wsdl
+rename from ../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/ProxyCache.wsdl
+rename to ../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache.wsdl
+--- a/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/ProxyCache.wsdl	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache.wsdl	(date 1670449614189)
+@@ -4,14 +4,9 @@
+     <xsd:schema targetNamespace="http://tempuri.org/Imports">
+       <xsd:import schemaLocation="http://localhost:8733/ProxyCache?xsd=xsd0" namespace="http://tempuri.org/" />
+       <xsd:import schemaLocation="http://localhost:8733/ProxyCache?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
++      <xsd:import schemaLocation="http://localhost:8733/ProxyCache?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GenericProxyCache" />
+     </xsd:schema>
+   </wsdl:types>
+-  <wsdl:message name="IProxyCache_Request_InputMessage">
+-    <wsdl:part name="parameters" element="tns:Request" />
+-  </wsdl:message>
+-  <wsdl:message name="IProxyCache_Request_OutputMessage">
+-    <wsdl:part name="parameters" element="tns:RequestResponse" />
+-  </wsdl:message>
+   <wsdl:message name="IProxyCache_getContractsList_InputMessage">
+     <wsdl:part name="parameters" element="tns:getContractsList" />
+   </wsdl:message>
+@@ -31,10 +26,6 @@
+     <wsdl:part name="parameters" element="tns:getStationsListWithContractNameResponse" />
+   </wsdl:message>
+   <wsdl:portType name="IProxyCache">
+-    <wsdl:operation name="Request">
+-      <wsdl:input wsaw:Action="http://tempuri.org/IProxyCache/Request" message="tns:IProxyCache_Request_InputMessage" />
+-      <wsdl:output wsaw:Action="http://tempuri.org/IProxyCache/RequestResponse" message="tns:IProxyCache_Request_OutputMessage" />
+-    </wsdl:operation>
+     <wsdl:operation name="getContractsList">
+       <wsdl:input wsaw:Action="http://tempuri.org/IProxyCache/getContractsList" message="tns:IProxyCache_getContractsList_InputMessage" />
+       <wsdl:output wsaw:Action="http://tempuri.org/IProxyCache/getContractsListResponse" message="tns:IProxyCache_getContractsList_OutputMessage" />
+@@ -50,15 +41,6 @@
+   </wsdl:portType>
+   <wsdl:binding name="BasicHttpBinding_IProxyCache" type="tns:IProxyCache">
+     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+-    <wsdl:operation name="Request">
+-      <soap:operation soapAction="http://tempuri.org/IProxyCache/Request" style="document" />
+-      <wsdl:input>
+-        <soap:body use="literal" />
+-      </wsdl:input>
+-      <wsdl:output>
+-        <soap:body use="literal" />
+-      </wsdl:output>
+-    </wsdl:operation>
+     <wsdl:operation name="getContractsList">
+       <soap:operation soapAction="http://tempuri.org/IProxyCache/getContractsList" style="document" />
+       <wsdl:input>
+Index: ../../SolutionsLab2/LetsGoBiking.sln
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nMicrosoft Visual Studio Solution File, Format Version 12.00\r\n# Visual Studio Version 17\r\nVisualStudioVersion = 17.1.32421.90\r\nMinimumVisualStudioVersion = 10.0.40219.1\r\nProject(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"RestClient\", \"RestClient\\RestClient.csproj\", \"{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}\"\r\n\tProjectSection(ProjectDependencies) = postProject\r\n\t\t{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6} = {E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}\r\n\tEndProjectSection\r\nEndProject\r\nProject(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"ProxyCache\", \"ProxyCache\\ProxyCache.csproj\", \"{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}\"\r\nEndProject\r\nProject(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"LetsGoBikingSelfHosted\", \"LetsGoBikingSelfHosted\\LetsGoBikingSelfHosted.csproj\", \"{F2D19C2D-C7A5-4329-B9BE-0361577FF778}\"\r\nEndProject\r\nProject(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"GenericProxyCache\", \"GenericProxyCache\\GenericProxyCache.csproj\", \"{0D19DCCC-6803-4C4B-826C-AE596767FAEF}\"\r\nEndProject\r\nGlobal\r\n\tGlobalSection(SolutionConfigurationPlatforms) = preSolution\r\n\t\tDebug|Any CPU = Debug|Any CPU\r\n\t\tRelease|Any CPU = Release|Any CPU\r\n\tEndGlobalSection\r\n\tGlobalSection(ProjectConfigurationPlatforms) = postSolution\r\n\t\t{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU\r\n\t\t{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}.Debug|Any CPU.Build.0 = Debug|Any CPU\r\n\t\t{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}.Release|Any CPU.ActiveCfg = Release|Any CPU\r\n\t\t{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}.Release|Any CPU.Build.0 = Release|Any CPU\r\n\t\t{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU\r\n\t\t{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}.Debug|Any CPU.Build.0 = Debug|Any CPU\r\n\t\t{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}.Release|Any CPU.ActiveCfg = Release|Any CPU\r\n\t\t{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}.Release|Any CPU.Build.0 = Release|Any CPU\r\n\t\t{F2D19C2D-C7A5-4329-B9BE-0361577FF778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU\r\n\t\t{F2D19C2D-C7A5-4329-B9BE-0361577FF778}.Debug|Any CPU.Build.0 = Debug|Any CPU\r\n\t\t{F2D19C2D-C7A5-4329-B9BE-0361577FF778}.Release|Any CPU.ActiveCfg = Release|Any CPU\r\n\t\t{F2D19C2D-C7A5-4329-B9BE-0361577FF778}.Release|Any CPU.Build.0 = Release|Any CPU\r\n\t\t{0D19DCCC-6803-4C4B-826C-AE596767FAEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU\r\n\t\t{0D19DCCC-6803-4C4B-826C-AE596767FAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU\r\n\t\t{0D19DCCC-6803-4C4B-826C-AE596767FAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU\r\n\t\t{0D19DCCC-6803-4C4B-826C-AE596767FAEF}.Release|Any CPU.Build.0 = Release|Any CPU\r\n\tEndGlobalSection\r\n\tGlobalSection(SolutionProperties) = preSolution\r\n\t\tHideSolutionNode = FALSE\r\n\tEndGlobalSection\r\n\tGlobalSection(ExtensibilityGlobals) = postSolution\r\n\t\tSolutionGuid = {19046046-1FEC-47A6-BA6B-B86FBB369A9A}\r\n\tEndGlobalSection\r\nEndGlobal\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/LetsGoBiking.sln b/../../SolutionsLab2/LetsGoBiking.sln
+--- a/../../SolutionsLab2/LetsGoBiking.sln	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/LetsGoBiking.sln	(date 1670449614132)
+@@ -3,31 +3,18 @@
+ # Visual Studio Version 17
+ VisualStudioVersion = 17.1.32421.90
+ MinimumVisualStudioVersion = 10.0.40219.1
+-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestClient", "RestClient\RestClient.csproj", "{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}"
+-	ProjectSection(ProjectDependencies) = postProject
+-		{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6} = {E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}
+-	EndProjectSection
+-EndProject
+-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyCache", "ProxyCache\ProxyCache.csproj", "{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}"
+-EndProject
+ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsGoBikingSelfHosted", "LetsGoBikingSelfHosted\LetsGoBikingSelfHosted.csproj", "{F2D19C2D-C7A5-4329-B9BE-0361577FF778}"
+ EndProject
+ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericProxyCache", "GenericProxyCache\GenericProxyCache.csproj", "{0D19DCCC-6803-4C4B-826C-AE596767FAEF}"
+ EndProject
++Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{A3E81593-A12E-429C-B0D0-2CA428048A7F}"
++EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+ 		Debug|Any CPU = Debug|Any CPU
+ 		Release|Any CPU = Release|Any CPU
+ 	EndGlobalSection
+ 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+-		{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+-		{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+-		{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+-		{5BEDA2C3-79AA-4106-BBF0-50CDA84F4B47}.Release|Any CPU.Build.0 = Release|Any CPU
+-		{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+-		{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+-		{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+-		{E26ECD9E-3C8B-4FE6-93D7-E80A517CCBC6}.Release|Any CPU.Build.0 = Release|Any CPU
+ 		{F2D19C2D-C7A5-4329-B9BE-0361577FF778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+ 		{F2D19C2D-C7A5-4329-B9BE-0361577FF778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+ 		{F2D19C2D-C7A5-4329-B9BE-0361577FF778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+@@ -36,6 +23,10 @@
+ 		{0D19DCCC-6803-4C4B-826C-AE596767FAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+ 		{0D19DCCC-6803-4C4B-826C-AE596767FAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+ 		{0D19DCCC-6803-4C4B-826C-AE596767FAEF}.Release|Any CPU.Build.0 = Release|Any CPU
++		{A3E81593-A12E-429C-B0D0-2CA428048A7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
++		{A3E81593-A12E-429C-B0D0-2CA428048A7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
++		{A3E81593-A12E-429C-B0D0-2CA428048A7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
++		{A3E81593-A12E-429C-B0D0-2CA428048A7F}.Release|Any CPU.Build.0 = Release|Any CPU
+ 	EndGlobalSection
+ 	GlobalSection(SolutionProperties) = preSolution
+ 		HideSolutionNode = FALSE
+Index: ../../SolutionsLab2/RestClient/Connected Services/Proxy/service.xsd
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/RestClient/Connected Services/Proxy/service.xsd b/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache2.xsd
+rename from ../../SolutionsLab2/RestClient/Connected Services/Proxy/service.xsd
+rename to ../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache2.xsd
+--- a/../../SolutionsLab2/RestClient/Connected Services/Proxy/service.xsd	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache2.xsd	(date 1670449614187)
+@@ -1,19 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+-  <xs:element name="Request">
+-    <xs:complexType>
+-      <xs:sequence>
+-        <xs:element minOccurs="0" name="url" nillable="true" type="xs:string" />
+-      </xs:sequence>
+-    </xs:complexType>
+-  </xs:element>
+-  <xs:element name="RequestResponse">
+-    <xs:complexType>
+-      <xs:sequence>
+-        <xs:element minOccurs="0" name="RequestResult" nillable="true" type="xs:string" />
+-      </xs:sequence>
+-    </xs:complexType>
+-  </xs:element>
++  <xs:import schemaLocation="http://localhost:8733/ProxyCache?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GenericProxyCache" />
+   <xs:element name="getContractsList">
+     <xs:complexType>
+       <xs:sequence />
+@@ -22,7 +9,7 @@
+   <xs:element name="getContractsListResponse">
+     <xs:complexType>
+       <xs:sequence>
+-        <xs:element minOccurs="0" name="getContractsListResult" nillable="true" type="xs:string" />
++        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GenericProxyCache" minOccurs="0" name="getContractsListResult" nillable="true" type="q1:JCDecauxItem" />
+       </xs:sequence>
+     </xs:complexType>
+   </xs:element>
+@@ -34,7 +21,7 @@
+   <xs:element name="getStationsListResponse">
+     <xs:complexType>
+       <xs:sequence>
+-        <xs:element minOccurs="0" name="getStationsListResult" nillable="true" type="xs:string" />
++        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/GenericProxyCache" minOccurs="0" name="getStationsListResult" nillable="true" type="q2:JCDecauxItem" />
+       </xs:sequence>
+     </xs:complexType>
+   </xs:element>
+@@ -48,7 +35,7 @@
+   <xs:element name="getStationsListWithContractNameResponse">
+     <xs:complexType>
+       <xs:sequence>
+-        <xs:element minOccurs="0" name="getStationsListWithContractNameResult" nillable="true" type="xs:string" />
++        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/GenericProxyCache" minOccurs="0" name="getStationsListWithContractNameResult" nillable="true" type="q3:JCDecauxItem" />
+       </xs:sequence>
+     </xs:complexType>
+   </xs:element>
+Index: ../../SolutionsLab2/test/Connected Services/ProxyCacheRef/Reference.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/Reference.cs b/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/Reference.cs
+new file mode 100644
+--- /dev/null	(date 1670449614140)
++++ b/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/Reference.cs	(date 1670449614140)
+@@ -0,0 +1,151 @@
++//------------------------------------------------------------------------------
++// <auto-generated>
++//     This code was generated by a tool.
++//     Runtime Version:4.0.30319.42000
++//
++//     Changes to this file may cause incorrect behavior and will be lost if
++//     the code is regenerated.
++// </auto-generated>
++//------------------------------------------------------------------------------
++
++namespace test.ProxyCacheRef {
++    using System.Runtime.Serialization;
++    using System;
++    
++    
++    [System.Diagnostics.DebuggerStepThroughAttribute()]
++    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
++    [System.Runtime.Serialization.DataContractAttribute(Name="JCDecauxItem", Namespace="http://schemas.datacontract.org/2004/07/GenericProxyCache")]
++    [System.SerializableAttribute()]
++    public partial class JCDecauxItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
++        
++        [System.NonSerializedAttribute()]
++        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
++        
++        [System.Runtime.Serialization.OptionalFieldAttribute()]
++        private string queryField;
++        
++        [System.Runtime.Serialization.OptionalFieldAttribute()]
++        private string responseField;
++        
++        [global::System.ComponentModel.BrowsableAttribute(false)]
++        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
++            get {
++                return this.extensionDataField;
++            }
++            set {
++                this.extensionDataField = value;
++            }
++        }
++        
++        [System.Runtime.Serialization.DataMemberAttribute()]
++        public string query {
++            get {
++                return this.queryField;
++            }
++            set {
++                if ((object.ReferenceEquals(this.queryField, value) != true)) {
++                    this.queryField = value;
++                    this.RaisePropertyChanged("query");
++                }
++            }
++        }
++        
++        [System.Runtime.Serialization.DataMemberAttribute()]
++        public string response {
++            get {
++                return this.responseField;
++            }
++            set {
++                if ((object.ReferenceEquals(this.responseField, value) != true)) {
++                    this.responseField = value;
++                    this.RaisePropertyChanged("response");
++                }
++            }
++        }
++        
++        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
++        
++        protected void RaisePropertyChanged(string propertyName) {
++            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
++            if ((propertyChanged != null)) {
++                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
++            }
++        }
++    }
++    
++    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
++    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProxyCacheRef.IProxyCache")]
++    public interface IProxyCache {
++        
++        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getContractsList", ReplyAction="http://tempuri.org/IProxyCache/getContractsListResponse")]
++        test.ProxyCacheRef.JCDecauxItem getContractsList();
++        
++        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getContractsList", ReplyAction="http://tempuri.org/IProxyCache/getContractsListResponse")]
++        System.Threading.Tasks.Task<test.ProxyCacheRef.JCDecauxItem> getContractsListAsync();
++        
++        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsList", ReplyAction="http://tempuri.org/IProxyCache/getStationsListResponse")]
++        test.ProxyCacheRef.JCDecauxItem getStationsList();
++        
++        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsList", ReplyAction="http://tempuri.org/IProxyCache/getStationsListResponse")]
++        System.Threading.Tasks.Task<test.ProxyCacheRef.JCDecauxItem> getStationsListAsync();
++        
++        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxyCache/getStationsListWithContractNameResponse")]
++        test.ProxyCacheRef.JCDecauxItem getStationsListWithContractName(string contractName);
++        
++        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCache/getStationsListWithContractName", ReplyAction="http://tempuri.org/IProxyCache/getStationsListWithContractNameResponse")]
++        System.Threading.Tasks.Task<test.ProxyCacheRef.JCDecauxItem> getStationsListWithContractNameAsync(string contractName);
++    }
++    
++    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
++    public interface IProxyCacheChannel : test.ProxyCacheRef.IProxyCache, System.ServiceModel.IClientChannel {
++    }
++    
++    [System.Diagnostics.DebuggerStepThroughAttribute()]
++    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
++    public partial class ProxyCacheClient : System.ServiceModel.ClientBase<test.ProxyCacheRef.IProxyCache>, test.ProxyCacheRef.IProxyCache {
++        
++        public ProxyCacheClient() {
++        }
++        
++        public ProxyCacheClient(string endpointConfigurationName) : 
++                base(endpointConfigurationName) {
++        }
++        
++        public ProxyCacheClient(string endpointConfigurationName, string remoteAddress) : 
++                base(endpointConfigurationName, remoteAddress) {
++        }
++        
++        public ProxyCacheClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
++                base(endpointConfigurationName, remoteAddress) {
++        }
++        
++        public ProxyCacheClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
++                base(binding, remoteAddress) {
++        }
++        
++        public test.ProxyCacheRef.JCDecauxItem getContractsList() {
++            return base.Channel.getContractsList();
++        }
++        
++        public System.Threading.Tasks.Task<test.ProxyCacheRef.JCDecauxItem> getContractsListAsync() {
++            return base.Channel.getContractsListAsync();
++        }
++        
++        public test.ProxyCacheRef.JCDecauxItem getStationsList() {
++            return base.Channel.getStationsList();
++        }
++        
++        public System.Threading.Tasks.Task<test.ProxyCacheRef.JCDecauxItem> getStationsListAsync() {
++            return base.Channel.getStationsListAsync();
++        }
++        
++        public test.ProxyCacheRef.JCDecauxItem getStationsListWithContractName(string contractName) {
++            return base.Channel.getStationsListWithContractName(contractName);
++        }
++        
++        public System.Threading.Tasks.Task<test.ProxyCacheRef.JCDecauxItem> getStationsListWithContractNameAsync(string contractName) {
++            return base.Channel.getStationsListWithContractNameAsync(contractName);
++        }
++    }
++}
+Index: ../../SolutionsLab2/test/IBiking.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/test/IBiking.cs b/../../SolutionsLab2/test/IBiking.cs
+new file mode 100644
+--- /dev/null	(date 1670449614142)
++++ b/../../SolutionsLab2/test/IBiking.cs	(date 1670449614142)
+@@ -0,0 +1,17 @@
++using System;
++using System.Collections.Generic;
++using System.Linq;
++using System.ServiceModel;
++using System.Text;
++using System.Threading.Tasks;
++
++namespace test
++{
++    [ServiceContract]
++    public interface IBiking
++    {
++        [OperationContract]
++        //returns itinerary after data 
++        Itinerary GetItinerary(string origin, string destination);
++    }
++}
+Index: ../../SolutionsLab2/test/JCDecauxApi.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/test/JCDecauxApi.cs b/../../SolutionsLab2/test/JCDecauxApi.cs
+new file mode 100644
+--- /dev/null	(date 1670449614142)
++++ b/../../SolutionsLab2/test/JCDecauxApi.cs	(date 1670449614142)
+@@ -0,0 +1,58 @@
++using System;
++using System.Collections.Generic;
++using System.Linq;
++using System.ServiceModel;
++using System.Text;
++using System.Text.Json;
++using System.Threading.Tasks;
++using test.ProxyCacheRef;
++using System.Device.Location;
++
++namespace test
++{
++    public class ClientJCDecauxAPI
++    {
++        private static readonly ProxyCacheClient proxy;
++
++        static ClientJCDecauxAPI()
++        {
++            proxy = new ProxyCacheClient();
++        }
++
++        public static JCDStation retrieveClosestStation(GeoCoordinate chosenStationGeo, List<JCDStation> stations)
++        {
++
++            double minDistance = Double.MaxValue;
++            JCDStation closestStation = null;
++
++            foreach (JCDStation station in stations)
++            {
++                // Find the current station's position.
++                GeoCoordinate stationGeo = new GeoCoordinate(station.position.latitude, station.position.longitude);
++                // And compare its distance to the chosen one to see if it is closer than the current closest.
++                double distance = chosenStationGeo.GetDistanceTo(stationGeo);
++
++                if (distance < minDistance)
++                {
++                    closestStation = station;
++                    minDistance = distance;
++                }
++            }
++            return closestStation;
++        }
++
++        public static JCDStation retrieveClosestStationDeparture(GeoCoordinate position)
++        {
++            string items = proxy.getStationsList().response;
++            List<JCDStation> stations = JsonSerializer.Deserialize<List<JCDStation>>(items);
++            return retrieveClosestStation(position, stations.Where(station => station.totalStands.availabilities.bikes != 0).ToList());
++        }
++
++        public static JCDStation retrieveClosestStationArrival(GeoCoordinate position)
++        {
++            string items = proxy.getStationsList().response;
++            List<JCDStation> stations = JsonSerializer.Deserialize<List<JCDStation>>(items);
++            return retrieveClosestStation(position, stations.Where(station => station.totalStands.availabilities.stands != 0).ToList());
++        }
++    }
++}
+Index: ../../SolutionsLab2/test/Connected Services/ProxyCacheRef/test.ProxyCacheRef.JCDecauxItem.datasource
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/test.ProxyCacheRef.JCDecauxItem.datasource b/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/test.ProxyCacheRef.JCDecauxItem.datasource
+new file mode 100644
+--- /dev/null	(date 1670449614142)
++++ b/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/test.ProxyCacheRef.JCDecauxItem.datasource	(date 1670449614142)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!--
++    This file is automatically generated by Visual Studio .Net. It is 
++    used to store generic object data source configuration information.  
++    Renaming the file extension or editing the content of this file may   
++    cause the file to be unrecognizable by the program.
++-->
++<GenericObjectDataSource DisplayName="JCDecauxItem" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
++   <TypeInfo>test.ProxyCacheRef.JCDecauxItem, Connected Services.ProxyCacheRef.Reference.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
++</GenericObjectDataSource>
+\ No newline at end of file
+Index: ../../SolutionsLab2/test/Program.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/test/Program.cs b/../../SolutionsLab2/test/Program.cs
+new file mode 100644
+--- /dev/null	(date 1670449614143)
++++ b/../../SolutionsLab2/test/Program.cs	(date 1670449614143)
+@@ -0,0 +1,32 @@
++using System;
++using System.Collections.Generic;
++using System.Linq;
++using System.Text;
++using System.Threading.Tasks;
++using System.ServiceModel;
++using System.ServiceModel.Description;
++
++namespace test
++{
++    class Program
++    {
++        static void Main(string[] args)
++        {
++            BasicHttpBinding binding = new BasicHttpBinding();
++            Uri baseAddress = new Uri("http://localhost:8800/ProxyCache");
++            ServiceHost serviceHost = new ServiceHost(typeof(Biking), baseAddress);
++            binding.MaxReceivedMessageSize = 1000000000;
++            serviceHost.AddServiceEndpoint(typeof(IBiking), binding, "");
++            ServiceMetadataBehavior serviceMetadataBehavior = new ServiceMetadataBehavior();
++            serviceMetadataBehavior.HttpGetEnabled = true;
++            serviceMetadataBehavior.HttpsGetEnabled = true;
++            serviceHost.Description.Behaviors.Add(serviceMetadataBehavior);
++            serviceHost.Open();
++            IBiking bike = new Biking();
++            Console.WriteLine("Lancement de Let's Go Biking");
++            Console.ReadLine();
++
++        }
++
++    }
++}
+Index: ../../SolutionsLab2/test/JCDecauxObject.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/test/JCDecauxObject.cs b/../../SolutionsLab2/test/JCDecauxObject.cs
+new file mode 100644
+--- /dev/null	(date 1670449614143)
++++ b/../../SolutionsLab2/test/JCDecauxObject.cs	(date 1670449614143)
+@@ -0,0 +1,55 @@
++using System;
++using System.Collections.Generic;
++using System.Linq;
++using System.Text;
++using System.Threading.Tasks;
++
++namespace test
++{//here
++    public class JCDContract
++    {
++
++        public string name { get; set; }
++    }
++
++    public class JCDStation
++    {
++
++        public int number { get; set; }
++
++        public string name { get; set; }
++
++        public string contractName { get; set; }
++
++        public Position position { get; set; }
++
++        public Totalstands totalStands { get; set; }
++    }
++
++    public class Totalstands
++    {
++
++        public Availabilities availabilities { get; set; }
++    }
++
++    public class Availabilities
++    {
++
++        public int bikes { get; set; }
++
++        public int stands { get; set; }
++    }
++
++    public class Position
++    {
++        public Position(double latitude, double longitude)
++        {
++            this.latitude = latitude;
++            this.longitude = longitude;
++        }
++
++        public double latitude { get; set; }
++
++        public double longitude { get; set; }
++    }
++}
+Index: ../../SolutionsLab2/RestClient/OpenStreetMapObject.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/RestClient/OpenStreetMapObject.cs b/../../SolutionsLab2/test/OpenStreetMapObject.cs
+rename from ../../SolutionsLab2/RestClient/OpenStreetMapObject.cs
+rename to ../../SolutionsLab2/test/OpenStreetMapObject.cs
+--- a/../../SolutionsLab2/RestClient/OpenStreetMapObject.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/test/OpenStreetMapObject.cs	(date 1670449614183)
+@@ -1,11 +1,12 @@
+ using System;
+ using System.Collections.Generic;
++using System.Device.Location;
+ using System.Linq;
+ using System.Runtime.Serialization;
+ using System.Text;
+ using System.Threading.Tasks;
+ 
+-namespace RestClient
++namespace test
+ {
+     [Serializable]
+     public class Geopoints
+@@ -37,7 +38,12 @@
+         public float importance { get; set; }
+         public string icon { get; set; }
+         public Address address { get; set; }
++        public GeoCoordinate GetGeoCoordinate()
++        {
++            return new GeoCoordinate(Double.Parse(lat, System.Globalization.CultureInfo.InvariantCulture), Double.Parse(lon, System.Globalization.CultureInfo.InvariantCulture));
++        }
+     }
++
+ 
+     [Serializable]
+     public class Address
+@@ -138,5 +144,3 @@
+ 
+ 
+ }
+-
+-
+Index: ../../SolutionsLab2/test/Utils.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/test/Utils.cs b/../../SolutionsLab2/test/Utils.cs
+new file mode 100644
+--- /dev/null	(date 1670449614144)
++++ b/../../SolutionsLab2/test/Utils.cs	(date 1670449614144)
+@@ -0,0 +1,44 @@
++using System;
++using System.Collections.Generic;
++using System.Device.Location;
++using System.Linq;
++using System.Text;
++using System.Threading.Tasks;
++
++namespace test
++{
++    internal class Utils
++    {
++        public bool SameCity(Location origin, Location destination)
++        {
++            return origin.Equals(destination);
++        }
++
++        public GeoCoordinate posToCoor(Position p)
++        {
++            return new GeoCoordinate(p.latitude, p.longitude);
++        }
++        public Itinerary calculateItinenary(List<Rootobject> route)
++        {
++            route.Select(o => o.metadata.query.profile);
++            Itinerary itinerary = new Itinerary();
++            Segment segment = new Segment();
++            foreach (Rootobject obj in route)
++            {
++                foreach (Single[] coor in obj.features.First().geometry.coordinates) {
++                    itinerary.coordinates.Add(new List<float>() { (float)coor[0], (float)coor[1] });
++                    Console.WriteLine(itinerary.coordinates);
++                }
++
++
++                Segment seg = obj.features.First().properties.segments.First();
++                string profile = obj.metadata.query.profile;
++                itinerary.directions.Add(new Direction(seg, profile));
++                itinerary.distance += obj.features.First().properties.summary.distance;
++                itinerary.duration += obj.features.First().properties.summary.duration;
++            }
++
++            return itinerary;
++        }
++    }
++}
+Index: ../../SolutionsLab2/RestClient/packages.config
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/RestClient/packages.config b/../../SolutionsLab2/test/packages.config
+rename from ../../SolutionsLab2/RestClient/packages.config
+rename to ../../SolutionsLab2/test/packages.config
+--- a/../../SolutionsLab2/RestClient/packages.config	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/test/packages.config	(date 1670449614182)
+@@ -1,14 +1,12 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <packages>
+-  <package id="Microsoft.Bcl.AsyncInterfaces" version="6.0.0" targetFramework="net472" />
+-  <package id="Newtonsoft.Json" version="13.0.1" targetFramework="net472" />
++  <package id="Microsoft.Bcl.AsyncInterfaces" version="7.0.0" targetFramework="net472" />
+   <package id="System.Buffers" version="4.5.1" targetFramework="net472" />
+-  <package id="System.Memory" version="4.5.4" targetFramework="net472" />
+-  <package id="System.Net.Http.Json" version="6.0.0" targetFramework="net472" />
++  <package id="System.Memory" version="4.5.5" targetFramework="net472" />
+   <package id="System.Numerics.Vectors" version="4.5.0" targetFramework="net472" />
+   <package id="System.Runtime.CompilerServices.Unsafe" version="6.0.0" targetFramework="net472" />
+-  <package id="System.Text.Encodings.Web" version="6.0.0" targetFramework="net472" />
+-  <package id="System.Text.Json" version="6.0.0" targetFramework="net472" />
++  <package id="System.Text.Encodings.Web" version="7.0.0" targetFramework="net472" />
++  <package id="System.Text.Json" version="7.0.0" targetFramework="net472" />
+   <package id="System.Threading.Tasks.Extensions" version="4.5.4" targetFramework="net472" />
+   <package id="System.ValueTuple" version="4.5.0" targetFramework="net472" />
+ </packages>
+\ No newline at end of file
+Index: ../../SolutionsLab2/RestClient/Properties/AssemblyInfo.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/RestClient/Properties/AssemblyInfo.cs b/../../SolutionsLab2/test/Properties/AssemblyInfo.cs
+rename from ../../SolutionsLab2/RestClient/Properties/AssemblyInfo.cs
+rename to ../../SolutionsLab2/test/Properties/AssemblyInfo.cs
+--- a/../../SolutionsLab2/RestClient/Properties/AssemblyInfo.cs	(revision d0a96785b54a6af86f9b8b9f48e05f650c83e6b8)
++++ b/../../SolutionsLab2/test/Properties/AssemblyInfo.cs	(date 1670449614182)
+@@ -5,11 +5,11 @@
+ // General Information about an assembly is controlled through the following
+ // set of attributes. Change these attribute values to modify the information
+ // associated with an assembly.
+-[assembly: AssemblyTitle("RestClient")]
++[assembly: AssemblyTitle("test")]
+ [assembly: AssemblyDescription("")]
+ [assembly: AssemblyConfiguration("")]
+ [assembly: AssemblyCompany("")]
+-[assembly: AssemblyProduct("RestClient")]
++[assembly: AssemblyProduct("test")]
+ [assembly: AssemblyCopyright("Copyright ©  2022")]
+ [assembly: AssemblyTrademark("")]
+ [assembly: AssemblyCulture("")]
+@@ -20,7 +20,7 @@
+ [assembly: ComVisible(false)]
+ 
+ // The following GUID is for the ID of the typelib if this project is exposed to COM
+-[assembly: Guid("5beda2c3-79aa-4106-bbf0-50cda84f4b47")]
++[assembly: Guid("a3e81593-a12e-429c-b0d0-2ca428048a7f")]
+ 
+ // Version information for an assembly consists of the following four values:
+ //
+Index: ../../SolutionsLab2/test/ServerObjects.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../SolutionsLab2/test/ServerObjects.cs b/../../SolutionsLab2/test/ServerObjects.cs
+new file mode 100644
+--- /dev/null	(date 1670449614144)
++++ b/../../SolutionsLab2/test/ServerObjects.cs	(date 1670449614144)
+@@ -0,0 +1,47 @@
++using System;
++using System.Collections.Generic;
++using System.Linq;
++using System.Runtime.Serialization;
++using System.Text;
++using System.Threading.Tasks;
++
++namespace test
++{
++    [DataContract]
++    public class Itinerary
++    {
++        public Itinerary()
++        {
++            directions = new List<Direction>();
++            coordinates = new List<List<float>>();
++        }
++
++        [DataMember]
++        public List<Direction> directions { get; set; }
++
++        [DataMember]
++        public double distance { get; set; }
++
++        [DataMember]
++        public double duration { get; set; }
++
++        [DataMember]
++        public List<List<float>> coordinates { get; set; }
++
++    }
++
++    [DataContract]
++    public class Direction
++    {
++        public Direction(Segment segment, string profile)
++        {
++            this.segment = segment;
++            this.profile = profile;
++        }
++        [DataMember]
++        public Segment segment { get; set; }
++        [DataMember]
++        public string profile { get; set; }
++    }
++
++}
+diff --git a/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/ProxyCache.xsd b/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache2.xsd
+rename from ../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/ProxyCache.xsd
+rename to ../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache2.xsd
+diff --git a/../../SolutionsLab2/RestClient/Connected Services/Proxy/service1.xsd b/../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache1.xsd
+rename from ../../SolutionsLab2/RestClient/Connected Services/Proxy/service1.xsd
+rename to ../../SolutionsLab2/test/Connected Services/ProxyCacheRef/ProxyCache1.xsd

@@ -1,0 +1,44 @@
+<changelist name="Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]" date="1670449779529" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 07/12/2022 22:49 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="../../SolutionsLab2/RestClient/RestClient.csproj" />
+    <option name="AFTER_PATH" value="../../SolutionsLab2/test/test.csproj" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/test.csproj" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/configuration.svcinfo" />
+    <option name="AFTER_PATH" value="../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/configuration.svcinfo" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration.svcinfo" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../../SolutionsLab2/ProxyCache/ProxyCache.csproj" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/Reference.svcmap" />
+    <option name="AFTER_PATH" value="../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/Reference.svcmap" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/Reference.svcmap" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/GenericProxyCache/configuration91.svcinfo" />
+    <option name="AFTER_PATH" value="../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/configuration91.svcinfo" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration91.svcinfo" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../../SolutionsLab2/RestClient/Connected Services/Proxy/configuration.svcinfo" />
+    <option name="AFTER_PATH" value="../../SolutionsLab2/test/Connected Services/ProxyCacheRef/configuration.svcinfo" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration1.svcinfo" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../../SolutionsLab2/RestClient/Connected Services/Proxy/Reference.svcmap" />
+    <option name="AFTER_PATH" value="../../SolutionsLab2/test/Connected Services/ProxyCacheRef/Reference.svcmap" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/Reference1.svcmap" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../../SolutionsLab2/RestClient/Connected Services/Proxy/configuration91.svcinfo" />
+    <option name="AFTER_PATH" value="../../SolutionsLab2/test/Connected Services/ProxyCacheRef/configuration91.svcinfo" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration911.svcinfo" />
+  </binary>
+</changelist>
