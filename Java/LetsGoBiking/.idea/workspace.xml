@@ -4,13 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9d016e3-a032-46cd-a723-acbca62da380" name="Changes" comment="Java exception Handling">
-      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/GenericProxyCache/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/GenericProxyCache/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/GenericProxyCache/ProxyCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/GenericProxyCache/ProxyCache.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/test/Biking.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/test/Biking.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/test/JCDecauxApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/test/JCDecauxApi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/test/OpenStreetMapObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/test/OpenStreetMapObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/test/Utils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/test/Utils.cs" afterDir="false" />
+    <list default="true" id="4a8a9e0d-f7aa-49a4-861d-5c8706ccc61f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/Reference.svcmap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/Reference1.svcmap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration.svcinfo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration1.svcinfo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration91.svcinfo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration911.svcinfo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/test.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ClientBikeApplication-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/ClientBikeApplication-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectId" id="2Ibh1FClisHRDJSS3ge12F1Ir1z" />
+  <component name="ProjectId" id="2IdptEHwcqodi1CfysRwp9vrSE2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -53,36 +62,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="15c92b16-3af2-4265-a401-7654827673fc" name="Changes" comment="" />
-      <created>1670455976461</created>
+      <changelist id="4a8a9e0d-f7aa-49a4-861d-5c8706ccc61f" name="Changes" comment="" />
+      <created>1670521532408</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1670455976461</updated>
+      <updated>1670521532408</updated>
     </task>
-    <task id="LOCAL-00001" summary="Java exception Handling">
-      <created>1670463122530</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1670463122531</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Java exception Handling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Java exception Handling" />
   </component>
 </project>

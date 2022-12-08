@@ -1,0 +1,1 @@
+wt -d "%cd%" "ToRun\proxyCache.bat" ; split-pane -H -d "%cd%" "ToRun\routeur.bat"
