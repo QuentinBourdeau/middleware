@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using test.ProxyCacheRef;
 using System.Device.Location;
+using System.Runtime.CompilerServices;
 
 namespace test
 {
@@ -20,8 +21,12 @@ namespace test
             proxy = proxyCacheClient;
         }
 
-        public JCDStation retrieveClosestStation(GeoCoordinate chosenStationGeo, List<JCDStation> stations)
+        public JCDStation retrieveClosestStation(GeoCoordinate position, List<JCDStation> stations)
         {
+            /*foreach (JCDStation station in stations)
+            {
+                Console.WriteLine(station.name);
+            }*/
 
             double minDistance = Double.MaxValue;
             JCDStation closestStation = null;
@@ -31,7 +36,7 @@ namespace test
                 // Find the current station's position.
                 GeoCoordinate stationGeo = new GeoCoordinate(station.position.latitude, station.position.longitude);
                 // And compare its distance to the chosen one to see if it is closer than the current closest.
-                double distance = chosenStationGeo.GetDistanceTo(stationGeo);
+                double distance = position.GetDistanceTo(stationGeo);
 
                 if (distance < minDistance)
                 {
@@ -39,48 +44,39 @@ namespace test
                     minDistance = distance;
                 }
             }
+            Console.WriteLine("Closest station is " + closestStation.name);
             return closestStation;
         }
 
-        public JCDStation retrieveClosestStationDeparture(GeoCoordinate position, string originCity, string destinationCity)
+        public JCDStation retrieveClosestStationDeparture(GeoCoordinate position)
         {
-            List<JCDContract> contracts = contractsContainingCities(originCity, destinationCity);
-            List<JCDStation> stations = new List<JCDStation>();
-            string stationTemp;
-            foreach (JCDContract contract in contracts)
-            {
-                stationTemp = proxy.getStationsListWithContractName(contract.name).response;
-                stations.Add(JsonSerializer.Deserialize<JCDStation>(stationTemp));
-
-            }
-            //string items = proxy.getStationsList().response;
-            //List<JCDStation> stations = JsonSerializer.Deserialize<List<JCDStation>>(items);
+            JCDecauxItem jCDecauxItem= proxy.getStationsList();
+            List<JCDStation> stations = JsonSerializer.Deserialize<List<JCDStation>>(jCDecauxItem.response);;
             return retrieveClosestStation(position, stations.Where(station => station.totalStands.availabilities.bikes != 0).ToList());
         }
 
-        public JCDStation retrieveClosestStationArrival(GeoCoordinate position, string originCity, string destinationCity)
+        public JCDStation retrieveClosestStationArrival(GeoCoordinate position, JCDContract jCDContract)
         {
-            List<JCDContract> contracts = contractsContainingCities(originCity, destinationCity);
-            List<JCDStation> stations = new List<JCDStation>();
-            string stationTemp;
-            foreach (JCDContract contract in contracts)
-            {
-                stationTemp = proxy.getStationsListWithContractName(contract.name).response;
-                stations.Add(JsonSerializer.Deserialize<JCDStation>(stationTemp));
-
-            }
-            //string items = proxy.getStationsList().response;
-            //stations = JsonSerializer.Deserialize<List<JCDStation>>(items);
+            JCDecauxItem jCDecauxItem = proxy.getStationsListWithContractName(jCDContract.name);
+            List<JCDStation> stations = JsonSerializer.Deserialize<List<JCDStation>>(jCDecauxItem.response);
             return retrieveClosestStation(position, stations.Where(station => station.totalStands.availabilities.stands != 0).ToList());
         }
 
-        private List<JCDContract> contractsContainingCities(string originCity, string destinationCity)
+        public JCDContract contractFromChosenStation(JCDStation jCDStation)
         {
-            JCDecauxItem JCDecauxItems = proxy.getContractsList();
-            List<JCDContract> JCDContracts = JsonSerializer.Deserialize<List<JCDContract>>(JCDecauxItems.response);
-            utils.cleanContractsList(JCDContracts);
-
-            return JCDContracts.Where(contract => contract.name.Contains(originCity) && contract.name.Contains(destinationCity)).ToList();
+            JCDecauxItem jCDecauxItem = proxy.getContractsList();
+            List<JCDContract> contracts = JsonSerializer.Deserialize<List<JCDContract>>(jCDecauxItem.response);
+            utils.cleanContractsList(contracts);
+            foreach (JCDContract contract in contracts)
+            {
+                if (contract.name == jCDStation.contractName)
+                {
+                    return contract;
+                }
+            }
+            return null;
         }
+
+        
     }
 }
