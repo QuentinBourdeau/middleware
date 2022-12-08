@@ -23,7 +23,7 @@ namespace test
             serviceHost.Description.Behaviors.Add(serviceMetadataBehavior);
             serviceHost.Open();
             IBiking bike = new Biking();
-            Console.WriteLine("Lancement de Let's Go Biking");
+            Console.WriteLine("Lancement du routeur Let's Go Biking");
             Console.ReadLine();
 
         }
