@@ -66,7 +66,6 @@ namespace GenericProxyCache
        
         public JCDecauxItem getContractsList()
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
             string url = "https://api.jcdecaux.com/vls/v3/contracts?"+apiKey;
             return Get<JCDecauxItem>(url, 3600);
             //return JCDecauxAPICall(url, apiKey).Result;
@@ -74,8 +73,6 @@ namespace GenericProxyCache
 
         public JCDecauxItem getStationsList()
         {
-            BasicHttpBinding binding = new BasicHttpBinding();
-
             string url = "https://api.jcdecaux.com/vls/v3/stations?"+apiKey;
             return Get<JCDecauxItem>(url, 3600);
             //return JCDecauxAPICall(url, apiKey).Result;
