@@ -28,7 +28,6 @@ namespace test
                 foreach (Single[] coor in obj.features.First().geometry.coordinates)
                 {
                     itinerary.coordinates.Add(new List<float>() { (float)coor[0], (float)coor[1] });
-                    Console.WriteLine(itinerary.coordinates);
                 }
 
 

@@ -27,7 +27,7 @@ namespace test
             string destinationCity = openStreet.getLocation(openStreet.urlAddress(destination)).Result.address.city;
 
             JCDStation startStation = clientJCDecaux.retrieveClosestStationDeparture(startingPoint, originCity, destinationCity);
-            JCDStation endingStation = clientJCDecaux.retrieveClosestStationArrival(startingPoint, originCity, destinationCity);
+            JCDStation endingStation = clientJCDecaux.retrieveClosestStationArrival(endingPoint, originCity, destinationCity);
 
             GeoCoordinate startStationLocation = utils.posToCoor(startStation.position);
             GeoCoordinate endingStationLocation = utils.posToCoor(endingStation.position);
