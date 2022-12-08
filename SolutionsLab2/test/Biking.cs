@@ -39,7 +39,6 @@ namespace test
             JCDStation startStation = clientJCDecaux.retrieveClosestStationDeparture(startingPoint);
             JCDContract jCDContract = clientJCDecaux.contractFromChosenStation(startStation);
 
-
             JCDStation endingStation = clientJCDecaux.retrieveClosestStationArrival(endingPoint, jCDContract);
 
             GeoCoordinate startStationLocation = utils.posToCoor(startStation.position);
@@ -47,11 +46,12 @@ namespace test
 
             List<Rootobject> bikeiti = new List<Rootobject>();
             List<Rootobject> walkiti = new List<Rootobject>();
-                bikeiti.Add(openStreet.geoToItinerary(startingPoint, startStationLocation, false).Result);
-                bikeiti.Add(openStreet.geoToItinerary(startStationLocation, endingStationLocation, true).Result);
-                bikeiti.Add(openStreet.geoToItinerary(endingStationLocation, endingPoint, false).Result);
 
-                walkiti.Add(openStreet.geoToItinerary(startingPoint, endingPoint, false).Result);
+            bikeiti.Add(openStreet.geoToItinerary(startingPoint, startStationLocation, false).Result);
+            bikeiti.Add(openStreet.geoToItinerary(startStationLocation, endingStationLocation, true).Result);
+            bikeiti.Add(openStreet.geoToItinerary(endingStationLocation, endingPoint, false).Result);
+
+            walkiti.Add(openStreet.geoToItinerary(startingPoint, endingPoint, false).Result);
 
             double walkingTime;
             double bikingTime;
@@ -69,13 +69,13 @@ namespace test
 
 
             if (walkingTime < bikingTime) {
-                Itinerary ret = utils.calculateItinenary(walkiti);
+                Itinerary ret = utils.processItinenary(walkiti);
                 ret.error += "FullFoot";
                 return ret;
             }
             else
             {
-                return utils.calculateItinenary(bikeiti);
+                return utils.processItinenary(bikeiti);
             }
 
         }

@@ -23,19 +23,13 @@ namespace test
 
         public JCDStation retrieveClosestStation(GeoCoordinate position, List<JCDStation> stations)
         {
-            /*foreach (JCDStation station in stations)
-            {
-                Console.WriteLine(station.name);
-            }*/
 
             double minDistance = Double.MaxValue;
             JCDStation closestStation = null;
 
             foreach (JCDStation station in stations)
             {
-                // Find the current station's position.
                 GeoCoordinate stationGeo = new GeoCoordinate(station.position.latitude, station.position.longitude);
-                // And compare its distance to the chosen one to see if it is closer than the current closest.
                 double distance = position.GetDistanceTo(stationGeo);
 
                 if (distance < minDistance)
@@ -50,8 +44,10 @@ namespace test
 
         public JCDStation retrieveClosestStationDeparture(GeoCoordinate position)
         {
+            //JCDecauxItem is the generic and only type sent by the proxy server
+            //so it needs to be deserialized to be used
             JCDecauxItem jCDecauxItem= proxy.getStationsList();
-            List<JCDStation> stations = JsonSerializer.Deserialize<List<JCDStation>>(jCDecauxItem.response);;
+            List<JCDStation> stations = JsonSerializer.Deserialize<List<JCDStation>>(jCDecauxItem.response);
             return retrieveClosestStation(position, stations.Where(station => station.totalStands.availabilities.bikes != 0).ToList());
         }
 

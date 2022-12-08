@@ -11,7 +11,7 @@ namespace test
     public interface IBiking
     {
         [OperationContract]
-        //returns itinerary after data 
+        //returns itinerary after data processing
         Itinerary GetItinerary(string origin, string destination);
     }
 }

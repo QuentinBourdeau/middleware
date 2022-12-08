@@ -36,6 +36,7 @@ namespace test
 
         public async Task<Location> getLocation(Uri baseAddress)
         {
+            //Headers are for some reason needed for the API to respond
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.TryAddWithoutValidation("accept", "*/*");
             client.DefaultRequestHeaders.TryAddWithoutValidation("accept-Encoding", "gzip, deflate, br");

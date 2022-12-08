@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9d016e3-a032-46cd-a723-acbca62da380" name="Changes" comment="Java exception Handling">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unice/polytech/BikeProject/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unice/polytech/BikeProject/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/generated/Itinerary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/generated/Itinerary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/generated/ObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/generated/ObjectFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ClientBikeApplication-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/ClientBikeApplication-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fr/unice/polytech/BikeProject/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fr/unice/polytech/BikeProject/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/generated/Itinerary.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/generated/Itinerary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/generated/ObjectFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/generated/ObjectFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/GenericProxyCache/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/GenericProxyCache/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/GenericProxyCache/ProxyCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/GenericProxyCache/ProxyCache.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/test/Biking.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/test/Biking.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/test/ServerObjects.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/test/ServerObjects.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/test/JCDecauxApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/test/JCDecauxApi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/test/OpenStreetMapObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/test/OpenStreetMapObject.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/test/Utils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SolutionsLab2/test/Utils.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

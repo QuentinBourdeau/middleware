@@ -8,23 +8,14 @@ using System.Threading.Tasks;
 
 namespace test
 {
-    [Serializable]
+    //nominatim classes
     public class Geopoints
     {
-        public Geopoints()
-        {
-
-        }
         public Location[] loc { get; set; }
     }
 
-    [Serializable]
     public class Location
     {
-        public Location()
-        {
-
-        }
         public int place_id { get; set; }
         public string licence { get; set; }
         public string osm_type { get; set; }
@@ -44,14 +35,8 @@ namespace test
         }
     }
 
-
-    [Serializable]
     public class Address
     {
-        public Address()
-        {
-
-        }
         public string shop { get; set; }
         public string road { get; set; }
         public string neighbourhood { get; set; }
@@ -65,6 +50,9 @@ namespace test
     }
 
 
+    
+    
+    //openrouteservice classes
     public class Rootobject
     {
         public string type { get; set; }

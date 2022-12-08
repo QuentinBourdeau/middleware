@@ -42,9 +42,6 @@ namespace GenericProxyCache
              * object and put it in the cache with CacheItemName as the corresponding key.
              * In this case, the Expiration Time is now + dt_seconds seconds. */
             return Get<T>(CacheItemName, DateTimeOffset.Now.AddSeconds(dt_seconds));
-
-
-            
         }
 
         private T Get<T>(string CacheItemName, DateTimeOffset dt)
@@ -68,14 +65,12 @@ namespace GenericProxyCache
         {
             string url = "https://api.jcdecaux.com/vls/v3/contracts?"+apiKey;
             return Get<JCDecauxItem>(url, 3600);
-            //return JCDecauxAPICall(url, apiKey).Result;
         }
 
         public JCDecauxItem getStationsList()
         {
             string url = "https://api.jcdecaux.com/vls/v3/stations?"+apiKey;
             return Get<JCDecauxItem>(url, 3600);
-            //return JCDecauxAPICall(url, apiKey).Result;
         }
 
         public JCDecauxItem getStationsListWithContractName(string contractName)
@@ -83,7 +78,6 @@ namespace GenericProxyCache
             string url = "https://api.jcdecaux.com/vls/v3/stations?";
             string query = "contract=" + contractName + "&" + apiKey;
             return Get<JCDecauxItem>(url+ query, 3600);
-            //return JCDecauxAPICall(url, query).Result;
         }
 
 

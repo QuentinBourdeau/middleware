@@ -9,16 +9,12 @@ namespace test
 {
     internal class Utils
     {
-        public bool SameCity(Location origin, Location destination)
-        {
-            return origin.Equals(destination);
-        }
 
         public GeoCoordinate posToCoor(Position p)
         {
             return new GeoCoordinate(p.latitude, p.longitude);
         }
-        public Itinerary calculateItinenary(List<Rootobject> route)
+        public Itinerary processItinenary(List<Rootobject> route)
         {
             route.Select(o => o.metadata.query.profile);
             Itinerary itinerary = new Itinerary();
