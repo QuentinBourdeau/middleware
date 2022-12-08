@@ -3,6 +3,7 @@
 ## Comment exécuter le projet :
 
 Il va falloir tout d'abord lancer les .exe générés par Visual Studio, puis ensuite lancer le client Java.
+Si vous possédez un antivirus, par exemple avast, les .exe seront détectés en tant que fichiers suspects et seront analysés, nous vous rassurons nous n'avons pas (encore) mis de code malveillant dans les .exe.
 
 ## Partie C#
 
@@ -12,7 +13,7 @@ Lorsque les exécutables ont été générés par Visual Studio il y a 2 solutio
 	- lancez un Windows Terminal PowerShell en administrateur, puis exécutez le fichier ```runC#.bat```
 
 - Sinon  
-	- lancez manuellement les exécutables suivants en prenant soin de commencer par le proxyCache :        
+	- lancez manuellement en administrateur les exécutables suivants en prenant soin de commencer par le proxyCache (s'ils ne sont pas exécutés en administrateurs, ils ne pourront pas accéder aux ports afin de lancer le programme) :        
 			```SolutionsLab2\GenericProxyCache\bin\Debug\GenericProxyCache.exe```           
 			puis            
 			```SolutionsLab2\test\bin\Debug\test.exe```
