@@ -22,15 +22,24 @@ namespace test
             GeoCoordinate startingPoint;
             GeoCoordinate endingPoint;
             // get starting point and ending point using nominatim
-            try {
+            try
+            {
                 startingPoint = openStreet.addressToPoint(origin).Result;
                 endingPoint = openStreet.addressToPoint(destination).Result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Itinerary errorIti = new Itinerary();
                 errorIti.error += "wrong address";
                 return errorIti;
+            }
+            if (startingPoint == endingPoint)
+            {
+
+                Itinerary errorIti = new Itinerary();
+                errorIti.error += "same address";
+                return errorIti;
+
             }
 
             JCDStation startStation = clientJCDecaux.retrieveClosestStationDeparture(startingPoint);
@@ -65,7 +74,8 @@ namespace test
             }
 
 
-            if (walkingTime < bikingTime) {
+            if (walkingTime < bikingTime)
+            {
                 Itinerary ret = utils.processItinenary(walkiti);
                 ret.error += "FullFoot";
                 return ret;

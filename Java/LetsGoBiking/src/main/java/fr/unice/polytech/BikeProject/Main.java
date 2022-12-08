@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
     private static final DecimalFormat df = new DecimalFormat("0.00");
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         Biking applicationService = new Biking();
         IBiking service = applicationService.getBasicHttpBindingIBiking();
@@ -28,6 +28,11 @@ public class Main {
                     continue;
                 }
 
+                if(itinerary.getError().getValue().contains("same address")){
+                    System.out.println("You're already there, you don't need a bike !");
+                    continue;
+                }
+
                 if(itinerary.getError().getValue().contains("FullFoot")){
                     System.out.println("Bikes aren't that usefull to get to your destination, so here's a way to get there on foot");
                     try {
@@ -36,6 +41,8 @@ public class Main {
                         e.printStackTrace();
                     }
                 }
+
+
                 if(itinerary.getDuration() > 3600){
                     System.out.println("Be Careful, you're going for a long trip");
                     System.out.println("approx time : " + df.format(itinerary.getDuration()/3600) + "hours");
