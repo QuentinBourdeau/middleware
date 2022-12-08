@@ -14,6 +14,7 @@ namespace test
         {
             directions = new List<Direction>();
             coordinates = new List<List<float>>();
+            error = "";
         }
 
         [DataMember]
@@ -27,6 +28,9 @@ namespace test
 
         [DataMember]
         public List<List<float>> coordinates { get; set; }
+
+        [DataMember]
+        public string error { get; set; }
 
     }
 

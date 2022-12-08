@@ -69,6 +69,7 @@ public class ObjectFactory {
     private final static QName _DirectionSegment_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "segment");
     private final static QName _ItineraryCoordinates_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "coordinates");
     private final static QName _ItineraryDirections_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "directions");
+    private final static QName _ItineraryError_QNAME = new QName("http://schemas.datacontract.org/2004/07/test", "error");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated
@@ -696,6 +697,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "directions", scope = Itinerary.class)
     public JAXBElement<ArrayOfDirection> createItineraryDirections(ArrayOfDirection value) {
         return new JAXBElement<ArrayOfDirection>(_ItineraryDirections_QNAME, ArrayOfDirection.class, Itinerary.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/test", name = "error", scope = Itinerary.class)
+    public JAXBElement<String> createItineraryError(String value) {
+        return new JAXBElement<String>(_ItineraryError_QNAME, String.class, Itinerary.class, value);
     }
 
 }

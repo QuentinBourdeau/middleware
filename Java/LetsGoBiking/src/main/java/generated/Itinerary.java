@@ -22,6 +22,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         &lt;element name="directions" type="{http://schemas.datacontract.org/2004/07/test}ArrayOfDirection" minOccurs="0"/&gt;
  *         &lt;element name="distance" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
  *         &lt;element name="duration" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
+ *         &lt;element name="error" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -35,7 +36,8 @@ import jakarta.xml.bind.annotation.XmlType;
     "coordinates",
     "directions",
     "distance",
-    "duration"
+    "duration",
+    "error"
 })
 public class Itinerary {
 
@@ -45,6 +47,8 @@ public class Itinerary {
     protected JAXBElement<ArrayOfDirection> directions;
     protected Double distance;
     protected Double duration;
+    @XmlElementRef(name = "error", namespace = "http://schemas.datacontract.org/2004/07/test", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> error;
 
     /**
      * Obtient la valeur de la propriété coordinates.
@@ -140,6 +144,30 @@ public class Itinerary {
      */
     public void setDuration(Double value) {
         this.duration = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété error.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getError() {
+        return error;
+    }
+
+    /**
+     * Définit la valeur de la propriété error.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setError(JAXBElement<String> value) {
+        this.error = value;
     }
 
 }

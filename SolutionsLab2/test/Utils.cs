@@ -46,5 +46,9 @@ namespace test
             contracts.RemoveAll(contract => contract.cities == null);
 
         }
+        public double calculateDuration(List<Rootobject> route)
+        {
+            return route.Select(o => o.features.First().properties.summary.duration).Sum();
+        }
     }
 }

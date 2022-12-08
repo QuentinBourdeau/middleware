@@ -19,32 +19,64 @@ namespace test
 
         public Itinerary GetItinerary(string origin, string destination)
         {
+            GeoCoordinate startingPoint;
+            GeoCoordinate endingPoint;
             // get starting point and ending point using nominatim
-            GeoCoordinate startingPoint = openStreet.addressToPoint(origin).Result;
-            GeoCoordinate endingPoint = openStreet.addressToPoint(destination).Result;
+            try {
+                startingPoint = openStreet.addressToPoint(origin).Result;
+                endingPoint = openStreet.addressToPoint(destination).Result;
+            }
+            catch(Exception ex)
+            {
+                Itinerary errorIti = new Itinerary();
+                errorIti.error += "wrong address";
+                return errorIti;
+            }
+
             string originCity = openStreet.getLocation(openStreet.urlAddress(origin)).Result.address.city;
             string destinationCity = openStreet.getLocation(openStreet.urlAddress(destination)).Result.address.city;
 
             JCDStation startStation = clientJCDecaux.retrieveClosestStationDeparture(startingPoint);
             JCDContract jCDContract = clientJCDecaux.contractFromChosenStation(startStation);
 
-            /*foreach (string city in jCDContract.cities)
-            {
-                Console.WriteLine(city);
-            }*/
+
             JCDStation endingStation = clientJCDecaux.retrieveClosestStationArrival(endingPoint, jCDContract);
 
             GeoCoordinate startStationLocation = utils.posToCoor(startStation.position);
             GeoCoordinate endingStationLocation = utils.posToCoor(endingStation.position);
 
-            List<Rootobject> iti = new List<Rootobject>();
-            iti.Add(openStreet.geoToItinerary(startingPoint, startStationLocation, false).Result);
-            iti.Add(openStreet.geoToItinerary(startStationLocation, endingStationLocation, true).Result);
-            iti.Add(openStreet.geoToItinerary(endingStationLocation, endingPoint, false).Result);
+            List<Rootobject> bikeiti = new List<Rootobject>();
+            List<Rootobject> walkiti = new List<Rootobject>();
+                bikeiti.Add(openStreet.geoToItinerary(startingPoint, startStationLocation, false).Result);
+                bikeiti.Add(openStreet.geoToItinerary(startStationLocation, endingStationLocation, true).Result);
+                bikeiti.Add(openStreet.geoToItinerary(endingStationLocation, endingPoint, false).Result);
 
-    
+                walkiti.Add(openStreet.geoToItinerary(startingPoint, endingPoint, false).Result);
 
-            return utils.calculateItinenary(iti);
+            double walkingTime;
+            double bikingTime;
+            try
+            {
+                walkingTime = utils.calculateDuration(walkiti);
+                bikingTime = utils.calculateDuration(bikeiti);
+            }
+            catch (Exception ex)
+            {
+                Itinerary errorIti = new Itinerary();
+                errorIti.error += "Jesus";
+                return errorIti;
+            }
+
+
+            if (walkingTime < bikingTime) {
+                Itinerary ret = utils.calculateItinenary(walkiti);
+                ret.error += "FullFoot";
+                return ret;
+            }
+            else
+            {
+                return utils.calculateItinenary(bikeiti);
+            }
 
         }
     }
