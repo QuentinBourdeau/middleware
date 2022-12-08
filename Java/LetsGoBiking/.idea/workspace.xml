@@ -4,22 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a8a9e0d-f7aa-49a4-861d-5c8706ccc61f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/Reference.svcmap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/Reference1.svcmap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration.svcinfo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration1.svcinfo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration91.svcinfo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/configuration911.svcinfo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49_[Changes]/test.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_12_2022_22_49__Changes_.xml" beforeDir="false" />
+    <list default="true" id="853a058e-a133-4cfd-8a79-34b97f0f3e59" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/ClientBikeApplication-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/ClientBikeApplication-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/ApiOpenRoute.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/App.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Biking.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache.wsdl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache1.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/ProxyCache2.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/Reference.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/Reference.svcmap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/configuration.svcinfo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Connected Services/Generic/configuration91.svcinfo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/IBiking.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/LetsGoBikingSelfHosted.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/OpenStreetMapObject.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/ServerObjects.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/Utils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SolutionsLab2/LetsGoBikingSelfHosted/packages.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToRun/java.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToRun/java.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectId" id="2IdptEHwcqodi1CfysRwp9vrSE2" />
+  <component name="ProjectId" id="2IdsFGaoJuUjUSbuObWoZQO6XJr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -39,34 +48,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.unice.polytech.BikeProject.Main" />
-      <module name="ClientBikeApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.unice.polytech.BikeProject.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4a8a9e0d-f7aa-49a4-861d-5c8706ccc61f" name="Changes" comment="" />
-      <created>1670521532408</created>
+      <changelist id="853a058e-a133-4cfd-8a79-34b97f0f3e59" name="Changes" comment="" />
+      <created>1670522691765</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1670521532408</updated>
+      <updated>1670522691765</updated>
     </task>
     <servers />
   </component>

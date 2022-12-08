@@ -1,5 +1,5 @@
 @ECHO off
-cd .\Java\LetsGoBiking
+cd .\Java\LetsGoBiking\
 call mvn clean package
 call mvn compile exec:java
 pause

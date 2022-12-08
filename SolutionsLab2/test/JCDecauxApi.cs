@@ -38,7 +38,6 @@ namespace test
                     minDistance = distance;
                 }
             }
-            Console.WriteLine("Closest station is " + closestStation.name);
             return closestStation;
         }
 

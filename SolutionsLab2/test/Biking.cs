@@ -33,9 +33,6 @@ namespace test
                 return errorIti;
             }
 
-            string originCity = openStreet.getLocation(openStreet.urlAddress(origin)).Result.address.city;
-            string destinationCity = openStreet.getLocation(openStreet.urlAddress(destination)).Result.address.city;
-
             JCDStation startStation = clientJCDecaux.retrieveClosestStationDeparture(startingPoint);
             JCDContract jCDContract = clientJCDecaux.contractFromChosenStation(startStation);
 

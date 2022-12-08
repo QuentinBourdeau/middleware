@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsGoBikingSelfHosted", "LetsGoBikingSelfHosted\LetsGoBikingSelfHosted.csproj", "{F2D19C2D-C7A5-4329-B9BE-0361577FF778}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericProxyCache", "GenericProxyCache\GenericProxyCache.csproj", "{0D19DCCC-6803-4C4B-826C-AE596767FAEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{A3E81593-A12E-429C-B0D0-2CA428048A7F}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F2D19C2D-C7A5-4329-B9BE-0361577FF778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2D19C2D-C7A5-4329-B9BE-0361577FF778}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2D19C2D-C7A5-4329-B9BE-0361577FF778}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2D19C2D-C7A5-4329-B9BE-0361577FF778}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0D19DCCC-6803-4C4B-826C-AE596767FAEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D19DCCC-6803-4C4B-826C-AE596767FAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D19DCCC-6803-4C4B-826C-AE596767FAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
